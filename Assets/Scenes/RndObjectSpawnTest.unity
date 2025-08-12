@@ -589,7 +589,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f295ad37cee3114097db0153cfd5fa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 4
   startIndex: 0
   endIndex: 2
   sprites:
@@ -1241,7 +1241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f295ad37cee3114097db0153cfd5fa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 3
   startIndex: 0
   endIndex: 2
   sprites:
@@ -1853,7 +1853,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f295ad37cee3114097db0153cfd5fa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 5
   startIndex: 0
   endIndex: 2
   sprites:
