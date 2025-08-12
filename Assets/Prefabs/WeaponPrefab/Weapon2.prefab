@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -4711488724611841332}
   - component: {fileID: -1786043981812207728}
   m_Layer: 0
-  m_Name: Weapon_Temp
+  m_Name: Weapon2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e0a83c2a06b75a41ab821a4cfed4997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoAttack: {fileID: 1506651425189059407, guid: c34c0a0655f09424682ec2eac1cc1fde, type: 3}
-  attackSpeed: 1
+  autoAttack: {fileID: 3363262325631042029, guid: b3514a023daf5314fbdbe43e87d770ab, type: 3}
+  attackSpeed: 0.3
 --- !u!114 &-1786043981812207728
 MonoBehaviour:
   m_ObjectHideFlags: 0
