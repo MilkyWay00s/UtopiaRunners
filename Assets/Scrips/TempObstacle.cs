@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TempObstacle : MonoBehaviour
+public class TempObstacle : MonoBehaviour, IPooledObject
 {
     public float moveSpeed = 5f;
     public float lifetime = 10f;

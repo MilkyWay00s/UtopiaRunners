@@ -59,11 +59,8 @@ public class ObjPoolManager : MonoBehaviour
         obj.transform.rotation = rotation;
         obj.SetActive(true);
 
-        var tempObstacle = obj.GetComponent<TempObstacle>();
-        if (tempObstacle != null)
-        {
-            tempObstacle.Init(key);
-        }
+        IPooledObject pooledObj = obj.GetComponent<IPooledObject>();
+        pooledObj?.Init(key);
 
         return obj;
     }
