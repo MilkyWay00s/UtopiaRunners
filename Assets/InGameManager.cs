@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
-public class GameManager : MonoBehaviour
+public class InGameManager : MonoBehaviour
 {
     [Header("Timer & Game Over")]
     public float timeLimit = 60f;
