@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class WeaponSpawn : MonoBehaviour
 {
-    public GameObject player;
+    private GameObject player;
     private GameObject weapon = WeaponSelect.selectedWeapon; // 전투 준비 Scene에서 장착된 무기를 받아옴
 
     private void Start()
     {
         if (WeaponSelect.selectedWeapon != null)
         {
+            player = GameObject.FindGameObjectWithTag("Player");
             weapon = Instantiate(weapon, player.transform.position, Quaternion.identity); // 무기를 Player 위치에 소환
         }
     }
