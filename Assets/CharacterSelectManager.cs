@@ -71,7 +71,7 @@ public class CharacterSelectManager : MonoBehaviour
         }
         PlayerPrefs.SetInt("MainCharacter", selectedMain.Value);
         PlayerPrefs.SetInt("SubCharacter", selectedSub.Value);
-        SceneManager.LoadScene("RunningScene");
+        SceneManager.LoadScene("CharacterSelect");
     }
 
     // 서브 선택 시 메인과 동일한 버튼만 비활성화
