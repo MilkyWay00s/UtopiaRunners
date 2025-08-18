@@ -78,25 +78,6 @@ public class WorldMapPointer : MonoBehaviour
         }
     }
 
-    void LoadCurrentScene()
-    {
-        if (sceneNames.Length == regionPositions.Length && currentIndex < sceneNames.Length)
-        {
-            string sceneToLoad = sceneNames[currentIndex];
-            if (!string.IsNullOrEmpty(sceneToLoad))
-            {
-                SceneManager.LoadScene(sceneToLoad);
-            }
-            else
-            {
-                Debug.LogWarning("씬 이름이 비어 있습니다.");
-            }
-        }
-        else
-        {
-            Debug.LogWarning("씬 이름 배열과 지역 배열의 길이가 다르거나 인덱스 초과입니다.");
-        }
-    }
 
     int GetCurrentStageIndex()
     {

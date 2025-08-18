@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
             saveFolder = Application.persistentDataPath;
+
+            int recentSlot = GetMostRecentSlot();
+            LoadGame(recentSlot);
         }
         else
         {
@@ -32,11 +35,13 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void SaveGame(int slot = -1)
+    public void SetCurrentSlot(int slot)
     {
-        if (slot == -1) slot = currentSlot;
         currentSlot = slot;
+    }
 
+    public void SaveGame(int slot)
+    {
         SaveData data = new SaveData
         {
             coins = coins,
@@ -63,12 +68,16 @@ public class GameManager : MonoBehaviour
             SaveData data = JsonUtility.FromJson<SaveData>(json);
 
             coins = data.coins;
+            currentWorld = data.currentWorld;
+            currentStage = data.currentStage;
+            clearedStages = data.clearedStages;
         }
         else
         {
             NewGame();
         }
     }
+
 
     public int GetMostRecentSlot()
     {
@@ -95,14 +104,14 @@ public class GameManager : MonoBehaviour
     {
         currentWorld = worldName;
 
-        SaveGame();
+        SaveGame(currentSlot);
     }
 
     public void SetCurrentStage(int stageIndex)
     {
         currentStage = $"Stage{stageIndex + 1}";
 
-        SaveGame(); 
+        SaveGame(currentSlot); 
     }
 
 
@@ -120,7 +129,7 @@ public class GameManager : MonoBehaviour
         currentWorld = world;
         currentStage = $"Stage{stageIndex + 1}";
 
-        SaveGame(); 
+        SaveGame(currentSlot); 
     }
 
 
@@ -138,6 +147,6 @@ public class GameManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        SaveGame();
+        SaveGame(currentSlot);
     }
 }
