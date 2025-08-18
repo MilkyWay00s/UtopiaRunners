@@ -1,24 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SaveSlotManager : MonoBehaviour
 {
     public GameObject SaveSlotPanel;
 
+    public void OnSelectSlot(int slotNumber)
+    {
+        GameManager.Instance.LoadGame(slotNumber);
+        SceneManager.LoadScene("WorldMap");
+    }
+
     public void OnStartButtonClicked()
     {
         SaveSlotPanel.SetActive(true);
     }
 
-    public void onBackButtonClicked()
+    public void OnBackButtonClicked()
     {
         SaveSlotPanel.SetActive(false);
     }
 
-    public void onSelectButtonClicked()
+    public void OnClickLoadMostRecent()
     {
-        SceneManager.LoadScene("WorldMap");
+        GameManager.Instance.LoadMostRecent();
+        UnityEngine.SceneManagement.SceneManager.LoadScene("WorldMap");
     }
 }

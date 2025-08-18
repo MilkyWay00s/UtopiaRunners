@@ -7,14 +7,22 @@ public class World1Pointer : MonoBehaviour
 {
     [SerializeField] private Transform pointer;
     [SerializeField] private Transform[] stagePositions;
-    private SpriteRenderer[] stageRenderers;
-
     private int currentIndex = 0;
-    // Start is called before the first frame update
+
+    private string worldName = "World1"; // 해당 씬이 속한 월드 이름
+
     void Start()
     {
-        if (stagePositions.Length > 0)
-            pointer.position = stagePositions[currentIndex].position + new Vector3(0, 1f, 0);
+        // 이전 진행 정보 기반으로 포인터 위치 초기화
+        for (int i = 0; i < stagePositions.Length; i++)
+        {
+            if ($"Stage{i + 1}" == GameManager.Instance.currentStage)
+            {
+                currentIndex = i;
+                break;
+            }
+        }
+        MovePointer(currentIndex);
     }
 
     void Update()
@@ -35,8 +43,12 @@ public class World1Pointer : MonoBehaviour
         {
             MovePointer(currentIndex + 1);
         }
-        else if (Input.GetKeyDown(KeyCode.Return)) 
+        else if (Input.GetKeyDown(KeyCode.Return))
         {
+            // 선택한 스테이지 저장
+            GameManager.Instance.SetCurrentStage(currentIndex);
+
+            // 씬 이동
             SceneManager.LoadScene("CharacterSelect");
         }
     }
@@ -44,24 +56,17 @@ public class World1Pointer : MonoBehaviour
     void MovePointer(int newIndex)
     {
         int count = stagePositions.Length;
-        Transform currentStage = stagePositions[currentIndex];
-
         if (count == 0) return;
 
         currentIndex = (newIndex + count) % count;
+        Transform currentStage = stagePositions[currentIndex];
 
+        // 포인터 위치 조정
         if (currentStage.CompareTag("BossStage"))
-        {
             pointer.position = currentStage.position + new Vector3(0, 3.5f, 0);
-        }
-
         else if (currentStage.CompareTag("EliteStage"))
-        {
             pointer.position = currentStage.position + new Vector3(0, 2.5f, 0);
-        }
-        else 
-        { 
-            pointer.position = currentStage.position + new Vector3(0, 1f, 0); 
-        }
+        else
+            pointer.position = currentStage.position + new Vector3(0, 1f, 0);
     }
 }
