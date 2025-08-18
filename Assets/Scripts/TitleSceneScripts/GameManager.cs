@@ -11,7 +11,11 @@ public class GameManager : MonoBehaviour
     private string saveFolder;
 
     public int coins = 0;
-    public int currentSlot = 1; 
+    public int currentSlot = 1;
+
+    public float playTime = 0f;  
+    private float sessionStartTime;
+
     public string currentWorld = "World1";
     public string currentStage = "Stage1";
     public Dictionary<string, List<bool>> clearedStages = new Dictionary<string, List<bool>>();
@@ -23,7 +27,9 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
             saveFolder = Application.persistentDataPath;
+            sessionStartTime = Time.time;
 
             int recentSlot = GetMostRecentSlot();
             LoadGame(recentSlot);
@@ -34,6 +40,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void UpdatePlayTime()
+    {
+        playTime += Time.time - sessionStartTime;
+        sessionStartTime = Time.time;
+    }
 
     public void SetCurrentSlot(int slot)
     {
@@ -42,12 +53,15 @@ public class GameManager : MonoBehaviour
 
     public void SaveGame(int slot)
     {
+        UpdatePlayTime();
+
         SaveData data = new SaveData
         {
             coins = coins,
             currentWorld = currentWorld,
             currentStage = currentStage,
-            clearedStages = clearedStages
+            clearedStages = clearedStages,
+            playTime = playTime
         };
 
         string path = Path.Combine(saveFolder, $"save{slot}.json");
