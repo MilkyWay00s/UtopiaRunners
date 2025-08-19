@@ -17,5 +17,6 @@ MonoBehaviour:
   critRate: 0.3
   autoAttackPrefab: {fileID: 8634067572751228905, guid: 5bea93be5156f214c89054ac0cd29bec,
     type: 3}
-  skillPrefab: {fileID: 0}
+  skillPrefab: {fileID: 1949517176471591376, guid: f7199daa6e3b2544ea12cc770a57ef36,
+    type: 3}
   cooldownTime: 10
