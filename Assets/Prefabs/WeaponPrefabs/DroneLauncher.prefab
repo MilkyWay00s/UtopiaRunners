@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -4711488724611841332}
   - component: {fileID: -1786043981812207728}
   m_Layer: 0
-  m_Name: Weapon1
+  m_Name: DroneLauncher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,8 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e0a83c2a06b75a41ab821a4cfed4997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoAttack: {fileID: 1506651425189059407, guid: c34c0a0655f09424682ec2eac1cc1fde, type: 3}
-  attackSpeed: 1
+  weaponData: {fileID: 11400000, guid: f9e62b28f00c8b549aceafd1c0c1db20, type: 2}
 --- !u!114 &-1786043981812207728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,5 +58,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e60822a615da25498660f32175d4265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillPrefab: {fileID: 1036646135589556611, guid: b136384cd484abb4ca9fa89157d99abf, type: 3}
-  cooldownTime: 5
+  weaponData: {fileID: 11400000, guid: f9e62b28f00c8b549aceafd1c0c1db20, type: 2}

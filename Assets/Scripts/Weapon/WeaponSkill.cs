@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class WeaponSkill : MonoBehaviour
 {
-    public GameObject skillPrefab;
-    public float cooldownTime = 5; // 스킬 쿨타임
+    public WeaponData weaponData;
     private bool isCooldown = false;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && !isCooldown) // E 버튼을 누르면 스킬 시전
+        if (Input.GetKeyDown(KeyCode.E) && !isCooldown)
         {
             UseSkill();
         }
@@ -18,16 +17,14 @@ public class WeaponSkill : MonoBehaviour
 
     void UseSkill()
     {
-        Instantiate(skillPrefab, transform.position, transform.rotation);
-
-        // 쿨타임 시작
+        Instantiate(weaponData.skillPrefab, transform.position, transform.rotation);
         StartCoroutine(StartCooldown());
     }
 
     IEnumerator StartCooldown()
     {
         isCooldown = true;
-        yield return new WaitForSeconds(cooldownTime);
+        yield return new WaitForSeconds(weaponData.cooldownTime);
         isCooldown = false;
         Debug.Log("Skill Ready");
     }
