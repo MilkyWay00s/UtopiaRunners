@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/WeaponSelectMode.unity
     guid: 9d8934ed6e405564b8105019abf268dd
   - enabled: 1
-    path: Assets/Scenes/PlayMode.unity
+    path: Assets/Scenes/Test/PlayMode.unity
     guid: 8ba1802c4176fbd4d9216bfc7459792b
   - enabled: 1
     path: Assets/Scenes/Title.unity
@@ -38,4 +38,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Upgrade.unity
     guid: a0eb7c940473afa4da4ba1228cf8019f
+  - enabled: 1
+    path: Assets/Scenes/InGameScene.unity
+    guid: 1337b6e900b081b4896bfb7c45ab0738
+  - enabled: 1
+    path: Assets/Scenes/CharacterSelectScene.unity
+    guid: 5ea4b0d56b14e0044a9b98a0d675cc6c
   m_configObjects: {}

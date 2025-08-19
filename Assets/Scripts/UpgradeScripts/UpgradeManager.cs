@@ -10,7 +10,7 @@ public class UpgradeManager : MonoBehaviour
         public UpgradeData upgradeData;
         public UpgradeBarController upgradeBar;
         public TextMeshProUGUI costText;
-        public Button upgradeButton;   // 버튼 추가
+        public Button upgradeButton;
     }
 
     public UpgradeEntry[] upgrades;
@@ -36,7 +36,7 @@ public class UpgradeManager : MonoBehaviour
             return;
         }
 
-        if (GameManager.Instance.SpendCoins(cost))
+        if (CoinManager.Instance.SpendCoins(cost))
         {
             data.currentLevel++;
 

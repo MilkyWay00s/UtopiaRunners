@@ -13,7 +13,9 @@ public class WorldMapPointer : MonoBehaviour
 
     void Start()
     {
-        MovePointer(currentIndex);
+        int indexToMove = GetCurrentStageIndex();
+        MovePointer(indexToMove);
+        updateWorldName();
     }
 
     void Update()
@@ -38,9 +40,12 @@ public class WorldMapPointer : MonoBehaviour
             MovePointer(currentIndex + 1);
             updateWorldName();
         }
-        else if (Input.GetKeyDown(KeyCode.Return)) // Enter 키 입력
+        else if (Input.GetKeyDown(KeyCode.Return))
         {
-            LoadCurrentScene();
+            string selectedWorld = regionPositions[currentIndex].name;
+            GameManager.Instance.SetCurrentWorld(selectedWorld);
+
+            SceneManager.LoadScene(selectedWorld);
         }
     }
 
@@ -73,25 +78,23 @@ public class WorldMapPointer : MonoBehaviour
         }
     }
 
-    void LoadCurrentScene()
+
+    int GetCurrentStageIndex()
     {
-        if (sceneNames.Length == regionPositions.Length && currentIndex < sceneNames.Length)
+        string worldName = GameManager.Instance.currentWorld;
+        string stageName = GameManager.Instance.currentStage;
+
+        for (int i = 0; i < regionPositions.Length; i++)
         {
-            string sceneToLoad = sceneNames[currentIndex];
-            if (!string.IsNullOrEmpty(sceneToLoad))
+            if (regionPositions[i].name == worldName)
             {
-                SceneManager.LoadScene(sceneToLoad);
-            }
-            else
-            {
-                Debug.LogWarning("씬 이름이 비어 있습니다.");
+                return i;
             }
         }
-        else
-        {
-            Debug.LogWarning("씬 이름 배열과 지역 배열의 길이가 다르거나 인덱스 초과입니다.");
-        }
+
+        return 0; 
     }
+
 
     void updateWorldName()
     {
