@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DroneSkill : MonoBehaviour
+public class DroneLauncherSkill : MonoBehaviour
 {
     public WeaponAutoAttack weaponAutoAttack;
     public float duration = 5f;

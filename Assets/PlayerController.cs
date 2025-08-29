@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     bool isSliding = false;
     bool isGrounded = false;
 
+    public bool IsGrounded() => isGrounded;
+
     void Awake() => rb = GetComponent<Rigidbody2D>();
 
     void Update()

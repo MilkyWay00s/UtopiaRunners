@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1949517176471591376
+--- !u!1 &6889599416930219185
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,43 +8,43 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7777461224352179321}
-  - component: {fileID: 6713577688878967969}
+  - component: {fileID: 7534323326066646246}
+  - component: {fileID: 2065232253474588027}
   m_Layer: 0
-  m_Name: DroneSkillProjectile
+  m_Name: MissilePodSkill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7777461224352179321
+--- !u!4 &7534323326066646246
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1949517176471591376}
+  m_GameObject: {fileID: 6889599416930219185}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.233945, y: -0.0030134828, z: -0.025395418}
+  m_LocalPosition: {x: -1.6776408, y: 0.5890509, z: 0.010315665}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6713577688878967969
+--- !u!114 &2065232253474588027
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1949517176471591376}
+  m_GameObject: {fileID: 6889599416930219185}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daa6c1c5f42feef4dba91ee12f44aadc, type: 3}
+  m_Script: {fileID: 11500000, guid: e2f9b9fdfbb85c1409dbfcab8d12c43b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponAutoAttack: {fileID: -4711488724611841332, guid: f33cebc1567f9d244acb09091a188314,
+  missileCount: {fileID: 6531575968622116242, guid: ecab4c8d6d492db4ca971ec0770ce6ff,
     type: 3}
-  duration: 5
-  speedMultiplier: 2
+  missileSkill: {fileID: 83038825261546737, guid: 086e2d1d77f438947a6cb68a6185817b,
+    type: 3}
