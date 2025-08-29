@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -62,14 +61,13 @@ public class GameManager : MonoBehaviour
             currentWorld = currentWorld,
             currentStage = currentStage,
             clearedStages = clearedStages
-        .Select(kvp => new StageClearData
-        {
-            world = kvp.Key,
-            stages = kvp.Value
-        })
-        .ToList()
+                .Select(s => new StageClearData
+                {
+                    world = s.world,
+                    stages = new List<bool>(s.stages)
+                })
+                .ToList()
         };
-
 
         string path = Path.Combine(saveFolder, $"save{slot}.json");
         string json = JsonUtility.ToJson(data, true);
@@ -91,8 +89,14 @@ public class GameManager : MonoBehaviour
             coins = data.coins;
             currentWorld = data.currentWorld;
             currentStage = data.currentStage;
+
             clearedStages = data.clearedStages
-            .ToDictionary(entry => entry.world, entry => entry.stages);
+                .Select(s => new StageClearData
+                {
+                    world = s.world,
+                    stages = new List<bool>(s.stages)
+                })
+                .ToList();
         }
         else
         {

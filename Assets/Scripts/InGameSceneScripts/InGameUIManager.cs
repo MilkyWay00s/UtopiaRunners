@@ -26,19 +26,26 @@ public class InGameUIManager : MonoBehaviour
         Time.timeScale = 1f;
 
         string world = GameManager.Instance.currentWorld;
-        string stageStr = GameManager.Instance.currentStage; 
+        string stageStr = GameManager.Instance.currentStage;
         int stageIndex = int.Parse(stageStr.Replace("Stage", "")) - 1;
 
         GameManager.Instance.CompleteStage(world, stageIndex);
 
-        if (GameManager.Instance.clearedStages.ContainsKey(world))
+        var stageData = GameManager.Instance.clearedStages
+            .Find(s => s.world == world);
+
+        if (stageData != null)
         {
-            List<bool> stages = GameManager.Instance.clearedStages[world];
-            string status = string.Join(", ", stages.Select(b => b ? "Cleared" : "NotCleared"));
+            string status = string.Join(", ", stageData.stages.Select(b => b ? "Cleared" : "NotCleared"));
             Debug.Log($"[{world}] 스테이지 클리어 상태: {status}");
+        }
+        else
+        {
+            Debug.LogWarning($"[{world}] 클리어 데이터가 없습니다.");
         }
 
         string currentWorld = GameManager.Instance.currentWorld;
         SceneManager.LoadScene(currentWorld);
     }
+
 }
