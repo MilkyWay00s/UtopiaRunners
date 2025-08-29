@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
 
     public string currentWorld = "World1";
     public string currentStage = "Stage1";
-    public Dictionary<string, List<bool>> clearedStages = new Dictionary<string, List<bool>>();
+    public List<StageClearData> clearedStages = new List<StageClearData>();
 
 
     private void Awake()
@@ -58,11 +58,18 @@ public class GameManager : MonoBehaviour
         SaveData data = new SaveData
         {
             coins = coins,
+            playTime = playTime,
             currentWorld = currentWorld,
             currentStage = currentStage,
-            clearedStages = clearedStages,
-            playTime = playTime
+            clearedStages = clearedStages
+        .Select(kvp => new StageClearData
+        {
+            world = kvp.Key,
+            stages = kvp.Value
+        })
+        .ToList()
         };
+
 
         string path = Path.Combine(saveFolder, $"save{slot}.json");
         string json = JsonUtility.ToJson(data, true);
@@ -84,7 +91,8 @@ public class GameManager : MonoBehaviour
             coins = data.coins;
             currentWorld = data.currentWorld;
             currentStage = data.currentStage;
-            clearedStages = data.clearedStages;
+            clearedStages = data.clearedStages
+            .ToDictionary(entry => entry.world, entry => entry.stages);
         }
         else
         {
@@ -132,19 +140,36 @@ public class GameManager : MonoBehaviour
 
     public void CompleteStage(string world, int stageIndex)
     {
-        if (!clearedStages.ContainsKey(world))
-            clearedStages[world] = new List<bool>();
+        // 해당 world 데이터를 찾음
+        StageClearData worldData = clearedStages.Find(w => w.world == world);
 
-        while (clearedStages[world].Count <= stageIndex)
-            clearedStages[world].Add(false);
+        // 없으면 새로 추가
+        if (worldData == null)
+        {
+            worldData = new StageClearData
+            {
+                world = world,
+                stages = new List<bool>()
+            };
+            clearedStages.Add(worldData);
+        }
 
-        clearedStages[world][stageIndex] = true;
+        // stageIndex까지 리스트 크기 늘리기
+        while (worldData.stages.Count <= stageIndex)
+        {
+            worldData.stages.Add(false);
+        }
 
+        // 해당 스테이지를 클리어 처리
+        worldData.stages[stageIndex] = true;
+
+        // 현재 진행 상황 갱신
         currentWorld = world;
         currentStage = $"Stage{stageIndex + 1}";
 
-        SaveGame(currentSlot); 
+        SaveGame(currentSlot);
     }
+
 
 
     public void LoadMostRecent()
