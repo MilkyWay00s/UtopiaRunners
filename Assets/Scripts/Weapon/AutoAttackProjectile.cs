@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AutoAttackMoving : MonoBehaviour
+public class AutoAttackProjectile : MonoBehaviour
 {
     public float moveSpeed = 10f;
     public Transform targetBoss; 

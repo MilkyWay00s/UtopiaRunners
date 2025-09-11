@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ToPlayMode_Temp : MonoBehaviour
+public class ToPlayModep : MonoBehaviour
 {
     public void LoadPlayModeScene()
     {
