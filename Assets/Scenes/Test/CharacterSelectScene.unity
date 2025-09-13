@@ -1484,16 +1484,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2a884543b9f7a047aae938204dede4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterDatabase: {fileID: 0}
+  characterDatabase: {fileID: 11400000, guid: ad06aaccdfdb7a14386ddb1c543c1958, type: 2}
   characterButtonPanel: {fileID: 2013687620}
   characterButtons:
   - {fileID: 7781550883857344802, guid: 62b1c01228c0f8c41800e6d9c0237c42, type: 3}
   - {fileID: 7975672807681981967, guid: 0c471edd15848d341a7a1bbca18faa6c, type: 3}
   - {fileID: 7853347430173106205, guid: a69a876554421cb4ca125b253960a227, type: 3}
   - {fileID: 4878696465556494960, guid: d1f6219b0fd2e2d4a9d19fb16d4d0558, type: 3}
-  mainSlotImage: {fileID: 0}
-  subSlotImage: {fileID: 0}
-  emptySlotSprite: {fileID: 0}
+  mainSlotImage: {fileID: 1762087387}
+  subSlotImage: {fileID: 1641783342}
+  emptySlotSprite: {fileID: 21300000, guid: 321d8291ab2c6cb4b81d3dda37a91ef6, type: 3}
 --- !u!4 &1381484154
 Transform:
   m_ObjectHideFlags: 0
@@ -1862,10 +1862,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1381484153}
         m_TargetAssemblyTypeName: CharacterSelectManager, Assembly-CSharp
         m_MethodName: OpenSubCharacterSelection
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1641783341}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1995,10 +1995,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1381484153}
         m_TargetAssemblyTypeName: CharacterSelectManager, Assembly-CSharp
         m_MethodName: OpenMainCharacterSelection
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1762087386}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

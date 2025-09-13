@@ -678,6 +678,7 @@ GameObject:
   - component: {fileID: 279734621}
   - component: {fileID: 279734623}
   - component: {fileID: 279734622}
+  - component: {fileID: 279734624}
   m_Layer: 5
   m_Name: CharacterListPanel
   m_TagString: Untagged
@@ -743,6 +744,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 279734620}
   m_CullTransparentMesh: 1
+--- !u!114 &279734624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279734620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f98c2fa2116fc74d8c394fe05719911, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterDatabase: {fileID: 11400000, guid: d1de84a6ea164864ca2bf79579f4ae41, type: 2}
 --- !u!1 &286529224
 GameObject:
   m_ObjectHideFlags: 0
@@ -1138,6 +1152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f98c2fa2116fc74d8c394fe05719911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterDatabase: {fileID: 11400000, guid: ad06aaccdfdb7a14386ddb1c543c1958, type: 2}
 --- !u!4 &636533840
 Transform:
   m_ObjectHideFlags: 0

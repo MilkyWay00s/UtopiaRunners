@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 
 public interface IWeaponContext {
     Transform Muzzle { get; }
@@ -350,3 +350,4 @@ public static class ModifierFactory {
         return null;
     }
 }
+*/

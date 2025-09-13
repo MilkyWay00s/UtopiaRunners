@@ -937,11 +937,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2cb1be51fdf21f41ab799f81c0cd3d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allCharacters:
-  - {fileID: 7781550883857344802, guid: 62b1c01228c0f8c41800e6d9c0237c42, type: 3}
-  - {fileID: 7975672807681981967, guid: 0c471edd15848d341a7a1bbca18faa6c, type: 3}
-  - {fileID: 7853347430173106205, guid: a69a876554421cb4ca125b253960a227, type: 3}
-  - {fileID: 4878696465556494960, guid: d1f6219b0fd2e2d4a9d19fb16d4d0558, type: 3}
+  characterDatabase: {fileID: 11400000, guid: ad06aaccdfdb7a14386ddb1c543c1958, type: 2}
   spawnPoint: {fileID: 87194267}
   switchKey: 113
   switchCooldown: 15
