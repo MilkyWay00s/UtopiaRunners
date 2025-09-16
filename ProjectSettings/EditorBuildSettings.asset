@@ -39,9 +39,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Upgrade.unity
     guid: a0eb7c940473afa4da4ba1228cf8019f
   - enabled: 1
-    path: Assets/Scenes/InGameScene.unity
-    guid: 1337b6e900b081b4896bfb7c45ab0738
+    path: Assets/Scenes/Test/CharacterSelectScene.unity
+    guid: 2c595fe2561ecbd419ade2fafdbe9be9
   - enabled: 1
-    path: Assets/Scenes/CharacterSelectScene.unity
-    guid: 5ea4b0d56b14e0044a9b98a0d675cc6c
+    path: Assets/Scenes/Test/InGameScene.unity
+    guid: ef3b1e7ace3633d4a82b1d800184a1cf
   m_configObjects: {}

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f567dc409e2b24d428828207de31e727, type: 3}
+  m_Name: TempCharacter1
+  m_EditorClassIdentifier: 
+  displayName: "\uC784\uC2DC1\uBC88"
+  displayImage: {fileID: 21300000, guid: 5889f3968634a8542a9d9b69ab53de31, type: 3}
+  characterLevel: 1
+  abilities: {fileID: 0}
+  selectedState: 0
+  runnerObj: {fileID: 7781550883857344802, guid: 62b1c01228c0f8c41800e6d9c0237c42,
+    type: 3}

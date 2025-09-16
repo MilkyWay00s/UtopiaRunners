@@ -4,31 +4,41 @@ using UnityEngine.UI;
 
 public class CharacterSelectManager : MonoBehaviour
 {
+    [SerializeField] private CharacterDatabase characterDatabase;
+
     [Header("Character Choice UI")]
     public GameObject characterButtonPanel;   // 목록 패널(켜고 끄기)
     public GameObject[] characterButtons;     // A~D 버튼 오브젝트
-    
+
+    [Header("Slot UI")]
+    [SerializeField] private Image mainSlotImage;
+    [SerializeField] private Image subSlotImage;
+
+    private Button curSelectedButton;
 
     private int? selectedMain = null;
     private int? selectedSub = null;
     private bool isSelectingMain = true;
 
+    [SerializeField] private Sprite emptySlotSprite;
     void Start()
     {
         characterButtonPanel.SetActive(false);
-
+        mainSlotImage.sprite = emptySlotSprite;
+        subSlotImage.sprite = emptySlotSprite;
     }
 
     // “메인 캐릭터 선택” 버튼
-    public void OpenMainCharacterSelection()
+    public void OpenMainCharacterSelection(Button clickedButton)
     {
         isSelectingMain = true;
+        curSelectedButton = clickedButton;
         RefreshButtons();
         characterButtonPanel.SetActive(true);
     }
 
     // “서브 캐릭터 선택” 버튼
-    public void OpenSubCharacterSelection()
+    public void OpenSubCharacterSelection(Button clickedButton)
     {
         if (selectedMain == null)
         {
@@ -36,6 +46,7 @@ public class CharacterSelectManager : MonoBehaviour
             return;
         }
         isSelectingMain = false;
+        curSelectedButton = clickedButton;
         RefreshButtons();
         characterButtonPanel.SetActive(true);
     }
@@ -43,9 +54,13 @@ public class CharacterSelectManager : MonoBehaviour
     // 목록에서 캐릭터 하나를 눌렀을 때 (각 버튼 OnClick에 index 할당)
     public void SelectCharacter(int index)
     {
+        var spec = characterDatabase.allCharacters[index];
+
         if (isSelectingMain)
         {
             selectedMain = index;
+            mainSlotImage.sprite = spec.displayImage; // 메인 슬롯 이미지 갱신
+            spec.selectedState = SelectedState.Main; // 이후 초기화 필요
         }
         else
         {
@@ -55,9 +70,10 @@ public class CharacterSelectManager : MonoBehaviour
                 return;
             }
             selectedSub = index;
+            subSlotImage.sprite = spec.displayImage; // 서브 슬롯 이미지 갱신
+            spec.selectedState = SelectedState.Sub;
         }
 
-        // 선택 후 패널 닫기 (원하면 유지해도 됨)
         characterButtonPanel.SetActive(false);
     }
 

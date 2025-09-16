@@ -2,11 +2,12 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Reflection;
 
 public class CharacterManager : MonoBehaviour
 {
     [Header("Spawn")]
-    public GameObject[] allCharacters;   // A~D 프리팹들
+    public CharacterDatabase characterDatabase;   // A~D 프리팹들
     public Transform spawnPoint;
 
     [Header("Switching")]
@@ -32,15 +33,10 @@ public class CharacterManager : MonoBehaviour
 
     void Start()
     {
-        // --- 인덱스 안전 보정 ---
-        int count = (allCharacters != null) ? allCharacters.Length : 0;
-        if (count < 2) { Debug.LogError("[CM] allCharacters에 최소 2개 프리팹이 필요합니다."); return; }
+        int mainIndex = PlayerPrefs.GetInt("MainCharacter", 0);
+        int subIndex = PlayerPrefs.GetInt("SubCharacter", 1);
 
-        int mainIndex = Mathf.Clamp(PlayerPrefs.GetInt("MainCharacter", 0), 0, count - 1);
-        int subIndex = Mathf.Clamp(PlayerPrefs.GetInt("SubCharacter", 1), 0, count - 1);
-        if (subIndex == mainIndex) subIndex = (mainIndex + 1) % count;
-
-        if (!allCharacters[mainIndex] || !allCharacters[subIndex])
+        if (!characterDatabase.allCharacters[mainIndex] || !characterDatabase.allCharacters[subIndex])
         {
             Debug.LogError("[CM] 프리팹 슬롯에 비어있는 요소가 있습니다."); return;
         }
@@ -48,8 +44,8 @@ public class CharacterManager : MonoBehaviour
         // --- 스폰 ---
         Vector3 pos = spawnPoint ? spawnPoint.position : Vector3.zero;
         pos.z = 0f; // 2D 카메라 가시
-        mainObj = Instantiate(allCharacters[mainIndex], pos, Quaternion.identity);
-        subObj = Instantiate(allCharacters[subIndex], pos, Quaternion.identity);
+        mainObj = Instantiate(characterDatabase.allCharacters[mainIndex].runnerObj, pos, Quaternion.identity);
+        subObj = Instantiate(characterDatabase.allCharacters[subIndex].runnerObj, pos, Quaternion.identity);
 
         // 처음엔 메인만 보이게
         mainObj.SetActive(true);
