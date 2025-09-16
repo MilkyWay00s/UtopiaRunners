@@ -7,6 +7,6 @@ public class WeaponSelectButton : MonoBehaviour
 {
     public void LoadWeaponSelectScene()
     {
-        SceneManager.LoadScene("WeaponSelectMode");
+        SceneManager.LoadScene("6_WeaponSelectMode");
     }
 }

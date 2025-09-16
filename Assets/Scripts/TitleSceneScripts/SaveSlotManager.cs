@@ -49,7 +49,7 @@ public class SaveSlotManager : MonoBehaviour
     public void OnSelectSlot(int slotNumber)
     {
         GameManager.Instance.LoadGame(slotNumber);
-        SceneManager.LoadScene("WorldMap");
+        SceneManager.LoadScene("2_World1");
     }
 
     public void OnStartButtonClicked()
@@ -66,6 +66,6 @@ public class SaveSlotManager : MonoBehaviour
     public void OnClickLoadMostRecent()
     {
         GameManager.Instance.LoadMostRecent();
-        SceneManager.LoadScene("WorldMap");
+        SceneManager.LoadScene("2_World1");
     }
 }

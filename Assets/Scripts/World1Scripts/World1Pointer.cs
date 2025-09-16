@@ -44,7 +44,7 @@ public class World1Pointer : MonoBehaviour
         {
             GameManager.Instance.SetCurrentStage(currentIndex);
 
-            SceneManager.LoadScene("CharacterSelect");
+            SceneManager.LoadScene("3_CharacterSelect");
         }
     }
 

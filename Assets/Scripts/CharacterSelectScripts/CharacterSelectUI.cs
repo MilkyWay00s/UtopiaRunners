@@ -10,6 +10,6 @@ public class CharacterSelectUI : MonoBehaviour
     }
     public void OnUpgradeButtonClicked()
     {
-        SceneManager.LoadScene("Upgrade"); 
+        SceneManager.LoadScene("5_Upgrade"); 
     }
 }

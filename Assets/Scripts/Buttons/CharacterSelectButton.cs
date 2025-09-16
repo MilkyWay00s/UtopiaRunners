@@ -7,6 +7,6 @@ public class CharacterSelectButton : MonoBehaviour
 {
     public void LoadCharacterSelectScene()
     {
-        SceneManager.LoadScene("CharacterSelectScene");
+        SceneManager.LoadScene("4_CharacterSelectScene");
     }
 }
