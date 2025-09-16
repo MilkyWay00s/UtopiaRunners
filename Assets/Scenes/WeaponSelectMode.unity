@@ -505,7 +505,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6,
+    type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -589,7 +590,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -794,8 +796,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89adc62e2c131884b96511abb32ba2ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponSelect: {fileID: 3720546235035006504, guid: f33cebc1567f9d244acb09091a188314, type: 3}
-  weapon1: {fileID: 3720546235035006504, guid: f33cebc1567f9d244acb09091a188314, type: 3}
+  weaponSelect: {fileID: 3720546235035006504, guid: f33cebc1567f9d244acb09091a188314,
+    type: 3}
+  weapon1: {fileID: 1528006660386521009, guid: 3dfba2dc62abe2f4ab9e8cd7690b972f, type: 3}
   weapon2: {fileID: 3720546235035006504, guid: ecab4c8d6d492db4ca971ec0770ce6ff, type: 3}
   slotSelecter: {fileID: 407198587}
   slot1: {fileID: 456999672}
@@ -1568,7 +1571,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
