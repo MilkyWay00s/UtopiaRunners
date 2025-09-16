@@ -23,5 +23,10 @@ public class DroneLauncherPosition : MonoBehaviour
             newPos.y += 2f;
             transform.position = newPos;
         }
+
+        if (playerPosition != null && Input.GetKeyDown(KeyCode.Q))
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+        }
     }
 }
