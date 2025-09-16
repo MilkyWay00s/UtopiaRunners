@@ -2067,8 +2067,8 @@ GameObject:
   m_Component:
   - component: {fileID: 949025486}
   - component: {fileID: 949025485}
-  - component: {fileID: 949025487}
-  - component: {fileID: 949025488}
+  - component: {fileID: 949025492}
+  - component: {fileID: 949025491}
   - component: {fileID: 949025490}
   - component: {fileID: 949025489}
   m_Layer: 0
@@ -2146,37 +2146,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &949025487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 949025484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c18f26418935144aafb63c268144b2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obstaclePrefabs: []
-  spawnInterval: 1
---- !u!114 &949025488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 949025484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4749779df2a327b4fabb33fca032956a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pools:
-  - key: 0
-    prefab: {fileID: 1042047395439326476, guid: 6041b937de8fc1947a281bb157025688,
-      type: 3}
-    size: 10
 --- !u!50 &949025489
 Rigidbody2D:
   serializedVersion: 4
@@ -2249,6 +2218,40 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &949025491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949025484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f137ac110f86a7b47987436f244f2a1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patterns:
+  - {fileID: 11400000, guid: 8b657f8945ee6604a947601c3aeb0d6a, type: 2}
+  - {fileID: 11400000, guid: 8ec5fb10bf6a78e49ae2e5d508672666, type: 2}
+  spawnOrigin: {fileID: 949025486}
+  interval: 3
+--- !u!114 &949025492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949025484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4749779df2a327b4fabb33fca032956a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pools:
+  - key: 0
+    prefab: {fileID: 1042047395439326476, guid: 6041b937de8fc1947a281bb157025688,
+      type: 3}
+    size: 10
 --- !u!1 &1012471324
 GameObject:
   m_ObjectHideFlags: 0
@@ -2417,7 +2420,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39d16496c27059d49b451919d0e91b5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 7781550883857344802, guid: 62b1c01228c0f8c41800e6d9c0237c42, type: 3}
 --- !u!4 &1078606151
 Transform:
   m_ObjectHideFlags: 0

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aece9f7501c28fa42959a0ae280e4cc0, type: 3}
+  m_Name: LaserPattern
+  m_EditorClassIdentifier: 
+  patternName: "\uD30C\uAD34\uAD11\uC120!!!"
+  warningPrefab: {fileID: 7975672807681981967, guid: 077fb7e523d5b2a40a66189842fb2e09,
+    type: 3}
+  laserPrefab: {fileID: 7975672807681981967, guid: 647e9219793aa1742917524f3af2b89b,
+    type: 3}
+  offset: {x: 0, y: 3}
+  warningTime: 1
+  laserDuration: 2
