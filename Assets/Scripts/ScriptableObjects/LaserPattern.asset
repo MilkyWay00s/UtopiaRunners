@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: LaserPattern
   m_EditorClassIdentifier: 
   patternName: "\uD30C\uAD34\uAD11\uC120!!!"
-  warningPrefab: {fileID: 7975672807681981967, guid: 077fb7e523d5b2a40a66189842fb2e09,
+  warningPrefab: {fileID: 8562359384423880294, guid: 009ca2ac490248a44876223c2c87515c,
     type: 3}
-  laserPrefab: {fileID: 7975672807681981967, guid: 647e9219793aa1742917524f3af2b89b,
+  laserPrefab: {fileID: 8562359384423880294, guid: 31cb17284e3e5094f832eef161db38dd,
     type: 3}
   offset: {x: 0, y: 3}
   warningTime: 1
   laserDuration: 2
+  warningScale: {x: 1, y: 1}
+  laserScale: {x: 1, y: 1}
