@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 public enum BgmType { MainTheme }
-public enum SfxType { Jump, Slide }
+public enum SfxType { Jump, Slide } 
 
 public class SoundManager : MonoBehaviour
 {
@@ -35,7 +35,7 @@ public class SoundManager : MonoBehaviour
 
     void Start()
     {
-        SoundManager.Instance.PlayBGM(BgmType.MainTheme);
+        PlayBGM(BgmType.MainTheme);
     }
 
     private void Init()
