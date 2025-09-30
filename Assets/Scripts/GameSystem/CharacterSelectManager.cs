@@ -7,8 +7,8 @@ public class CharacterSelectManager : MonoBehaviour
     [SerializeField] private CharacterDatabase characterDatabase;
 
     [Header("Character Choice UI")]
-    public GameObject characterButtonPanel;   // ¸ñ·Ï ÆÐ³Î(ÄÑ°í ²ô±â)
-    public GameObject[] characterButtons;     // A~D ¹öÆ° ¿ÀºêÁ§Æ®
+    public GameObject characterButtonPanel;   // ï¿½ï¿½ï¿½ ï¿½Ð³ï¿½(ï¿½Ñ°ï¿½ ï¿½ï¿½ï¿½ï¿½)
+    public GameObject[] characters;     // A~D ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 
     [Header("Slot UI")]
     [SerializeField] private Image mainSlotImage;
@@ -28,7 +28,7 @@ public class CharacterSelectManager : MonoBehaviour
         subSlotImage.sprite = emptySlotSprite;
     }
 
-    // ¡°¸ÞÀÎ Ä³¸¯ÅÍ ¼±ÅÃ¡± ¹öÆ°
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ã¡ï¿½ ï¿½ï¿½Æ°
     public void OpenMainCharacterSelection(Button clickedButton)
     {
         isSelectingMain = true;
@@ -37,12 +37,12 @@ public class CharacterSelectManager : MonoBehaviour
         characterButtonPanel.SetActive(true);
     }
 
-    // ¡°¼­ºê Ä³¸¯ÅÍ ¼±ÅÃ¡± ¹öÆ°
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ã¡ï¿½ ï¿½ï¿½Æ°
     public void OpenSubCharacterSelection(Button clickedButton)
     {
         if (selectedMain == null)
         {
-            Debug.Log("¸ÞÀÎ Ä³¸¯ÅÍ¸¦ ¸ÕÀú ¼±ÅÃÇÏ¼¼¿ä.");
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½.");
             return;
         }
         isSelectingMain = false;
@@ -51,7 +51,7 @@ public class CharacterSelectManager : MonoBehaviour
         characterButtonPanel.SetActive(true);
     }
 
-    // ¸ñ·Ï¿¡¼­ Ä³¸¯ÅÍ ÇÏ³ª¸¦ ´­·¶À» ¶§ (°¢ ¹öÆ° OnClick¿¡ index ÇÒ´ç)
+    // ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ (ï¿½ï¿½ ï¿½ï¿½Æ° OnClickï¿½ï¿½ index ï¿½Ò´ï¿½)
     public void SelectCharacter(int index)
     {
         var spec = characterDatabase.allCharacters[index];
@@ -59,30 +59,30 @@ public class CharacterSelectManager : MonoBehaviour
         if (isSelectingMain)
         {
             selectedMain = index;
-            mainSlotImage.sprite = spec.displayImage; // ¸ÞÀÎ ½½·Ô ÀÌ¹ÌÁö °»½Å
-            spec.selectedState = SelectedState.Main; // ÀÌÈÄ ÃÊ±âÈ­ ÇÊ¿ä
+            mainSlotImage.sprite = spec.displayImage; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            spec.selectedState = SelectedState.Main; // ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ ï¿½Ê¿ï¿½
         }
         else
         {
             if (selectedMain == index)
             {
-                Debug.Log("¸ÞÀÎ°ú °°Àº Ä³¸¯ÅÍ´Â ¼­ºê·Î ¼±ÅÃÇÒ ¼ö ¾ø½À´Ï´Ù.");
+                Debug.Log("ï¿½ï¿½ï¿½Î°ï¿½ ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½Í´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
                 return;
             }
             selectedSub = index;
-            subSlotImage.sprite = spec.displayImage; // ¼­ºê ½½·Ô ÀÌ¹ÌÁö °»½Å
+            subSlotImage.sprite = spec.displayImage; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             spec.selectedState = SelectedState.Sub;
         }
 
         characterButtonPanel.SetActive(false);
     }
 
-    // ¡°°ÔÀÓ ½ÃÀÛ¡± ¹öÆ°
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Û¡ï¿½ ï¿½ï¿½Æ°
     public void StartGame()
     {
         if (selectedMain == null || selectedSub == null)
         {
-            Debug.Log("¸ÞÀÎ/¼­ºê Ä³¸¯ÅÍ¸¦ ¸ðµÎ ¼±ÅÃÇÏ¼¼¿ä.");
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½.");
             return;
         }
         PlayerPrefs.SetInt("MainCharacter", selectedMain.Value);
@@ -90,14 +90,14 @@ public class CharacterSelectManager : MonoBehaviour
         SceneManager.LoadScene("3_CharacterSelect");
     }
 
-    // ¼­ºê ¼±ÅÃ ½Ã ¸ÞÀÎ°ú µ¿ÀÏÇÑ ¹öÆ°¸¸ ºñÈ°¼ºÈ­
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Î°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­
     private void RefreshButtons()
     {
-        for (int i = 0; i < characterButtons.Length; i++)
+        for (int i = 0; i < characters.Length; i++)
         {
-            characterButtons[i].SetActive(true);
+            characters[i].SetActive(true);
             if (!isSelectingMain && selectedMain != null && i == selectedMain)
-                characterButtons[i].SetActive(false);
+                characters[i].SetActive(false);
         }
     }
 }
