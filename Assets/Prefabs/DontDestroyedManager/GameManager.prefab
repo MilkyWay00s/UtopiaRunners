@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54030464732cfaa4ab7a52a7b5b10db6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedWorld: 
-  selectedStage: 
-  selectedCharacter: 
   coins: 10000
+  currentSlot: 1
+  playTime: 0
+  currentWorld: World1
+  currentStage: Stage1
