@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEditor.Progress;
 
 public class CharacterPortrait : MonoBehaviour, ICharacterPortrait
@@ -8,14 +9,14 @@ public class CharacterPortrait : MonoBehaviour, ICharacterPortrait
     [Header("캐릭터")]
     public CharacterSpec character;
     [Header("캐릭터 초상화")]
-    public SpriteRenderer characterImage;
+    public Image characterImage;
 
     void Start()
     {
         characterImage.sprite = character.displayImage;
     }
-    public CharacterSpec ClickPortrait()
+    public void ClickedPortrait()
     {
-        return this.character;
+        CharacterSelectManager.Instance.CharacterSelect(character);
     }
 }

@@ -4,5 +4,5 @@ using UnityEngine;
 using static UnityEditor.Progress;
 public interface ICharacterPortrait
 {
-    CharacterSpec ClickPortrait();
+    public void ClickedPortrait();
 }
