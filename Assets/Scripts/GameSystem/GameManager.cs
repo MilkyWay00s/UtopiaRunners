@@ -22,14 +22,11 @@ public class GameManager : SingletonObject<GameManager>
     protected override void Awake()
     {
         base.Awake();
-        if (Instance == null)
-        {
-            saveFolder = Application.persistentDataPath;
-            sessionStartTime = Time.time;
+        saveFolder = Application.persistentDataPath;
+        sessionStartTime = Time.time;
 
-            int recentSlot = GetMostRecentSlot();
-            LoadGame(recentSlot);
-        }
+        int recentSlot = GetMostRecentSlot();
+        LoadGame(recentSlot);
     }
 
     private void UpdatePlayTime()
