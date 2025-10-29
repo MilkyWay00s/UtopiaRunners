@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,70 +10,108 @@ public class StageManager : MonoBehaviour
     [Header("Database")]
     public StageDatabase database;
 
-    public StageData CurrentStage { get; private set; }
+    [Header("Common Scene")]
+    [SerializeField] private string runningSceneName = "RunningScene"; 
+
+    [Header("State (runtime)")]
+    [SerializeField] private StageData currentStage;  
+    public StageData CurrentStage => currentStage;
 
     const string PREF_LAST_STAGE = "LastStageId";
 
-    private void Awake()
+    void Awake()
     {
-        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
+        if (Instance && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
         DontDestroyOnLoad(gameObject);
-
-        if (database != null) database.BuildMap();
+        SceneManager.sceneLoaded += OnAnySceneLoaded;
     }
 
-    // 외부(UI 버튼)에서 호출
-    public void SelectAndLoad(StageName id)
+    void OnDestroy()
     {
-        var data = database?.GetStageId(id);
-        if (data == null)
+        if (Instance == this) SceneManager.sceneLoaded -= OnAnySceneLoaded;
+    }
+
+    void OnAnySceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // RunningScene이 로드되면 선택된 StageData를 씬에 주입
+        if (scene.name == runningSceneName && currentStage != null)
         {
-            Debug.LogError($"StageManager: StageData not found for {id}");
-            return;
+            ApplyEnvironment();
+            //ApplyAudio();
+            ApplyPlayerStart();
+            //ApplyToSpawners();
         }
-        PlayerPrefs.SetInt(PREF_LAST_STAGE, (int)id);
-        StartCoroutine(LoadStageRoutine(data));
+    }
+
+    // 월드맵 UI에서 호출: ID 선택 후 공통 RunningScene 로드
+    public void SelectAndPlay(StageName id, bool remember = true)
+    {
+        var data = database?.GetStageName(id);
+        if (data == null) { Debug.LogError($"StageData not found: {id}"); return; }
+        currentStage = data;
+        if (remember) PlayerPrefs.SetInt(PREF_LAST_STAGE, (int)id);
+
+    
+        if (SceneManager.GetActiveScene().name == runningSceneName)
+        {
+            ApplyEnvironment();
+            //ApplyAudio();
+            ApplyPlayerStart();
+            //ApplyToSpawners();
+        }
+        else
+        {
+            StartCoroutine(LoadRunningScene());
+        }
     }
 
     public void LoadLastSelectedOr(StageName fallback)
     {
         var saved = PlayerPrefs.GetInt(PREF_LAST_STAGE, (int)fallback);
-        SelectAndLoad((StageName)saved);
+        SelectAndPlay((StageName)saved, remember: false);
     }
 
-    private IEnumerator LoadStageRoutine(StageData data)
+    IEnumerator LoadRunningScene()
     {
-        // 씬 로드
-        var op = SceneManager.LoadSceneAsync(data.sceneName, LoadSceneMode.Single);
-        yield return op;
-
-        CurrentStage = data;
-
-        // 로드가 끝난 뒤 환경 적용
-
-        ApplyPlayerStart();
-        //ApplyToSpawners();
-
-        Debug.Log($"[StageManager] Loaded: {data.displayName}");
+        var op = SceneManager.LoadSceneAsync(runningSceneName, LoadSceneMode.Single);
+        yield return op; // 로드 완료 후 OnAnySceneLoaded에서 자동 적용
     }
 
-    private void ApplyPlayerStart()
+
+    void ApplyEnvironment()
     {
-        var player = GameObject.FindWithTag("Player");
-        if (player)
+        RenderSettings.ambientLight = currentStage.ambientLight;
+
+        var bg = GameObject.Find("Background");
+        if (bg && currentStage.background)
         {
-            player.transform.position = (Vector3)CurrentStage.playerStartPos;
+            var sr = bg.GetComponent<SpriteRenderer>();
+            if (sr) sr.sprite = currentStage.background;
         }
     }
 
-    //private void ApplyToSpawners()
+    /*void ApplyAudio()
+    {
+        var go = GameObject.Find("BgmPlayer");
+        if (!go) return;
+        var src = go.GetComponent<AudioSource>();
+        if (!src) return;
+        src.clip = currentStage.bgm;
+        src.volume = currentStage.bgmVolume;
+        if (src.clip) src.Play(); else src.Stop();
+    }
+    */
+
+    void ApplyPlayerStart()
+    {
+        var player = GameObject.FindWithTag("Player");
+        if (player) player.transform.position = (Vector3)currentStage.playerStartPos;
+    }
+
+    //void ApplyToSpawners()
     //{
-        // 씬 안의 모든 EnemySpawner에 현재 스테이지 설정 주입
-    //    var spawners = FindObjectsOfType<EnemySpawner>(true);
-    //    foreach (var s in spawners)
-    //    {
-    //        s.Configure(CurrentStage);
-    //    }
+    //    var spawners = Object.FindObjectsOfType<EnemySpawner>(true);
+    //    foreach (var s in spawners) s.Configure(currentStage);
     //}
 }
