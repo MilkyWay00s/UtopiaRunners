@@ -23,5 +23,11 @@ public class MissileCount : MonoBehaviour
                 Debug.Log("Missile = " + missile);
             }
         }
+
+        if (player != null && Input.GetKeyDown(KeyCode.Q))
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            player = playerObj.GetComponent<PlayerController>();
+        }
     }
 }

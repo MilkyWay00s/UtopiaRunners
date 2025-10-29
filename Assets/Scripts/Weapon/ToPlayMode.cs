@@ -7,6 +7,6 @@ public class ToPlayModep : MonoBehaviour
 {
     public void LoadPlayModeScene()
     {
-        SceneManager.LoadScene("InGameScene");
+        SceneManager.LoadScene("7_InGameScene");
     }
 }
