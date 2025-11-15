@@ -5,23 +5,55 @@ using UnityEngine;
 public class AutoAttackProjectile : MonoBehaviour
 {
     public float moveSpeed = 10f;
-    public Transform targetBoss; 
+    public string targetTag = "Boss";
+
+    private Transform target;
 
     private void Start()
     {
-        GameObject boss = GameObject.FindGameObjectWithTag("Boss");
-        targetBoss = boss.transform;
+        AcquireTarget();
     }
 
     private void Update()
     {
-        Vector3 direction = (targetBoss.position - transform.position).normalized;
+        if (target == null)
+        {
+            AcquireTarget();
+
+            if (target == null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+        }
+
+        Vector3 direction = (target.position - transform.position).normalized;
         transform.position += direction * moveSpeed * Time.deltaTime;
+    }
+
+    private void AcquireTarget()
+    {
+        GameObject[] possibleTargets = GameObject.FindGameObjectsWithTag(targetTag);
+        if (possibleTargets.Length == 0) return;
+
+        float minDist = Mathf.Infinity;
+        GameObject nearest = null;
+        foreach (var obj in possibleTargets)
+        {
+            float dist = Vector2.Distance(transform.position, obj.transform.position);
+            if (dist < minDist)
+            {
+                minDist = dist;
+                nearest = obj;
+            }
+        }
+
+        if (nearest != null)
+            target = nearest.transform;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // 보스와 충돌되면 삭제
         if (other.CompareTag("Boss"))
         {
             Destroy(gameObject);

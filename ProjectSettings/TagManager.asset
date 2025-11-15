@@ -8,6 +8,8 @@ TagManager:
   - EliteStage
   - BossStage
   - CommonStage
+  - Ground
+  - Weapon
   layers:
   - Default
   - TransparentFX
