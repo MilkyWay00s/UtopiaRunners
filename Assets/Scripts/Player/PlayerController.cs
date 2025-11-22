@@ -3,12 +3,14 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
 public class PlayerController : MonoBehaviour
 {
-    public float jumpForce = 8f;
+    public float jumpForce = 20f;
+    public int maxJumpCount = 2;
     public float slideDuration = 0.5f;
 
     Rigidbody2D rb;
     bool isSliding = false;
     bool isGrounded = false;
+    int jumpCount = 0;
 
     public bool IsGrounded() => isGrounded;
 
@@ -17,8 +19,11 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // 점프: Space / ↑
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) && isGrounded && !isSliding)
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) && jumpCount < maxJumpCount)
+        {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            jumpCount++;
+        }
 
         // 슬라이드: Ctrl / ↓
         if ((Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.DownArrow)) && !isSliding)
@@ -28,15 +33,19 @@ public class PlayerController : MonoBehaviour
     System.Collections.IEnumerator Slide()
     {
         isSliding = true;
-        // TODO: 슬라이드 애니메이션/콜라이더 변경이 있으면 여기서
         yield return new WaitForSeconds(slideDuration);
         isSliding = false;
     }
 
     void OnCollisionEnter2D(Collision2D c)
     {
-        if (c.gameObject.CompareTag("Ground")) isGrounded = true;
+        if (c.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+            jumpCount = 0;
+        }
     }
+
     void OnCollisionExit2D(Collision2D c)
     {
         if (c.gameObject.CompareTag("Ground")) isGrounded = false;

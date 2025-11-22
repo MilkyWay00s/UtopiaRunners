@@ -1,20 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MobBulletMovement : MonoBehaviour
 {
-    private Vector2 moveDirection;
-    private float speed;
+    public float speed = 5f;
+    private Transform target;
 
-    public void SetDirection(Vector2 dir, float spd)
+    void Start()
     {
-        moveDirection = dir.normalized;
-        speed = spd;
+        GameObject targetObj = GameObject.FindGameObjectWithTag("Target");
+        if (targetObj != null)
+        {
+            target = targetObj.transform;
+        }
     }
+
 
     void Update()
     {
-        transform.position += (Vector3)(moveDirection * speed * Time.deltaTime);
+        if (target == null) return;
+
+        Vector2 dir = (target.position - transform.position).normalized;
+        transform.position += (Vector3)(dir * speed * Time.deltaTime);
     }
 }

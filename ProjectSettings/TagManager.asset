@@ -10,6 +10,7 @@ TagManager:
   - CommonStage
   - Ground
   - Weapon
+  - Target
   layers:
   - Default
   - TransparentFX
