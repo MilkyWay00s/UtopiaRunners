@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Merge_25_09_16/1_WorldMap.unity
     guid: a228e2daee5fbc346b4d7762475f73e6
   - enabled: 1
-    path: Assets/Scenes/Merge_25_09_16/2_World1.unity
+    path: Assets/Scenes/Merge_25_09_16/2_Eden.unity
     guid: da8f826952dd8904182e19afec0fa206
   - enabled: 1
     path: Assets/Scenes/Merge_25_09_16/3_CharacterSelect.unity

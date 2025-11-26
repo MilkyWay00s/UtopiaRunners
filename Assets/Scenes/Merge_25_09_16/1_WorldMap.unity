@@ -530,6 +530,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldName: ???
   worldDescription: ??????
+  sceneName: 
 --- !u!1 &389955844
 GameObject:
   m_ObjectHideFlags: 0
@@ -804,6 +805,7 @@ MonoBehaviour:
   worldName: Lumina Forest
   worldDescription: "\uC0DD\uBA85\uB825\uC774 \uCDA9\uB9CC\uD55C \uB208\uBD80\uC2E0
     \uC232"
+  sceneName: 
 --- !u!1 &521202716
 GameObject:
   m_ObjectHideFlags: 0
@@ -910,6 +912,7 @@ MonoBehaviour:
   worldName: Eden
   worldDescription: "\uD504\uB85C\uBE44\uB358\uC2A4\uAC00 \uC9C0\uBC30\uD558\uB294
     \uB3C4\uC2DC"
+  sceneName: 2_Eden
 --- !u!1 &550171242
 GameObject:
   m_ObjectHideFlags: 0
@@ -2129,6 +2132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldName: Rust Belt
   worldDescription: "\uB179\uC2A8 \uAE30\uACC4\uB4E4\uC774 \uAC00\uB4DD\uD55C \uACF5\uC7A5"
+  sceneName: 
 --- !u!1 &1484275641
 GameObject:
   m_ObjectHideFlags: 0
@@ -2210,7 +2214,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1484275644}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1664848961}
+        m_TargetAssemblyTypeName: WorldManager, Assembly-CSharp
+        m_MethodName: onGoButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1484275644
 MonoBehaviour:
   m_ObjectHideFlags: 0

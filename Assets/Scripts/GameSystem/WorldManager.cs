@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
-public class WorldClickHandler : MonoBehaviour
+public class WorldManager : MonoBehaviour
 {
     public Camera cam;
     public TMP_Text worldNameText;
     public TMP_Text worldDescriptionText;
+
+    private string selectedWorldSceneName;
 
     void Update()
     {
@@ -21,8 +24,17 @@ public class WorldClickHandler : MonoBehaviour
                 {
                     worldNameText.text = area.worldName;
                     worldDescriptionText.text = area.worldDescription;
+                    selectedWorldSceneName = area.sceneName;
                 }
             }
+        }
+    }
+
+    public void onGoButtonClicked()
+    {
+        if (!string.IsNullOrEmpty(selectedWorldSceneName))
+        {
+            SceneManager.LoadScene(selectedWorldSceneName);
         }
     }
 }
