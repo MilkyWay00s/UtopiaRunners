@@ -7,11 +7,6 @@ public class ObstacleMoving : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
-
-        if (transform.position.x <= destroyX)
-        {
-            Destroy(gameObject);
-        }
+        transform.Translate(Vector3.left * moveSpeed * Time.deltaTime, Space.World);
     }
 }

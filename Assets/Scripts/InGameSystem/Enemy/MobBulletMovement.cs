@@ -13,7 +13,7 @@ public class MobBulletMovement : MonoBehaviour
             target = targetObj.transform;
         }
 
-        Destroy(gameObject, 3.5f);
+        Destroy(gameObject, 3f);
     }
 
 
