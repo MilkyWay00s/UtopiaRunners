@@ -118,4 +118,12 @@ public class StageManager : MonoBehaviour
     {
         SceneManager.LoadScene("1_WorldMap");
     }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            SceneManager.LoadScene("3_CharacterSelect");
+        }
+    }
 }
