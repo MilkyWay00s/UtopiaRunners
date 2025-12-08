@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using InputSystem.Interface;
 
 
+
 namespace InputSystem
 {
     public enum ActionCode
@@ -31,6 +32,7 @@ namespace InputSystem
         private Dictionary<ActionCode, Coroutine> _keyDownCounterCoroutine = new Dictionary<ActionCode, Coroutine>();
         private Dictionary<ActionCode, bool> _keyActiveFlags = new Dictionary<ActionCode, bool>();
         private Dictionary<ActionCode, KeyCode> _keyMappings = new Dictionary<ActionCode, KeyCode>();
+        private Dictionary<ActionCode, KeyCode> _altKeyMappings = new Dictionary<ActionCode, KeyCode>();
 
 
         //씬이 로드될 때마다 OnSceneUnloading 함수 실행되도록 등록.
@@ -60,14 +62,21 @@ namespace InputSystem
             _keyMappings = new Dictionary<ActionCode, KeyCode>()
             {
                 { ActionCode.Jump, KeyCode.Space },
-                { ActionCode.Tag, KeyCode.Space },
+                { ActionCode.Tag, KeyCode.Q },
                 { ActionCode.Skill, KeyCode.Space },
-                { ActionCode.Slide, KeyCode.Space },
+                { ActionCode.Slide, KeyCode.LeftControl },
                 { ActionCode.Option, KeyCode.Space },
              
 
 
                 //편집 필요
+            };
+
+            _altKeyMappings = new Dictionary<ActionCode, KeyCode>()
+            {
+                { ActionCode.Jump, KeyCode.UpArrow },                
+                { ActionCode.Slide, KeyCode.DownArrow },
+
             };
         }
 
@@ -101,6 +110,14 @@ namespace InputSystem
                 _keyMappings[actionCode] = newKey;
         }
 
+        public void SetAltKey(ActionCode actionCode, KeyCode newAltKey)
+        {
+            if (_altKeyMappings.ContainsKey(actionCode))
+                _altKeyMappings[actionCode] = newAltKey;
+            else
+                _altKeyMappings.Add(actionCode, newAltKey);
+        }
+
         //키눌림감지(한번만)
         public bool GetKeyDown(ActionCode action)
         {
@@ -126,7 +143,10 @@ namespace InputSystem
         {
             try
             {
-                return Input.GetKey(_keyMappings[action]) && _keyActiveFlags[action];
+                bool main = Input.GetKey(_keyMappings[action]);
+                bool alt = _altKeyMappings.ContainsKey(action) && Input.GetKey(_altKeyMappings[action]);
+                return (main || alt) && _keyActiveFlags[action];
+
             }
             catch (KeyNotFoundException)
             {
@@ -153,7 +173,10 @@ namespace InputSystem
                 {
                     if (_keyActiveFlags[action])
                     {
-                        if (Input.GetKeyDown(_keyMappings[action]))
+                        bool mainDown = Input.GetKeyDown(_keyMappings[action]);
+                        bool altDown = _altKeyMappings.ContainsKey(action) && Input.GetKeyDown(_altKeyMappings[action]);
+
+                        if (mainDown || altDown)
                         {
                             _keyDownBools[action] = true;
                             _keyDownBoolsForListener[action] = true;
@@ -196,16 +219,22 @@ namespace InputSystem
                 {
                     if (_keyActiveFlags[action])
                     {
+                        bool mainPress = Input.GetKey(_keyMappings[action]);
+                        bool altPress = _altKeyMappings.ContainsKey(action) && Input.GetKey(_altKeyMappings[action]);
+
+                        bool mainUp = Input.GetKeyUp(_keyMappings[action]);
+                        bool altUp = _altKeyMappings.ContainsKey(action) && Input.GetKeyUp(_altKeyMappings[action]);
+
                         if (_keyDownBoolsForListener[action])
                         {
                             _keyDownBoolsForListener[action] = false;
                             OnKeyEvent?.Invoke(action, InputType.Down);
                         }
-                        else if (Input.GetKey(_keyMappings[action]))
+                        else if (mainPress || altPress)
                         {
                             OnKeyEvent?.Invoke(action, InputType.Press);
                         }
-                        else if (Input.GetKeyUp(_keyMappings[action]))
+                        else if (mainUp || altUp)
                         {
                             OnKeyEvent?.Invoke(action, InputType.Up);
                         }
