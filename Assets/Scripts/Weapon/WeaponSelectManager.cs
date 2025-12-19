@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -45,7 +45,7 @@ public class WeaponSelectManager : MonoBehaviour
     {
         selectedWeaponInfo = info;
         selectedWeaponPrefab = prefab;
-        Debug.Log(info.weaponName + " ¼±ÅÃµÊ");
+        Debug.Log(info.weaponName + " ì„ íƒë¨");
     }
 
     private IEnumerator SpawnWeapon()
@@ -61,4 +61,9 @@ public class WeaponSelectManager : MonoBehaviour
     }
 
     public WeaponInfo GetSelectedWeaponInfo() => selectedWeaponInfo;
+
+    public void onSelectButtonClicked()
+    {
+        SceneManager.LoadScene("3_CharacterSelect");
+    }
 }

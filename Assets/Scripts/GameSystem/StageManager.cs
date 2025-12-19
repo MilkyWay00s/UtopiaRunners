@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -34,7 +34,7 @@ public class StageManager : MonoBehaviour
 
     void OnAnySceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // RunningSceneÀÌ ·ÎµåµÇ¸é ¼±ÅÃµÈ StageData¸¦ ¾À¿¡ ÁÖÀÔ
+        // RunningSceneì´ ë¡œë“œë˜ë©´ ì„ íƒëœ StageDataë¥¼ ì”¬ì— ì£¼ì…
         if (scene.name == runningSceneName && currentStage != null)
         {
             ApplyEnvironment();
@@ -44,7 +44,7 @@ public class StageManager : MonoBehaviour
         }
     }
 
-    // ¿ùµå¸Ê UI¿¡¼­ È£Ãâ: ID ¼±ÅÃ ÈÄ °øÅë RunningScene ·Îµå
+    // ì›”ë“œë§µ UIì—ì„œ í˜¸ì¶œ: ID ì„ íƒ í›„ ê³µí†µ RunningScene ë¡œë“œ
     public void SelectAndPlay(StageName id, bool remember = true)
     {
         var data = database?.GetStageName(id);
@@ -75,7 +75,7 @@ public class StageManager : MonoBehaviour
     IEnumerator LoadRunningScene()
     {
         var op = SceneManager.LoadSceneAsync(runningSceneName, LoadSceneMode.Single);
-        yield return op; // ·Îµå ¿Ï·á ÈÄ OnAnySceneLoaded¿¡¼­ ÀÚµ¿ Àû¿ë
+        yield return op; // ë¡œë“œ ì™„ë£Œ í›„ OnAnySceneLoadedì—ì„œ ìë™ ì ìš©
     }
 
 
@@ -114,4 +114,16 @@ public class StageManager : MonoBehaviour
     //    var spawners = Object.FindObjectsOfType<EnemySpawner>(true);
     //    foreach (var s in spawners) s.Configure(currentStage);
     //}
+    public void onWorldmapButtonClicked()
+    {
+        SceneManager.LoadScene("1_WorldMap");
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            SceneManager.LoadScene("3_CharacterSelect");
+        }
+    }
 }

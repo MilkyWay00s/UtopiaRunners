@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class OptionsManager : MonoBehaviour
 {
     public GameObject OptionsPanel;
+    public GameObject DarkOverlay;
     public AudioMixer audioMixer;
     public Slider MasterVolumeSlider;
     public Slider SFXVolumeSlider;
@@ -29,11 +30,13 @@ public class OptionsManager : MonoBehaviour
 
     public void OpenOptions()
     {
+        DarkOverlay.SetActive(true);
         OptionsPanel.SetActive(true);
     }
 
     public void CloseOptions()
     {
+        DarkOverlay.SetActive(false);
         OptionsPanel.SetActive(false);
     }
 
