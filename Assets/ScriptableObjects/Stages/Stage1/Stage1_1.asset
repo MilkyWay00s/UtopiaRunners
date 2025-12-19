@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1960d645800503f43bd3fd15161596fd, type: 3}
+  m_Name: Stage1_1
+  m_EditorClassIdentifier: 
+  stageTimeLimit: 60
+  enemyWaves:
+  - {fileID: 11400000, guid: e94213b1d0c935d4a824f2b4f371473e, type: 2}
+  - {fileID: 11400000, guid: da8fa6c3804c9084bb4eddf5d880a5cd, type: 2}
+  - {fileID: 11400000, guid: 677c5d6ad2f2df440a5b776c238aabd7, type: 2}
+  - {fileID: 11400000, guid: 56b06a2365859c34994a0c1a5a1d4982, type: 2}
+  obstacleWaves:
+  - {fileID: 11400000, guid: e3eaec9a9700e7d49b29591deaed0c8e, type: 2}
+  - {fileID: 11400000, guid: 74cecc954d3257047a43dd50687a0479, type: 2}
+  - {fileID: 11400000, guid: 1489ed0c06485a84c8647dc6f82e5a3c, type: 2}
