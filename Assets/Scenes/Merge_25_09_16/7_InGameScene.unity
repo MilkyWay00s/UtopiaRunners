@@ -2067,6 +2067,7 @@ GameObject:
   - component: {fileID: 949025488}
   - component: {fileID: 949025490}
   - component: {fileID: 949025489}
+  - component: {fileID: 949025491}
   m_Layer: 0
   m_Name: ObstacleSpawner
   m_TagString: Boss
@@ -2149,7 +2150,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 949025484}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c18f26418935144aafb63c268144b2c, type: 3}
   m_Name: 
@@ -2245,6 +2246,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &949025491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949025484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f137ac110f86a7b47987436f244f2a1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patternObjects:
+  - {fileID: 11400000, guid: 6fe6725864df6d542a7b76d65b6a78c7, type: 2}
+  - {fileID: 11400000, guid: 304a176ab421ccb47afb2d506f8d67f7, type: 2}
+  spawnOrigin: {fileID: 0}
 --- !u!1 &1012471324
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,32 +1,24 @@
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Game/Stage Database", fileName = "StageDatabase")]
 public class StageDatabase : ScriptableObject
 {
-    public List<StageData> stages = new List<StageData>();
+    public List<StageData> stages = new();
+    Dictionary<StageName, StageData> map;
 
-    private Dictionary<StageName, StageData> _map;
+    void OnEnable() => BuildMap();
+
     public void BuildMap()
     {
-        _map = new Dictionary<StageName, StageData>();
-        foreach (var s in stages)
-        {
-            if (s == null) continue;
-            _map[s.id] = s;
-        }
+        map = new();
+        foreach (var s in stages) if (s) map[s.id] = s;
     }
 
-    public StageData GetStageId(StageName id)
+    public StageData GetStageName(StageName id)
     {
-        if (_map == null) BuildMap();
-        return _map != null && _map.TryGetValue(id, out var data) ? data : null;
-    }
-
-    public StageData GetByIndex(int index)
-    {
-        if (stages == null || stages.Count == 0) return null;
-        index = Mathf.Clamp(index, 0, stages.Count - 1);
-        return stages[index];
+        if (map == null || map.Count == 0) BuildMap();
+        return map != null && map.TryGetValue(id, out var data) ? data : null;
     }
 }

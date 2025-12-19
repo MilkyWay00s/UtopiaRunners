@@ -4,10 +4,8 @@ using System.Linq;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : SingletonObject<GameManager>
 {
-    public static GameManager Instance;
-
     private string saveFolder;
 
     public int coins = 0;
@@ -21,23 +19,14 @@ public class GameManager : MonoBehaviour
     public Dictionary<string, List<bool>> clearedStages = new Dictionary<string, List<bool>>();
 
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+        base.Awake();
+        saveFolder = Application.persistentDataPath;
+        sessionStartTime = Time.time;
 
-            saveFolder = Application.persistentDataPath;
-            sessionStartTime = Time.time;
-
-            int recentSlot = GetMostRecentSlot();
-            LoadGame(recentSlot);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        int recentSlot = GetMostRecentSlot();
+        LoadGame(recentSlot);
     }
 
     private void UpdatePlayTime()

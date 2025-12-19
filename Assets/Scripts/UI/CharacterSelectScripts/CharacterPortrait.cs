@@ -2,17 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
-public class CharacterPortrait : MonoBehaviour, ICharacterPortrait {
-    [Header("ìºë¦­í„°")]
-    public CharacterSpec characterSpec;
-    [Header("ìºë¦­í„° ì´ë¯¸ì§€")]
+public class CharacterPortrait : MonoBehaviour, ICharacterPortrait
+{
+    [Header("Ä³¸¯ÅÍ")]
+    public CharacterSpec character;
+    [Header("Ä³¸¯ÅÍ ÃÊ»óÈ­")]
     public Image characterImage;
 
-    void Start() {
-        characterImage.sprite = characterSpec.displayImage;
+    void Start()
+    {
+        characterImage.sprite = character.displayImage;
     }
-    public CharacterSpec ClickPortrait() {
-        return this.characterSpec;
+    public void ClickedPortrait()
+    {
+        CharacterSelectManager.Instance.CharacterSelect(character);
     }
 }
