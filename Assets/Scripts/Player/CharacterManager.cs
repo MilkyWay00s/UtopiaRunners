@@ -1,8 +1,9 @@
+using InputSystem;
 using System;
+using System.Reflection;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using System.Reflection;
 
 public class CharacterManager : MonoBehaviour
 {
@@ -60,7 +61,7 @@ public class CharacterManager : MonoBehaviour
     void Update()
     {
         if (switchRemain > 0f) switchRemain -= Time.deltaTime;
-        if (Input.GetKeyDown(switchKey) && switchRemain <= 0f)
+        if (InputManager.Instance.GetKey(ActionCode.Tag) && switchRemain <= 0f)
             SwitchCharacters();
     }
 

@@ -2,10 +2,12 @@
 
 public class QuitManager : MonoBehaviour
 {
-    public GameObject QuitPopup;  
+    public GameObject QuitPopup;
+    public GameObject darkOverlay;
 
     public void OnQuitButtonClicked()
     {
+        darkOverlay.SetActive(true);
         QuitPopup.SetActive(true); 
     }
 
@@ -17,6 +19,7 @@ public class QuitManager : MonoBehaviour
 
     public void OnNoClicked()
     {
-        QuitPopup.SetActive(false); 
+        QuitPopup.SetActive(false);
+        darkOverlay.SetActive(false);
     }
 }
