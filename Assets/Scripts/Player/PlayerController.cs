@@ -1,4 +1,5 @@
 using UnityEngine;
+using InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
 public class PlayerController : MonoBehaviour
@@ -16,12 +17,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // 점프: Space / ↑
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) && isGrounded && !isSliding)
+        // 점프: Space / ↑(윗방향키 구현 필요)
+        if (InputManager.Instance.GetKey(ActionCode.Jump) && isGrounded && !isSliding)
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
 
-        // 슬라이드: Ctrl / ↓
-        if ((Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.DownArrow)) && !isSliding)
+        // 슬라이드: Ctrl / ↓(아래방향키 구현 필요)
+        if (InputManager.Instance.GetKey(ActionCode.Slide) && !isSliding)
             StartCoroutine(Slide());
     }
 
