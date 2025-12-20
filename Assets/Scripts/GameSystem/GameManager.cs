@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEditor.SceneManagement;
@@ -18,6 +19,15 @@ public class GameManager : SingletonObject<GameManager>
     public string currentStage = "Stage1";
     public Dictionary<string, List<bool>> clearedStages = new Dictionary<string, List<bool>>();
 
+    [Header("Databases")]
+    public StageDatabase stageDatabase;
+
+    [Header("Runtime Selection")]
+    [SerializeField] private StageName selectedStageId;
+    public StageName SelectedStageId => selectedStageId;
+
+    public event Action<StageData> OnStageSelected;
+
     protected override void Awake()
     {
         base.Awake();
@@ -26,6 +36,8 @@ public class GameManager : SingletonObject<GameManager>
 
         int recentSlot = GetMostRecentSlot();
         LoadGame(recentSlot);
+
+        selectedStageId = ParseStageNameFromString(currentStage);
     }
 
     private void UpdatePlayTime()
@@ -73,6 +85,8 @@ public class GameManager : SingletonObject<GameManager>
             currentWorld = data.currentWorld;
             currentStage = data.currentStage;
             clearedStages = data.clearedStages;
+
+            selectedStageId = ParseStageNameFromString(currentStage);
         }
         else
         {
@@ -115,9 +129,29 @@ public class GameManager : SingletonObject<GameManager>
 
         SaveGame(currentSlot); 
     }
+    //선택된 스테이지 전달받는 매서드
+    public void SelectStage(StageName stageId, bool save = true)
+    {
+        selectedStageId = stageId;
 
+        // 저장용 string도 같이 맞춰줌
+        currentStage = StageNameToSaveString(stageId);
 
+        if (save) SaveGame(currentSlot);
 
+        // 런타임 StageData 이벤트로 뿌려줌
+        var data = GetSelectedStageData();
+        if (data != null) OnStageSelected?.Invoke(data);
+    }
+    public StageData GetSelectedStageData()
+    {
+        if (stageDatabase == null)
+        {
+            Debug.LogError("GameManager: stageDatabase가 할당되지 않았습니다.");
+            return null;
+        }
+        return stageDatabase.GetStageName(selectedStageId);
+    }
     public void CompleteStage(string world, int stageIndex)
     {
         if (!clearedStages.ContainsKey(world))
@@ -130,6 +164,8 @@ public class GameManager : SingletonObject<GameManager>
 
         currentWorld = world;
         currentStage = $"Stage{stageIndex + 1}";
+
+        selectedStageId = ParseStageNameFromString(currentStage);
 
         SaveGame(currentSlot); 
     }
@@ -145,10 +181,26 @@ public class GameManager : SingletonObject<GameManager>
     public void NewGame()
     {
         coins = 10000;
+        currentWorld = "World1";
+        currentStage = "Stage1";
+        selectedStageId = ParseStageNameFromString(currentStage);
     }
 
     private void OnApplicationQuit()
     {
         SaveGame(currentSlot);
+    }
+    private StageName ParseStageNameFromString(string stageStr)
+    {
+        if (string.IsNullOrEmpty(stageStr)) return default;
+        if (Enum.TryParse(stageStr, out StageName parsed))
+            return parsed;
+
+        return default;
+    }
+
+    private string StageNameToSaveString(StageName id)
+    {
+        return id.ToString();
     }
 }

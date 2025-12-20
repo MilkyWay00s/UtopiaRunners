@@ -32,7 +32,7 @@ public class WorldMapList : ScriptableObject
 
     [Header("¿ùµå")]
     public List<WorldInfo> worlds = new List<WorldInfo>();
-    public string GetAbilityName(WorldID id)
+    public string GetWorldName(WorldID id)
     {
         foreach (var world in worlds)
         {
@@ -43,7 +43,7 @@ public class WorldMapList : ScriptableObject
         }
         return string.Empty;
     }
-    public string GetAbilityDescription(WorldID id)
+    public string GetWorldDescription(WorldID id)
     {
         foreach (var world in worlds)
         {
@@ -54,7 +54,7 @@ public class WorldMapList : ScriptableObject
         }
         return string.Empty;
     }
-    public Sprite GetAbilityImage(WorldID id)
+    public Sprite GetWorldImage(WorldID id)
     {
         foreach (var world in worlds)
         {
