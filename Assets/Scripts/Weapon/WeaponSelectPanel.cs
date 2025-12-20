@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class WeaponSelectPanelScript : MonoBehaviour
+public class WeaponSelectPanel : MonoBehaviour
 {
     private WeaponInfo weaponInfo;
     private GameObject weaponPrefab;
@@ -23,7 +23,5 @@ public class WeaponSelectPanelScript : MonoBehaviour
         }
 
         WeaponSelectManager.Instance.SelectWeapon(weaponInfo, weaponPrefab);
-
-        SceneManager.LoadScene("7_InGameScene");
     }
 }
