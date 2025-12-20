@@ -5,9 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class CharacterSceneManager : MonoBehaviour
 {
-    public void onWeaponButtonClicked()
+    public GameObject weaponSelectUI;
+    public GameObject characterSelectUI;
+
+    public void OnWeaponButtonClicked()
     {
-        SceneManager.LoadScene("6_WeaponSelectMode");
+        weaponSelectUI.SetActive(true);
+        characterSelectUI.SetActive(false);
+    }
+
+    public void OnSelectButtonClicked()
+    {
+        weaponSelectUI.SetActive(false);
+        characterSelectUI.SetActive(true);
     }
 
     public void onGoButtonClicked()

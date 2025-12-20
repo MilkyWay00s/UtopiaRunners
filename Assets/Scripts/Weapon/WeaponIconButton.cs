@@ -7,7 +7,7 @@ public class WeaponIconButton : MonoBehaviour
     public WeaponInfo weaponInfo;
     public GameObject weaponPrefab;
 
-    public WeaponSelectPanelScript selectPanel;
+    public WeaponSelectPanel selectPanel;
 
     public void OnClickIcon()
     {
