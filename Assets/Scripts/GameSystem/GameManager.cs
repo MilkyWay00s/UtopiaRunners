@@ -18,7 +18,6 @@ public class GameManager : SingletonObject<GameManager>
     public string currentStage = "Stage1";
     public Dictionary<string, List<bool>> clearedStages = new Dictionary<string, List<bool>>();
 
-
     protected override void Awake()
     {
         base.Awake();
