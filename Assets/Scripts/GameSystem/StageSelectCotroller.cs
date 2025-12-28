@@ -22,6 +22,7 @@ public class StageSelectCotroller : MonoBehaviour
     [SerializeField] private bool goCharacterSelectBeforeRunning = true;
 
     private int currentIndex = 0;
+    private bool isCurrentStageUnlocked = true;
     void Start()
     {
         SetIndex(0);
@@ -54,17 +55,39 @@ public class StageSelectCotroller : MonoBehaviour
         var node = stages[currentIndex];
         if (node == null) return;
 
+        if (GameManager.Instance != null)
+        {
+            string worldName = GameManager.Instance.currentWorld; // 예: "World1"
+            isCurrentStageUnlocked = GameManager.Instance.IsStageUnlocked(worldName, currentIndex);
+        }
+        else
+        {
+            isCurrentStageUnlocked = false;
+        }
+
         if (stageNameText) stageNameText.text = node.stageTitle;
-        if (stageDescText) stageDescText.text = node.stageDesc;
+        if (stageDescText)
+        {
+            if (isCurrentStageUnlocked)
+                stageDescText.text = node.stageDesc;
+            else
+                stageDescText.text = node.stageDesc + "\n(잠김: 이전 스테이지 클리어 필요)";
+        }
 
         if (pointer && node.pointerAnchor)
             pointer.position = node.pointerAnchor.position;
 
-        if (GameManager.Instance != null)
+        if (isCurrentStageUnlocked && GameManager.Instance != null)
             GameManager.Instance.SelectStage(node.stageId, save: true);
     }
     public void ConfirmSelection()
     {
+        if (!isCurrentStageUnlocked)
+        {
+            Debug.Log("이전 스테이지를 클리어해야 선택할 수 있습니다.");
+            return;
+        }
+
         if (goCharacterSelectBeforeRunning)
         {
             SceneManager.LoadScene(characterSelectSceneName);

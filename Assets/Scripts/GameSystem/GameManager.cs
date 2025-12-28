@@ -211,7 +211,11 @@ public class GameManager : SingletonObject<GameManager>
         if (stageIndex < 0 || stageIndex >= list.Count) return false;
         return list[stageIndex];
     }
-
+    public bool IsStageUnlocked(string worldName, int stageIndex)
+    {
+        if (stageIndex <= 0) return true; // Stage1은 항상 오픈
+        return IsStageCleared(worldName, stageIndex - 1);
+    }
     // 월드 마지막 스테이지 클리어 시 해금
     public bool IsWorldCleared(string worldName, int lastStageIndex)
     {
