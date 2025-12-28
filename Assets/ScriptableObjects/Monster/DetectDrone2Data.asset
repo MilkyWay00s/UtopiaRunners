@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb72f209a6a49094d882d1426baf72c5, type: 3}
+  m_Name: DetectDrone2Data
+  m_EditorClassIdentifier: 
+  monsterName: 
+  maxHp: 3
+  defense: 0
+  attackType: 1
+  rangedType: 1
+  attackInterval: 5
+  projectilePrefab: {fileID: 0}
+  projectileTargetOffset: {x: 0, y: 0, z: 0}
+  laserPrefab: {fileID: 5057171396956184149, guid: ac53592895a844c41b58c3b403ed707b,
+    type: 3}
+  laserGrowSpeed: 20
+  laserMaxLength: 20
+  laserDuration: 1
