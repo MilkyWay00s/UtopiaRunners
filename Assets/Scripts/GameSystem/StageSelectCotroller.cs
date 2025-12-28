@@ -25,7 +25,18 @@ public class StageSelectCotroller : MonoBehaviour
     private bool isCurrentStageUnlocked = true;
     void Start()
     {
-        SetIndex(0);
+        if (stages == null || stages.Length == 0) return;
+
+        int lastStageNumber = 1;
+        if (GameManager.Instance != null)
+            lastStageNumber = GameManager.Instance.GetLastEnteredStageNumber();
+
+        int startIndex = lastStageNumber - 1;
+        startIndex = Mathf.Clamp(startIndex, 0, stages.Length - 1);
+
+        startIndex = ClampToUnlockedIndex(startIndex);
+
+        SetIndex(startIndex);
     }
     void Update()
     {
@@ -49,16 +60,33 @@ public class StageSelectCotroller : MonoBehaviour
             ConfirmSelection();
         }
     }
+    int ClampToUnlockedIndex(int desiredIndex)
+    {
+        if (GameManager.Instance == null) return 0;
+
+        string worldName = GameManager.Instance.currentWorld;
+
+        int idx = desiredIndex;
+        while (idx > 0)
+        {
+            int stageNumber = idx + 1;
+            bool unlocked = GameManager.Instance.IsStageUnlocked(worldName, stageNumber);
+            if (unlocked) return idx;
+
+            idx--;
+        }
+        return 0;
+    }
     void SetIndex(int index)
     {
         currentIndex = index;
         var node = stages[currentIndex];
         if (node == null) return;
-
+        int stageNumber = currentIndex + 1;
         if (GameManager.Instance != null)
         {
             string worldName = GameManager.Instance.currentWorld; // 예: "World1"
-            isCurrentStageUnlocked = GameManager.Instance.IsStageUnlocked(worldName, currentIndex);
+            isCurrentStageUnlocked = GameManager.Instance.IsStageUnlocked(worldName, stageNumber);
         }
         else
         {
@@ -78,7 +106,9 @@ public class StageSelectCotroller : MonoBehaviour
             pointer.position = node.pointerAnchor.position;
 
         if (isCurrentStageUnlocked && GameManager.Instance != null)
-            GameManager.Instance.SelectStage(node.stageId, save: true);
+        {
+            GameManager.Instance.SelectStage(node.stageId, save: false);
+        }
     }
     public void ConfirmSelection()
     {
@@ -88,13 +118,15 @@ public class StageSelectCotroller : MonoBehaviour
             return;
         }
 
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.currentStage = $"Stage{currentIndex + 1}";
+            GameManager.Instance.SaveGame(GameManager.Instance.currentSlot);
+        }
+
         if (goCharacterSelectBeforeRunning)
-        {
             SceneManager.LoadScene(characterSelectSceneName);
-        }
         else
-        {
             SceneManager.LoadScene("RunningScene");
-        }
     }
 }

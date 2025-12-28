@@ -2,9 +2,25 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
+[Serializable]
+public class WorldClearEntry
+{
+    public string worldName;
+    public List<bool> cleared; // 스테이지 클리어 여부
+}
+
+[Serializable]
+public class SaveData
+{
+    public int coins;
+    public string currentWorld;
+    public string currentStage;
+    public float playTime;
+
+    public List<WorldClearEntry> clearedWorlds = new List<WorldClearEntry>();
+}
 public class GameManager : SingletonObject<GameManager>
 {
     private string saveFolder;
@@ -50,7 +66,32 @@ public class GameManager : SingletonObject<GameManager>
     {
         currentSlot = slot;
     }
+    private List<WorldClearEntry> ConvertDictToList(Dictionary<string, List<bool>> dict)
+    {
+        var list = new List<WorldClearEntry>();
+        foreach (var kv in dict)
+        {
+            list.Add(new WorldClearEntry
+            {
+                worldName = kv.Key,
+                cleared = kv.Value
+            });
+        }
+        return list;
+    }
 
+    private Dictionary<string, List<bool>> ConvertListToDict(List<WorldClearEntry> list)
+    {
+        var dict = new Dictionary<string, List<bool>>();
+        if (list == null) return dict;
+
+        foreach (var e in list)
+        {
+            if (string.IsNullOrEmpty(e.worldName)) continue;
+            dict[e.worldName] = e.cleared ?? new List<bool>();
+        }
+        return dict;
+    }
     public void SaveGame(int slot)
     {
         UpdatePlayTime();
@@ -60,8 +101,8 @@ public class GameManager : SingletonObject<GameManager>
             coins = coins,
             currentWorld = currentWorld,
             currentStage = currentStage,
-            clearedStages = clearedStages,
-            playTime = playTime
+            playTime = playTime,
+            clearedWorlds = ConvertDictToList(clearedStages)
         };
 
         string path = Path.Combine(saveFolder, $"save{slot}.json");
@@ -69,8 +110,6 @@ public class GameManager : SingletonObject<GameManager>
         File.WriteAllText(path, json);
         Debug.Log($"게임 저장 완료 (슬롯 {slot})");
     }
-
-
     public void LoadGame(int slot)
     {
         currentSlot = slot;
@@ -84,7 +123,9 @@ public class GameManager : SingletonObject<GameManager>
             coins = data.coins;
             currentWorld = data.currentWorld;
             currentStage = data.currentStage;
-            clearedStages = data.clearedStages;
+            playTime = data.playTime;
+
+            clearedStages = ConvertListToDict(data.clearedWorlds);
 
             selectedStageId = ParseStageNameFromString(currentStage);
         }
@@ -204,16 +245,19 @@ public class GameManager : SingletonObject<GameManager>
         return id.ToString();
     }
     //클리어 판정을 위한 로직-----------------------------------------------------------
-    public bool IsStageCleared(string worldName, int stageIndex)
+    public bool IsStageCleared(string worldName, int stageNumber)
     {
         if (!clearedStages.ContainsKey(worldName)) return false;
         var list = clearedStages[worldName];
-        if (stageIndex < 0 || stageIndex >= list.Count) return false;
-        return list[stageIndex];
+
+        int idx = stageNumber - 1;
+        if (idx < 0 || idx >= list.Count) return false;
+
+        return list[idx];
     }
     public bool IsStageUnlocked(string worldName, int stageIndex)
     {
-        if (stageIndex <= 0) return true; // Stage1은 항상 오픈
+        if (stageIndex <= 1) return true; // Stage1은 항상 오픈
         return IsStageCleared(worldName, stageIndex - 1);
     }
     // 월드 마지막 스테이지 클리어 시 해금
@@ -231,4 +275,14 @@ public class GameManager : SingletonObject<GameManager>
         return IsWorldCleared(prevWorld, stagesPerWorld - 1);
     }
     //-----------------------------------------------------------
+    public int GetLastEnteredStageNumber()
+    {
+        if (string.IsNullOrEmpty(currentStage)) return 1;
+
+        string numStr = currentStage.Replace("Stage", "");
+        if (int.TryParse(numStr, out int stageNumber))
+            return Mathf.Max(stageNumber, 1);
+
+        return 1;
+    }
 }
