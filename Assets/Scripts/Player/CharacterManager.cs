@@ -126,6 +126,8 @@ public class CharacterManager : MonoBehaviour
         var rbTo = reserveObj.GetComponent<Rigidbody2D>();
         if (rbFrom && rbTo) rbTo.velocity = velFrom;
 
+        reserveObj.GetComponent<IcarusSkill>()?.OnTagEnter();
+
         // 참조 스왑 및 UI/이벤트 재바인딩
         var tmp = activeObj; activeObj = reserveObj; reserveObj = tmp;
         BindHPRefs();
