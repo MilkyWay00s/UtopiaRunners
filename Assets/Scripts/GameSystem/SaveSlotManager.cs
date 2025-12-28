@@ -7,9 +7,9 @@ public class SaveSlotManager : MonoBehaviour
 {
     public GameObject SaveSlotPanel; 
     private string saveFolder;
+    private int slotCount = 3;
 
-    [Header("슬롯 텍스트")]
-    public TMP_Text[] worldStageTexts; 
+    [Header("슬롯 텍스트")] 
     public TMP_Text[] coinsTexts;      
     public TMP_Text[] playtimeTexts;   
 
@@ -29,7 +29,6 @@ public class SaveSlotManager : MonoBehaviour
                 string json = File.ReadAllText(path);
                 SaveData data = JsonUtility.FromJson<SaveData>(json);
 
-                worldStageTexts[i].text = $"{data.currentWorld}, {data.currentStage}";
                 coinsTexts[i].text = $"Coins: {data.coins}";
 
                 int hours = (int)(data.playTime / 3600);
@@ -39,7 +38,6 @@ public class SaveSlotManager : MonoBehaviour
             }
             else
             {
-                worldStageTexts[i].text = "New Game";
                 coinsTexts[i].text = "Coins: 0";
                 playtimeTexts[i].text = "Playtime: 00:00:00";
             }
@@ -55,7 +53,7 @@ public class SaveSlotManager : MonoBehaviour
     public void OnStartButtonClicked()
     {
         SaveSlotPanel.SetActive(true);
-        PopulateSlots(worldStageTexts.Length); 
+        PopulateSlots(slotCount); 
     }
 
     public void OnBackButtonClicked()
