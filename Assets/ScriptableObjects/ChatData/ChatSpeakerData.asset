@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80c4b7593de0f914589dc1e0ddb02fd3, type: 3}
+  m_Name: ChatSpeakerData
+  m_EditorClassIdentifier: 
+  ChatSpeakers:
+  - speakerType: 0
+    speakerName: "\u3147"
+    image: {fileID: 21300000, guid: c0ced59eb0176454886bbc0407e71090, type: 3}
+    Faces: []
+  - speakerType: 1
+    speakerName: "\u3147\u3147"
+    image: {fileID: 21300000, guid: 2f7e0376ccbd464458b9c3a68f254215, type: 3}
+    Faces: []
+  - speakerType: 2
+    speakerName: "\u3147\u3147\u3147"
+    image: {fileID: 21300000, guid: 8d549ff170f2107409aab4d5df3715d0, type: 3}
+    Faces: []
+  - speakerType: 3
+    speakerName: ddddd
+    image: {fileID: 21300000, guid: 9558559b5bfbda9459d365a6e46b8ced, type: 3}
+    Faces: []
