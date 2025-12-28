@@ -8,6 +8,8 @@ public class AutoAttackProjectile : MonoBehaviour
     public string targetTag = "Boss";
 
     private Transform target;
+    //public float attackMultiplier = 1f;
+    //finalDamage = baseDamage * attackMultiplier;  를 밑에 추가해야함
 
     private void Start()
     {
@@ -56,6 +58,17 @@ public class AutoAttackProjectile : MonoBehaviour
     {
         if (other.CompareTag("Boss"))
         {
+            Enemy enemy = other.GetComponent<Enemy>();
+            GetComponentInParent<HaniSkill>()?.OnBasicAttackHit(enemy);//하니 스킬 호출
+
+            IWeaponBehaviour weaponBehaviour =
+            GetComponentInParent<IWeaponBehaviour>();
+
+            if (weaponBehaviour != null)
+            {
+                weaponBehaviour.OnHit(other.transform.position);
+            }
+
             Destroy(gameObject);
         }
     }

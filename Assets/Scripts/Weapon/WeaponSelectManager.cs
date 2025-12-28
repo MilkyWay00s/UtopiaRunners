@@ -57,6 +57,12 @@ public class WeaponSelectManager : MonoBehaviour
         {
             GameObject weapon = Instantiate(selectedWeaponPrefab, player.transform.position, player.transform.rotation);
             weapon.transform.SetParent(player.transform);
+
+            PlayerController pc = player.GetComponent<PlayerController>();
+            if (pc != null)
+            {
+                pc.currentWeapon = weapon;
+            }
         }
     }
 

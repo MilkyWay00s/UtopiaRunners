@@ -5,9 +5,11 @@ public class PlayerController : MonoBehaviour
 {
     public float jumpForce = 20f;
     public int maxJumpCount = 2;
-
+    public float slideDuration = 0.5f;
+    public GameObject currentWeapon;
     [Header("Slide")]
     public float slideScaleY = 0.3f;
+
 
     Rigidbody2D rb;
     BoxCollider2D box;
@@ -48,9 +50,13 @@ public class PlayerController : MonoBehaviour
 
         if (isSliding && jumpInput && jumpCount < maxJumpCount)
         {
-            EndSlide();
-            DoJump();
-            return;
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            if (jumpCount == 0)  
+                OnJump();
+                GetComponent<IcarusSkill>()?.OnJumpOrSlide();
+
+            jumpCount++;
+            GetComponent<HaniSkill>()?.OnAirJump(jumpCount);
         }
 
         if (slideDown && !isSliding && isGrounded)
@@ -78,21 +84,16 @@ public class PlayerController : MonoBehaviour
     void StartSlide()
     {
         isSliding = true;
-
-        // 캐릭터 눕히기 (Scale)
+        GetComponent<IcarusSkill>()?.OnJumpOrSlide();
         transform.localScale = new Vector3(
             originalScale.x,
             originalScale.y * slideScaleY,
             originalScale.z
         );
-
-        // 콜라이더 줄이기
         box.size = new Vector2(
             originalColliderSize.x,
             originalColliderSize.y * slideScaleY
         );
-
-        // 바닥에 붙이기
         box.offset = new Vector2(
             originalColliderOffset.x,
             originalColliderOffset.y - (originalColliderSize.y * (1f - slideScaleY) * 0.5f)
@@ -102,7 +103,6 @@ public class PlayerController : MonoBehaviour
     void EndSlide()
     {
         isSliding = false;
-
         transform.localScale = originalScale;
         box.size = originalColliderSize;
         box.offset = originalColliderOffset;
@@ -115,6 +115,14 @@ public class PlayerController : MonoBehaviour
             isGrounded = true;
             jumpCount = 0;
         }
+    }
+
+    void OnJump()
+    {
+        var chainWeapon =
+            currentWeapon.GetComponent<ElectricOrbBehaviour>();
+
+        chainWeapon?.EnableChainOnce();
     }
 
     void OnCollisionExit2D(Collision2D c)
