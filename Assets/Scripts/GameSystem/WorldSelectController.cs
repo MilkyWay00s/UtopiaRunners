@@ -14,10 +14,12 @@ public class WorldSelectController : MonoBehaviour
     [Header("Pointer")]
     public Transform pointer;
 
+    [Header("Unlock Rule")]
+    public int stagesPerWorld = 6;
+
     private int currentIndex = 0;
     private string selectedWorldSceneName;
-
-    //private string selectedWorldSceneName;
+    private bool isCurrentWorldUnlocked = true;
 
     void Start()
     {
@@ -76,7 +78,19 @@ public class WorldSelectController : MonoBehaviour
 
         // 텍스트 갱신
         worldNameText.text = area.worldName;
-        worldDescriptionText.text = area.worldDescription;
+        if (GameManager.Instance != null)
+        {
+            isCurrentWorldUnlocked =
+                GameManager.Instance.IsWorldUnlocked((int)area.worldID, stagesPerWorld);
+        }
+        else
+        {
+            isCurrentWorldUnlocked = false;
+        }
+        if (isCurrentWorldUnlocked)
+            worldDescriptionText.text = area.worldDescription;
+        else
+            worldDescriptionText.text = area.worldDescription + "\n(잠김: 이전 월드 마지막 스테이지 클리어 필요)";
         selectedWorldSceneName = area.sceneName;
 
         // 포인터 위치 이동
@@ -90,6 +104,12 @@ public class WorldSelectController : MonoBehaviour
     }
     public void onGoButtonClicked()
     {
+        if (!isCurrentWorldUnlocked)
+        {
+            Debug.Log("이전 월드의 마지막 스테이지를 클리어해야 진입할 수 있습니다.");
+            return;
+        }
+
         if (!string.IsNullOrEmpty(selectedWorldSceneName))
         {
             SceneManager.LoadScene(selectedWorldSceneName);

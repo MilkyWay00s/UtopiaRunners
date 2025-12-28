@@ -203,4 +203,28 @@ public class GameManager : SingletonObject<GameManager>
     {
         return id.ToString();
     }
+    //클리어 판정을 위한 로직-----------------------------------------------------------
+    public bool IsStageCleared(string worldName, int stageIndex)
+    {
+        if (!clearedStages.ContainsKey(worldName)) return false;
+        var list = clearedStages[worldName];
+        if (stageIndex < 0 || stageIndex >= list.Count) return false;
+        return list[stageIndex];
+    }
+
+    // 월드 마지막 스테이지 클리어 시 해금
+    public bool IsWorldCleared(string worldName, int lastStageIndex)
+    {
+        return IsStageCleared(worldName, lastStageIndex);
+    }
+
+    public bool IsWorldUnlocked(int worldIndex, int stagesPerWorld)
+    {
+        if (worldIndex <= 1) return true; // 첫 월드는 항상 오픈
+
+        string prevWorld = $"World{worldIndex}"; // worldIndex=1이면 이전 월드는 World1
+
+        return IsWorldCleared(prevWorld, stagesPerWorld - 1);
+    }
+    //-----------------------------------------------------------
 }
