@@ -256,7 +256,7 @@ PrefabInstance:
     - target: {fileID: 8225889066920441249, guid: 82701fb6753cb114683d5fb788467275,
         type: 3}
       propertyPath: m_Name
-      value: CommonStageUnactivated (1)
+      value: Stage5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43bae3dfd02c6aa418039a771c6cdef0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageId: 0
+  stageId: 5
   pointerAnchor: {fileID: 1889422248}
   stageTitle: "\u3134\u3134\u3134"
   stageDesc: "\u3134\u3134"
@@ -558,6 +558,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 524882307}
   m_CullTransparentMesh: 1
+--- !u!1 &535469245
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 535469246}
+  m_Layer: 0
+  m_Name: Anchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &535469246
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535469245}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.23, y: 2.65, z: -0.13267268}
+  m_LocalScale: {x: 1.0869565, y: 1.0869565, z: 1.0869565}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2063613733}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &536998066
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2331,8 +2362,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2063613733}
   - component: {fileID: 2063613734}
+  - component: {fileID: 2063613735}
   m_Layer: 0
-  m_Name: image 88
+  m_Name: Stage6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2350,7 +2382,8 @@ Transform:
   m_LocalPosition: {x: 5.74, y: 1, z: 0}
   m_LocalScale: {x: 0.92, y: 0.92, z: 0.92}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 535469246}
   m_Father: {fileID: 616275335}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2063613734
@@ -2405,6 +2438,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2063613735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063613732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43bae3dfd02c6aa418039a771c6cdef0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stageId: 6
+  pointerAnchor: {fileID: 535469246}
+  stageTitle: sss
+  stageDesc: sss
 --- !u!4 &2069295219 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2670692814892019161, guid: 3474f8924aae7d8449d082612e89ce18,
@@ -2423,7 +2472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43bae3dfd02c6aa418039a771c6cdef0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageId: 0
+  stageId: 2
   pointerAnchor: {fileID: 1593324899}
   stageTitle: "\uB450\uBC88\uC9F8 \uC2A4\uD14C\uC774\uC9C0\uC774\uB2E4"
   stageDesc: "\uB450\uBC88\uC9F8 \uC2A4\uD14C\uC774\uC9C0\uC774\uB2E4"
@@ -2438,7 +2487,7 @@ PrefabInstance:
     - target: {fileID: 5601440336586368188, guid: f5fe62c6ba9178f4c82468f44785d368,
         type: 3}
       propertyPath: m_Name
-      value: MiddleStage1
+      value: MiddleStage
       objectReference: {fileID: 0}
     - target: {fileID: 8042660642827091957, guid: f5fe62c6ba9178f4c82468f44785d368,
         type: 3}
@@ -2531,7 +2580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43bae3dfd02c6aa418039a771c6cdef0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageId: 0
+  stageId: 3
   pointerAnchor: {fileID: 1564343865}
   stageTitle: "\uC138\uBC88\uC9F8 \uC2A4\uD14C\uC774\uC9C0\uC774\uB2E4"
   stageDesc: "\uC138\uBC88\uC9F8 \uC2A4\uD14C\uC774\uC9C0\uC774\uB2E4"
@@ -2601,7 +2650,7 @@ PrefabInstance:
     - target: {fileID: 8225889066920441249, guid: 82701fb6753cb114683d5fb788467275,
         type: 3}
       propertyPath: m_Name
-      value: CommonStageUnactivated
+      value: Stage4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2634,7 +2683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43bae3dfd02c6aa418039a771c6cdef0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageId: 0
+  stageId: 4
   pointerAnchor: {fileID: 1483490021}
   stageTitle: "\uB124 \uBC88\uC9F8 \uC2A4\uD14C\uC774\uC9C0\uC774"
   stageDesc: "\uB124 \uBC88\uC9F8 \uC2A4\uD14C\uC774\uC9C0\uC774\uB2E4"
@@ -2696,6 +2745,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5810611478921885227, guid: 3474f8924aae7d8449d082612e89ce18,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b31997f5364230646b43f2dfc1078275,
+        type: 3}
     - target: {fileID: 5810611478921885227, guid: 3474f8924aae7d8449d082612e89ce18,
         type: 3}
       propertyPath: m_SortingOrder
