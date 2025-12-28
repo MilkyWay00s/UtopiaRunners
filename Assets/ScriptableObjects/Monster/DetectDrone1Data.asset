@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb72f209a6a49094d882d1426baf72c5, type: 3}
+  m_Name: DetectDrone1Data
+  m_EditorClassIdentifier: 
+  monsterName: Detect Drone 1
+  maxHp: 5
+  defense: 0
+  moveSpeed: 0
+  attackType: 1
+  attackInterval: 1.5
+  projectileTargetOffset: {x: 0, y: 0, z: 0}
+  projectilePrefab: {fileID: 7698130059834984552, guid: a6434f152ebcc774889f3a89f483461c,
+    type: 3}
+  meleeMoveCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  meleeMoveSpeed: 0

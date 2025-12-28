@@ -19,12 +19,12 @@ MonoBehaviour:
     spawnTimeOffset: 0
     spawnPosition: {x: 10, y: -3.5}
     speedModifier: 0
-  - enemyPrefab: {fileID: 3913712796454661069, guid: 77495c4f87d66f043be7849a386982cd,
+  - enemyPrefab: {fileID: 4181751369538448354, guid: 1d5de1a82b0cc134ea3dadb75431212f,
       type: 3}
     spawnTimeOffset: 0
     spawnPosition: {x: 8, y: 1}
     speedModifier: 0
-  - enemyPrefab: {fileID: 3913712796454661069, guid: 77495c4f87d66f043be7849a386982cd,
+  - enemyPrefab: {fileID: 4181751369538448354, guid: 1d5de1a82b0cc134ea3dadb75431212f,
       type: 3}
     spawnTimeOffset: 2
     spawnPosition: {x: 8, y: -1}

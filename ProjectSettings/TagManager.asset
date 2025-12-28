@@ -11,6 +11,7 @@ TagManager:
   - Ground
   - Weapon
   - Target
+  - FirePoint
   layers:
   - Default
   - TransparentFX
