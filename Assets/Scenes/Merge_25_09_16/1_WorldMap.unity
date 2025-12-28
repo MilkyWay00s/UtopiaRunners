@@ -442,7 +442,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -204.73657, w: -187.25894}
+  m_margin: {x: -50.480225, y: 0, z: -204.73657, w: -187.25894}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -565,6 +565,7 @@ MonoBehaviour:
   worldName: ???
   worldDescription: ??????
   sceneName: 
+  lockIcon: {fileID: 1700297467}
 --- !u!1 &322020200
 GameObject:
   m_ObjectHideFlags: 0
@@ -977,6 +978,7 @@ MonoBehaviour:
   worldDescription: "\uC0DD\uBA85\uB825\uC774 \uCDA9\uB9CC\uD55C \uB208\uBD80\uC2E0
     \uC232"
   sceneName: 
+  lockIcon: {fileID: 1266010552}
 --- !u!1 &439850250
 GameObject:
   m_ObjectHideFlags: 0
@@ -1042,7 +1044,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 585.5, y: -233.25}
+  m_AnchoredPosition: {x: 657, y: 269}
   m_SizeDelta: {x: 354.6973, y: 144.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &473114695
@@ -1253,6 +1255,7 @@ MonoBehaviour:
   worldDescription: "\uD504\uB85C\uBE44\uB358\uC2A4\uAC00 \uC9C0\uBC30\uD558\uB294
     \uB3C4\uC2DC"
   sceneName: 2_Eden
+  lockIcon: {fileID: 956541568}
 --- !u!1 &550171242
 GameObject:
   m_ObjectHideFlags: 0
@@ -2642,6 +2645,7 @@ MonoBehaviour:
   worldName: Rust Belt
   worldDescription: "\uB179\uC2A8 \uAE30\uACC4\uB4E4\uC774 \uAC00\uB4DD\uD55C \uACF5\uC7A5"
   sceneName: 
+  lockIcon: {fileID: 1956453637}
 --- !u!1 &1484275641
 GameObject:
   m_ObjectHideFlags: 0
@@ -3326,7 +3330,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -213.8175, w: 0}
+  m_margin: {x: -54.869995, y: 0, z: -213.8175, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

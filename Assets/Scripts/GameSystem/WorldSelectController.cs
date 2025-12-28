@@ -28,9 +28,20 @@ public class WorldSelectController : MonoBehaviour
             Debug.LogWarning("WorldManager: worlds 배열이 비어 있습니다.");
             return;
         }
+        RefreshLocks();
         SetSelectedWorld(0);
     }
+    void RefreshLocks()
+    {
+        if (GameManager.Instance == null) return;
 
+        foreach (var w in worlds)
+        {
+            if (w == null || w.lockIcon == null) continue;
+            bool unlocked = GameManager.Instance.IsWorldUnlocked((int)w.worldID, stagesPerWorld);
+            w.lockIcon.SetActive(!unlocked);
+        }
+    }
     void Update()
     {
         /*if (Input.GetMouseButtonDown(0))
