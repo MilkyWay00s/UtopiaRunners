@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2437172364362706234}
   - component: {fileID: -4577142563429513465}
   - component: {fileID: -7557932747516943680}
+  - component: {fileID: 5251086392088787005}
   m_Layer: 0
   m_Name: DetectDrone2
   m_TagString: Boss
@@ -112,7 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 376c7d9835a05734998b2857ea17284c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 3
+  data: {fileID: 11400000, guid: ff031ef1414c72f4aa5927a2ea4d5fd4, type: 2}
 --- !u!70 &-7557932747516943680
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -148,3 +149,30 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 5.24, y: 4.34}
   m_Direction: 0
+--- !u!50 &5251086392088787005
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3073487800317195520}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

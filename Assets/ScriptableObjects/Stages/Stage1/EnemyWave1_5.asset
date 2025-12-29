@@ -10,22 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4181e831e4659e44bacd3c5d372feb7a, type: 3}
-  m_Name: EnemyWave1_1
+  m_Name: EnemyWave1_5
   m_EditorClassIdentifier: 
-  startTime: 3
+  startTime: 17
   spawnList:
-  - enemyPrefab: {fileID: 728205970907969643, guid: d384b42587aeb8f4ebdae7de3d12363e,
+  - enemyPrefab: {fileID: 4181751369538448354, guid: 1d5de1a82b0cc134ea3dadb75431212f,
       type: 3}
     spawnTimeOffset: 0
-    spawnPosition: {x: 10, y: -3.3}
+    spawnPosition: {x: 6, y: 3}
     speedModifier: 0
   - enemyPrefab: {fileID: 4181751369538448354, guid: 1d5de1a82b0cc134ea3dadb75431212f,
       type: 3}
     spawnTimeOffset: 0
-    spawnPosition: {x: 8, y: 1}
+    spawnPosition: {x: 6, y: 1}
     speedModifier: 0
   - enemyPrefab: {fileID: 4181751369538448354, guid: 1d5de1a82b0cc134ea3dadb75431212f,
+      type: 3}
+    spawnTimeOffset: 0
+    spawnPosition: {x: 6, y: -1}
+    speedModifier: 0
+  - enemyPrefab: {fileID: 3073487800317195520, guid: 9bb269e8e98e25a499f3042c7763b803,
       type: 3}
     spawnTimeOffset: 2
-    spawnPosition: {x: 8, y: -1}
+    spawnPosition: {x: 8, y: 0}
+    speedModifier: 0
+  - enemyPrefab: {fileID: 3073487800317195520, guid: 9bb269e8e98e25a499f3042c7763b803,
+      type: 3}
+    spawnTimeOffset: 2
+    spawnPosition: {x: 8, y: 2}
     speedModifier: 0

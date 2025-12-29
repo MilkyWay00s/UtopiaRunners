@@ -1,15 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MobHealth : MonoBehaviour
 {
-    public int maxHP = 3;
-    private int currentHP;
+    [Header("몬스터 데이터")]
+    public MonsterData data;
+
+    int currentHP;
 
     void Start()
     {
-        currentHP = maxHP;
+        if (data == null)
+        {
+            Debug.LogError("MonsterData가 할당되지 않았습니다.");
+            return;
+        }
+
+        currentHP = data.maxHp;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -23,6 +29,7 @@ public class MobHealth : MonoBehaviour
     void TakeDamage(int damage)
     {
         currentHP -= damage;
+
         if (currentHP <= 0)
         {
             Die();

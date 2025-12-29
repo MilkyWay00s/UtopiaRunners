@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a0897f5b7da1334386325ffacacfe75, type: 3}
-  m_Name: ObstacleWave1_1
+  m_Name: ObstacleWave1_5
   m_EditorClassIdentifier: 
-  startTime: 3
+  startTime: 27
   spawnList:
   - obstaclePrefab: {fileID: 6925315057518650935, guid: 78029d8b3e44ed44cacf492ad0d5f352,
       type: 3}
     spawnTimeOffset: 0
-    spawnPosition: {x: 10, y: -3}
-    moveSpeed: 1
-  - obstaclePrefab: {fileID: 5126688772545595835, guid: caf3a6c0cd581ab4db44f117562707ef,
-      type: 3}
-    spawnTimeOffset: 1
-    spawnPosition: {x: 10, y: -2.5}
-    moveSpeed: 1
+    spawnPosition: {x: 10, y: -3.25}
+    moveSpeed: 0
   - obstaclePrefab: {fileID: 6925315057518650935, guid: 78029d8b3e44ed44cacf492ad0d5f352,
       type: 3}
-    spawnTimeOffset: 2
-    spawnPosition: {x: 10, y: -3}
-    moveSpeed: 1
+    spawnTimeOffset: 0.3
+    spawnPosition: {x: 10, y: -3.25}
+    moveSpeed: 0
+  - obstaclePrefab: {fileID: 6925315057518650935, guid: 78029d8b3e44ed44cacf492ad0d5f352,
+      type: 3}
+    spawnTimeOffset: 0.6
+    spawnPosition: {x: 10, y: -3.25}
+    moveSpeed: 0
