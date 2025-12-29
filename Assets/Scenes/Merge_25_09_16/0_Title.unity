@@ -327,7 +327,7 @@ PrefabInstance:
     - target: {fileID: 1914977779380854318, guid: 38682ef1ed57af44baa8e98339a9bef5,
         type: 3}
       propertyPath: m_Name
-      value: CoinsText2
+      value: CoinText2
       objectReference: {fileID: 0}
     - target: {fileID: 1967794442847081955, guid: 38682ef1ed57af44baa8e98339a9bef5,
         type: 3}
@@ -2245,11 +2245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SaveSlotPanel: {fileID: 489060708}
-  worldStageTexts:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  coinsTexts:
+  coinText:
   - {fileID: 934830886}
   - {fileID: 428805557}
   - {fileID: 2052826817}
@@ -2766,7 +2762,7 @@ PrefabInstance:
     - target: {fileID: 1914977779380854318, guid: 38682ef1ed57af44baa8e98339a9bef5,
         type: 3}
       propertyPath: m_Name
-      value: CoinsText1
+      value: CoinText1
       objectReference: {fileID: 0}
     - target: {fileID: 1967794442847081955, guid: 38682ef1ed57af44baa8e98339a9bef5,
         type: 3}
@@ -3748,6 +3744,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1914977779380854318, guid: 38682ef1ed57af44baa8e98339a9bef5,
+        type: 3}
+      propertyPath: m_Name
+      value: CoinText0
       objectReference: {fileID: 0}
     - target: {fileID: 5035943473084173988, guid: 38682ef1ed57af44baa8e98339a9bef5,
         type: 3}

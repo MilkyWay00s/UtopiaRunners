@@ -5,6 +5,7 @@ using UnityEngine;
 public class StageData2 : ScriptableObject
 {
     public float stageTimeLimit = 60f;
+    public int stageRewardCoin = 100;
     public List<EnemyWaveData> enemyWaves;
     public List<ObstacleWaveData> obstacleWaves;
 }

@@ -10,7 +10,7 @@ public class SaveSlotManager : MonoBehaviour
     private int slotCount = 3;
 
     [Header("슬롯 텍스트")] 
-    public TMP_Text[] coinsTexts;      
+    public TMP_Text[] coinText;      
     public TMP_Text[] playtimeTexts;   
 
     private void Awake()
@@ -29,7 +29,7 @@ public class SaveSlotManager : MonoBehaviour
                 string json = File.ReadAllText(path);
                 SaveData data = JsonUtility.FromJson<SaveData>(json);
 
-                coinsTexts[i].text = $"Coins: {data.coins}";
+                coinText[i].text = $"Coins: {data.coin}";
 
                 int hours = (int)(data.playTime / 3600);
                 int minutes = (int)((data.playTime % 3600) / 60);
@@ -38,7 +38,7 @@ public class SaveSlotManager : MonoBehaviour
             }
             else
             {
-                coinsTexts[i].text = "Coins: 0";
+                coinText[i].text = "Coin: 0";
                 playtimeTexts[i].text = "Playtime: 00:00:00";
             }
         }
@@ -46,9 +46,11 @@ public class SaveSlotManager : MonoBehaviour
 
     public void OnSelectSlot(int slotNumber)
     {
+        GameManager.Instance.currentSlot = slotNumber; 
         GameManager.Instance.LoadGame(slotNumber);
         SceneManager.LoadScene("1_WorldMap");
     }
+
 
     public void OnStartButtonClicked()
     {

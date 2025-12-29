@@ -5,6 +5,7 @@ using UnityEngine;
 public class WeaponAutoAttack : MonoBehaviour
 {
     public WeaponData weaponData;
+    public float attackMultiplier = 1f;
 
     private void Start()
     {
