@@ -49,3 +49,5 @@ MonoBehaviour:
   playTime: 0
   currentWorld: World1
   currentStage: Stage1
+  stageDatabase: {fileID: 11400000, guid: 4a1dfa1bcacd30b418f2e24c8a234e81, type: 2}
+  selectedStageId: 0

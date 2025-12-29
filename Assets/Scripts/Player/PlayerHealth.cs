@@ -17,6 +17,13 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
+        EveSkill eve = GetComponent<EveSkill>();
+
+        if (eve != null && eve.IsShieldActive())
+        {
+            eve.OnDamaged(); // ½¯µå¸¸ ÆÄ±«
+            return;          
+        }
         CurrentHealth = Mathf.Clamp(CurrentHealth - amount, 0, maxHealth);
         OnHealthChanged?.Invoke(CurrentHealth, maxHealth);
         if (CurrentHealth <= 0) OnDeath?.Invoke();
