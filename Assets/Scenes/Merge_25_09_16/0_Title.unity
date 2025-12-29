@@ -2245,10 +2245,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SaveSlotPanel: {fileID: 489060708}
-  worldStageTexts:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   coinsTexts:
   - {fileID: 934830886}
   - {fileID: 428805557}
@@ -3701,6 +3697,74 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63ec6c82200ec884891e6951b74ddce0, type: 3}
+--- !u!1001 &4644043794619757231
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 281579930936666668, guid: 9666dc2e05fa1554d9824896e77fbe71,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 577.4434
+      objectReference: {fileID: 0}
+    - target: {fileID: 281579930936666668, guid: 9666dc2e05fa1554d9824896e77fbe71,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 771.38403
+      objectReference: {fileID: 0}
+    - target: {fileID: 281579930936666668, guid: 9666dc2e05fa1554d9824896e77fbe71,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.19912875
+      objectReference: {fileID: 0}
+    - target: {fileID: 281579930936666668, guid: 9666dc2e05fa1554d9824896e77fbe71,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 281579930936666668, guid: 9666dc2e05fa1554d9824896e77fbe71,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281579930936666668, guid: 9666dc2e05fa1554d9824896e77fbe71,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281579930936666668, guid: 9666dc2e05fa1554d9824896e77fbe71,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281579930936666668, guid: 9666dc2e05fa1554d9824896e77fbe71,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281579930936666668, guid: 9666dc2e05fa1554d9824896e77fbe71,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281579930936666668, guid: 9666dc2e05fa1554d9824896e77fbe71,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7818038623548515308, guid: 9666dc2e05fa1554d9824896e77fbe71,
+        type: 3}
+      propertyPath: m_Name
+      value: SoundManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9666dc2e05fa1554d9824896e77fbe71, type: 3}
 --- !u!1001 &4878269401554807631
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4446,3 +4510,4 @@ SceneRoots:
   - {fileID: 292645456}
   - {fileID: 1525524726631768510}
   - {fileID: 190914624}
+  - {fileID: 4644043794619757231}
