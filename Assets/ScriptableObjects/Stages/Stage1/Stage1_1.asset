@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1960d645800503f43bd3fd15161596fd, type: 3}
   m_Name: Stage1_1
   m_EditorClassIdentifier: 
+  id: 1
   stageTimeLimit: 120
+  stageRewardCoin: 100
   enemyWaves:
   - {fileID: 11400000, guid: e94213b1d0c935d4a824f2b4f371473e, type: 2}
   - {fileID: 11400000, guid: da8fa6c3804c9084bb4eddf5d880a5cd, type: 2}

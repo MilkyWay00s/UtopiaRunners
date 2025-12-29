@@ -999,7 +999,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 347bda9c369b61a4c9fd3fd84471a095, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageData: {fileID: 11400000, guid: 985fdfd09885d274ea1f61a9a86ca650, type: 2}
+  stageDatabase: {fileID: 11400000, guid: 50c3db100af7b09429a626cf9eb38553, type: 2}
 --- !u!1 &320955303
 GameObject:
   m_ObjectHideFlags: 0
