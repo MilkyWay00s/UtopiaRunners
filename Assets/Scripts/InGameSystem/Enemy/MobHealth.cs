@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MobHealth : MonoBehaviour
 {
-    public int maxHP = 3;
-    private int currentHP;
+    public float maxHP = 3;
+    public float currentHP;
 
     void Start()
     {
@@ -16,11 +16,17 @@ public class MobHealth : MonoBehaviour
     {
         if (other.CompareTag("Weapon"))
         {
-            TakeDamage(1);
+            AutoAttackProjectile projectile =
+                other.GetComponent<AutoAttackProjectile>();
+
+            if (projectile != null)
+            {
+                TakeDamage(projectile.finalDamage);
+            }
         }
     }
 
-    void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         currentHP -= damage;
         if (currentHP <= 0)
