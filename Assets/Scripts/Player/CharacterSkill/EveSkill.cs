@@ -59,10 +59,10 @@ public class EveSkill : MonoBehaviour
         var weapon = GetComponentInChildren<WeaponAutoAttack>();
         if (weapon == null) return;
 
-        if (apply)
+        /*if (apply)
             weapon.attackMultiplier += attackBonusRate;
         else
-            weapon.attackMultiplier -= attackBonusRate;
+            weapon.attackMultiplier -= attackBonusRate;*/
     }
 
     public bool IsShieldActive() => shieldActive;
