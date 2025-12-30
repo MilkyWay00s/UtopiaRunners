@@ -19,30 +19,9 @@ public class StageManager2 : MonoBehaviour
         enemyWaveIndex = 0;
         obstacleWaveIndex = 0;
 
-        if (GameManager.Instance == null)
-        {
-            Debug.LogError("[StageManager2] GameManager가 없습니다.");
-            enabled = false;
-            return;
-        }
-
         StageName stageId = GameManager.Instance.SelectedStageId;
 
-        if (stageDatabase == null)
-        {
-            Debug.LogError("[StageManager2] StageDatabase2가 할당되지 않았습니다.");
-            enabled = false;
-            return;
-        }
-
         stageData = stageDatabase.Get(stageId);
-
-        if (stageData == null)
-        {
-            Debug.LogError($"[StageManager2] StageData2 없음: {stageId}");
-            enabled = false;
-            return;
-        }
     }
 
     void Update()

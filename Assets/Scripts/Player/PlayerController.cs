@@ -7,9 +7,14 @@ public class PlayerController : MonoBehaviour
     public int maxJumpCount = 2;
     public float slideDuration = 0.5f;
     public GameObject currentWeapon;
-    [Header("Slide")]
-    public float slideScaleY = 0.3f;
 
+    [Header("Slide Visual")]
+    public GameObject normalVisual;
+    public GameObject slideVisual;
+
+    [Header("Slide Collider")]
+    public Vector2 slideColliderSize = new Vector2(1f, 0.5f);
+    public Vector2 slideColliderOffset = new Vector2(0f, -0.25f);
 
     Rigidbody2D rb;
     BoxCollider2D box;
@@ -18,7 +23,6 @@ public class PlayerController : MonoBehaviour
     bool isGrounded = false;
     int jumpCount = 0;
 
-    Vector3 originalScale;
     Vector2 originalColliderSize;
     Vector2 originalColliderOffset;
 
@@ -29,9 +33,11 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         box = GetComponent<BoxCollider2D>();
 
-        originalScale = transform.localScale;
         originalColliderSize = box.size;
         originalColliderOffset = box.offset;
+
+        if (normalVisual) normalVisual.SetActive(true);
+        if (slideVisual) slideVisual.SetActive(false);
     }
 
     void Update()
@@ -48,27 +54,33 @@ public class PlayerController : MonoBehaviour
             Input.GetKeyDown(KeyCode.LeftControl) ||
             Input.GetKeyDown(KeyCode.DownArrow);
 
+        // 슬라이드 중 점프
         if (isSliding && jumpInput && jumpCount < maxJumpCount)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            if (jumpCount == 0)  
+
+            if (jumpCount == 0)
                 OnJump();
-                GetComponent<IcarusSkill>()?.OnJumpOrSlide();
+
+            GetComponent<IcarusSkill>()?.OnJumpOrSlide();
 
             jumpCount++;
             GetComponent<HaniSkill>()?.OnAirJump(jumpCount);
         }
 
+        // 슬라이드 시작
         if (slideDown && !isSliding && isGrounded)
         {
             StartSlide();
         }
 
+        // 슬라이드 종료
         if (isSliding && !slideHold)
         {
             EndSlide();
         }
 
+        // 일반 점프
         if (!isSliding && jumpInput && jumpCount < maxJumpCount)
         {
             DoJump();
@@ -84,26 +96,23 @@ public class PlayerController : MonoBehaviour
     void StartSlide()
     {
         isSliding = true;
+
         GetComponent<IcarusSkill>()?.OnJumpOrSlide();
-        transform.localScale = new Vector3(
-            originalScale.x,
-            originalScale.y * slideScaleY,
-            originalScale.z
-        );
-        box.size = new Vector2(
-            originalColliderSize.x,
-            originalColliderSize.y * slideScaleY
-        );
-        box.offset = new Vector2(
-            originalColliderOffset.x,
-            originalColliderOffset.y - (originalColliderSize.y * (1f - slideScaleY) * 0.5f)
-        );
+
+        if (normalVisual) normalVisual.SetActive(false);
+        if (slideVisual) slideVisual.SetActive(true);
+
+        box.size = slideColliderSize;
+        box.offset = slideColliderOffset;
     }
 
     void EndSlide()
     {
         isSliding = false;
-        transform.localScale = originalScale;
+
+        if (normalVisual) normalVisual.SetActive(true);
+        if (slideVisual) slideVisual.SetActive(false);
+
         box.size = originalColliderSize;
         box.offset = originalColliderOffset;
     }
@@ -117,19 +126,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnJump()
-    {
-        var chainWeapon =
-            currentWeapon.GetComponent<ElectricOrbBehaviour>();
-
-        chainWeapon?.EnableChainOnce();
-    }
-
     void OnCollisionExit2D(Collision2D c)
     {
         if (c.gameObject.CompareTag("Ground"))
         {
             isGrounded = false;
         }
+    }
+
+    void OnJump()
+    {
+        var chainWeapon =
+            currentWeapon.GetComponent<ElectricOrbBehaviour>();
+
+        chainWeapon?.EnableChainOnce();
     }
 }

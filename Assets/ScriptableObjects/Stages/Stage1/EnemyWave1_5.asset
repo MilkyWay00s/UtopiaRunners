@@ -17,22 +17,22 @@ MonoBehaviour:
   - enemyPrefab: {fileID: 4181751369538448354, guid: 1d5de1a82b0cc134ea3dadb75431212f,
       type: 3}
     spawnTimeOffset: 0
-    spawnPosition: {x: 6, y: 3}
+    spawnPosition: {x: 8, y: 3}
     speedModifier: 0
   - enemyPrefab: {fileID: 4181751369538448354, guid: 1d5de1a82b0cc134ea3dadb75431212f,
       type: 3}
     spawnTimeOffset: 0
-    spawnPosition: {x: 6, y: 1}
+    spawnPosition: {x: 8, y: 1}
     speedModifier: 0
   - enemyPrefab: {fileID: 4181751369538448354, guid: 1d5de1a82b0cc134ea3dadb75431212f,
       type: 3}
     spawnTimeOffset: 0
-    spawnPosition: {x: 6, y: -1}
+    spawnPosition: {x: 8, y: -1}
     speedModifier: 0
   - enemyPrefab: {fileID: 3073487800317195520, guid: 9bb269e8e98e25a499f3042c7763b803,
       type: 3}
     spawnTimeOffset: 2
-    spawnPosition: {x: 8, y: 0}
+    spawnPosition: {x: 6, y: 0}
     speedModifier: 0
   - enemyPrefab: {fileID: 3073487800317195520, guid: 9bb269e8e98e25a499f3042c7763b803,
       type: 3}
