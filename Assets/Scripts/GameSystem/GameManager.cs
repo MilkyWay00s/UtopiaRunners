@@ -14,7 +14,7 @@ public class WorldClearEntry
 [Serializable]
 public class SaveData
 {
-    public int coins;
+    public int coin;
     public string currentWorld;
     public string currentStage;
     public float playTime;
@@ -25,7 +25,7 @@ public class GameManager : SingletonObject<GameManager>
 {
     private string saveFolder;
 
-    public int coins = 0;
+    public int coin = 0;
     public int currentSlot = 1;
 
     public float playTime = 0f;  
@@ -47,11 +47,9 @@ public class GameManager : SingletonObject<GameManager>
     protected override void Awake()
     {
         base.Awake();
+
         saveFolder = Application.persistentDataPath;
         sessionStartTime = Time.time;
-
-        int recentSlot = GetMostRecentSlot();
-        LoadGame(recentSlot);
 
         selectedStageId = ParseStageNameFromString(currentStage);
     }
@@ -92,13 +90,14 @@ public class GameManager : SingletonObject<GameManager>
         }
         return dict;
     }
+
     public void SaveGame(int slot)
     {
         UpdatePlayTime();
 
         SaveData data = new SaveData
         {
-            coins = coins,
+            coin = coin,
             currentWorld = currentWorld,
             currentStage = currentStage,
             playTime = playTime,
@@ -108,8 +107,8 @@ public class GameManager : SingletonObject<GameManager>
         string path = Path.Combine(saveFolder, $"save{slot}.json");
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(path, json);
-        Debug.Log($"게임 저장 완료 (슬롯 {slot})");
     }
+
     public void LoadGame(int slot)
     {
         currentSlot = slot;
@@ -120,7 +119,7 @@ public class GameManager : SingletonObject<GameManager>
             string json = File.ReadAllText(path);
             SaveData data = JsonUtility.FromJson<SaveData>(json);
 
-            coins = data.coins;
+            coin = data.coin;
             currentWorld = data.currentWorld;
             currentStage = data.currentStage;
             playTime = data.playTime;
@@ -131,10 +130,9 @@ public class GameManager : SingletonObject<GameManager>
         }
         else
         {
-            NewGame();
+            Debug.LogWarning($"Save file missing: save{slot}.json");
         }
     }
-
 
     public int GetMostRecentSlot()
     {
@@ -170,6 +168,7 @@ public class GameManager : SingletonObject<GameManager>
 
         SaveGame(currentSlot); 
     }
+
     //선택된 스테이지 전달받는 매서드
     public void SelectStage(StageName stageId, bool save = true)
     {
@@ -184,6 +183,7 @@ public class GameManager : SingletonObject<GameManager>
         var data = GetSelectedStageData();
         if (data != null) OnStageSelected?.Invoke(data);
     }
+
     public StageData GetSelectedStageData()
     {
         if (stageDatabase == null)
@@ -193,6 +193,7 @@ public class GameManager : SingletonObject<GameManager>
         }
         return stageDatabase.GetStageName(selectedStageId);
     }
+
     public void CompleteStage(string world, int stageIndex)
     {
         if (!clearedStages.ContainsKey(world))
@@ -211,17 +212,15 @@ public class GameManager : SingletonObject<GameManager>
         SaveGame(currentSlot); 
     }
 
-
     public void LoadMostRecent()
     {
         int slot = GetMostRecentSlot();
         LoadGame(slot); 
     }
 
-
     public void NewGame()
     {
-        coins = 10000;
+        coin = 0;
         currentWorld = "World1";
         currentStage = "Stage1";
         selectedStageId = ParseStageNameFromString(currentStage);
@@ -231,6 +230,7 @@ public class GameManager : SingletonObject<GameManager>
     {
         SaveGame(currentSlot);
     }
+
     private StageName ParseStageNameFromString(string stageStr)
     {
         if (string.IsNullOrEmpty(stageStr)) return default;
@@ -244,6 +244,7 @@ public class GameManager : SingletonObject<GameManager>
     {
         return id.ToString();
     }
+
     //클리어 판정을 위한 로직-----------------------------------------------------------
     public bool IsStageCleared(string worldName, int stageNumber)
     {
@@ -255,11 +256,13 @@ public class GameManager : SingletonObject<GameManager>
 
         return list[idx];
     }
+
     public bool IsStageUnlocked(string worldName, int stageIndex)
     {
         if (stageIndex <= 1) return true; // Stage1은 항상 오픈
         return IsStageCleared(worldName, stageIndex - 1);
     }
+
     // 월드 마지막 스테이지 클리어 시 해금
     public bool IsWorldCleared(string worldName, int lastStageIndex)
     {
@@ -274,7 +277,7 @@ public class GameManager : SingletonObject<GameManager>
 
         return IsWorldCleared(prevWorld, stagesPerWorld - 1);
     }
-    //-----------------------------------------------------------
+
     public int GetLastEnteredStageNumber()
     {
         if (string.IsNullOrEmpty(currentStage)) return 1;

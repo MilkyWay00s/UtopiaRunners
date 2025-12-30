@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
@@ -13,6 +13,7 @@ public class InGameManager : MonoBehaviour
     private float timeLeft;
     private CharacterManager cm;
     private bool isGameOver = false;
+    public StageData2 stageData;
 
     void Start()
     {
@@ -23,16 +24,18 @@ public class InGameManager : MonoBehaviour
         timeLeft = timeLimit;
         UpdateTimerUI();
 
-        // CharacterManager Ã£°í ÀÌº¥Æ® ±¸µ¶
+        // CharacterManager ì°¾ê³  ì´ë²¤íŠ¸ êµ¬ë…
         cm = FindObjectOfType<CharacterManager>();
+        /*
         if (cm != null)
         {
-            cm.OnActiveCharacterDeath += GameOver; // È°¼º Ä³¸¯ÅÍ »ç¸Á ½Ã °ÔÀÓ¿À¹ö
+            cm.OnActiveCharacterDeath += GameOver; // í™œì„± ìºë¦­í„° ì‚¬ë§ ì‹œ ê²Œì„ì˜¤ë²„
         }
         else
         {
-            Debug.LogError("[GameManager] CharacterManager¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù.");
+            Debug.LogError("[GameManager] CharacterManagerë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
         }
+        */
     }
 
     void Update()
@@ -41,29 +44,43 @@ public class InGameManager : MonoBehaviour
 
         timeLeft -= Time.deltaTime;
         UpdateTimerUI();
-        if (timeLeft <= 0f) GameOver();
+        if (timeLeft <= 0f) CommonStageClear();
     }
 
     private void UpdateTimerUI()
     {
         if (timerText)
-            timerText.text = $"Time: {Mathf.CeilToInt(Mathf.Max(0f, timeLeft))}";
+            timerText.text = $"{Mathf.CeilToInt(Mathf.Max(0f, timeLeft))}";
     }
 
-    public void GameOver()
+    public void CommonStageClear()
     {
         if (isGameOver) return;
         isGameOver = true;
 
         Time.timeScale = 0f;
         if (gameOverPanel) gameOverPanel.SetActive(true);
-        Debug.Log("[GameManager] Game Over");
+
+
+        GameManager.Instance.coin += stageData.stageRewardCoin;
+        GameManager.Instance.SaveGame(GameManager.Instance.currentSlot);
     }
 
-    // (¼±ÅÃ) ´Ù½Ã ½ÃÀÛ/¸Ş´º·Î °¡±â ¹öÆ°¿¡¼­ È£ÃâÇÒ ¼ö ÀÖ´Â ÇïÆÛ
+
+    // (ì„ íƒ) ë‹¤ì‹œ ì‹œì‘/ë©”ë‰´ë¡œ ê°€ê¸° ë²„íŠ¼ì—ì„œ í˜¸ì¶œí•  ìˆ˜ ìˆëŠ” í—¬í¼
     public void RestartCurrentScene()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void onStageSelectButtonClicked()
+    {
+        SceneManager.LoadScene("2_Eden");
+    }
+
+    public void onRetryButtonClicked()
+    {
+        SceneManager.LoadScene("3_CharacterSelect");
     }
 }
