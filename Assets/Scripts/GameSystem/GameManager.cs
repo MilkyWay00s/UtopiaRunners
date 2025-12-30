@@ -47,7 +47,6 @@ public class GameManager : SingletonObject<GameManager>
     protected override void Awake()
     {
         base.Awake();
-        Debug.Log($"[GM Awake] ID={GetInstanceID()} coin={coin} playTime={playTime}");
 
         saveFolder = Application.persistentDataPath;
         sessionStartTime = Time.time;
