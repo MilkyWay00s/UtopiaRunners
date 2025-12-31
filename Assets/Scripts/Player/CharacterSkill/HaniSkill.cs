@@ -12,6 +12,7 @@ public class HaniSkill : MonoBehaviour
 
     public int extraJumpCount = 1;
     bool empoweredAttackReady = false;
+    [SerializeField] private Animator animator;//추상화 필요
 
     void OnEnable()
     {
@@ -20,6 +21,7 @@ public class HaniSkill : MonoBehaviour
         {
             pc.maxJumpCount += extraJumpCount;
         }
+        animator.SetInteger("RunnerIdx", 2);
     }
 
     void OnDisable()

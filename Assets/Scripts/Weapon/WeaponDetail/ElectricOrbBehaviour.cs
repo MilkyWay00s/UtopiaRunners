@@ -29,7 +29,7 @@ public class ElectricOrbBehaviour : MonoBehaviour, IWeaponBehaviour
         {
             if (!hit.CompareTag("Boss")) continue;
 
-            Enemy e = hit.GetComponent<Enemy>();
+            MobHealth e = hit.GetComponent<MobHealth>();
             if (e == null) continue;
 
             e.TakeDamage(damage);

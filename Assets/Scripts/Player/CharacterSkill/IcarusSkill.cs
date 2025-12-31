@@ -12,7 +12,7 @@ public class IcarusSkill : MonoBehaviour
 
     WeaponSkill weaponSkill;
     bool isDashing = false;
-
+    [SerializeField] private Animator animator;
     void Awake()
     {
         // Player에 붙은 WeaponSkill 찾기
