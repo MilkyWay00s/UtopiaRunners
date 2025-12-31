@@ -52,7 +52,7 @@ public class HaniSkill : MonoBehaviour
     }
 
     //게이지가 찬 후 기본 공격 적중 시
-    public void OnBasicAttackHit(Enemy enemy)
+    public void OnBasicAttackHit(EnemyCondition enemy)
     {
         if (!empoweredAttackReady) return;
 

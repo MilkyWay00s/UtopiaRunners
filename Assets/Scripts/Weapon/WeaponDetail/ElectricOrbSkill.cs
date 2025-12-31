@@ -40,10 +40,14 @@ public class ElectricOrbSkill : MonoBehaviour
             {
                 if (!hit.CompareTag("Boss")) continue;
 
-                Enemy enemy = hit.GetComponent<Enemy>();
+                EnemyCondition enemy = hit.GetComponent<EnemyCondition>();
                 if (enemy == null) continue;
 
-                enemy.TakeDamage(tickDamage);
+                MobHealth mob = hit.GetComponent<MobHealth>();
+                if (mob == null) continue;
+
+                mob.TakeDamage(tickDamage);
+
                 enemy.ApplyStun(stunDuration);
             }
 

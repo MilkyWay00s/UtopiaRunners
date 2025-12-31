@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 846613574229691086}
   - component: {fileID: 1787214106650572575}
   - component: {fileID: 6612075016205871859}
+  - component: {fileID: -1345428157600958856}
   m_Layer: 0
-  m_Name: CharacterC
+  m_Name: Hani
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -176,6 +177,8 @@ MonoBehaviour:
   jumpForce: 25
   maxJumpCount: 2
   slideDuration: 0.5
+  currentWeapon: {fileID: 0}
+  slideScaleY: 0.3
 --- !u!114 &6612075016205871859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,3 +192,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+--- !u!114 &-1345428157600958856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7853347430173106205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e3f3dc866560d94ea9b4ed72039eda8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxGauge: 5
+  shockDuration: 10
+  extraJumpCount: 1
