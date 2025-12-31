@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8799883149541069365}
   - component: {fileID: 1684538994878386327}
+  - component: {fileID: -4342054618881818624}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -44,10 +45,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54030464732cfaa4ab7a52a7b5b10db6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coins: 10000
+  coin: 0
   currentSlot: 1
   playTime: 0
   currentWorld: World1
   currentStage: Stage1
   stageDatabase: {fileID: 11400000, guid: 4a1dfa1bcacd30b418f2e24c8a234e81, type: 2}
   selectedStageId: 0
+--- !u!114 &-4342054618881818624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7207815319568178974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 121973f984a4b4f47b74fb8d4698fb3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

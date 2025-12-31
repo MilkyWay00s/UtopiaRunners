@@ -7,9 +7,9 @@ public class OptionsManager : MonoBehaviour
     public GameObject OptionsPanel;
     public GameObject DarkOverlay;
     public AudioMixer audioMixer;
-    public Slider MasterVolumeSlider;
-    public Slider SFXVolumeSlider;
-    public Slider BGMVolumeSlider;
+    //public Slider MasterVolumeSlider;
+    //public Slider SFXVolumeSlider;
+    //public Slider BGMVolumeSlider;
 
     void Start()
     {
@@ -19,13 +19,13 @@ public class OptionsManager : MonoBehaviour
         audioMixer.GetFloat("BGMVolume", out bgmVol);
         audioMixer.GetFloat("SFXVolume", out sfxVol);
 
-        MasterVolumeSlider.value = Mathf.Pow(10, masterVol / 20f);
-        BGMVolumeSlider.value = Mathf.Pow(10, bgmVol / 20f);
-        SFXVolumeSlider.value = Mathf.Pow(10, sfxVol / 20f);
+        //MasterVolumeSlider.value = Mathf.Pow(10, masterVol / 20f);
+        //BGMVolumeSlider.value = Mathf.Pow(10, bgmVol / 20f);
+        //SFXVolumeSlider.value = Mathf.Pow(10, sfxVol / 20f);
 
-        MasterVolumeSlider.onValueChanged.AddListener(SetMasterVolume);
-        BGMVolumeSlider.onValueChanged.AddListener(SetBGMVolume);
-        SFXVolumeSlider.onValueChanged.AddListener(SetSFXVolume);
+        //MasterVolumeSlider.onValueChanged.AddListener(SetMasterVolume);
+        //BGMVolumeSlider.onValueChanged.AddListener(SetBGMVolume);
+        //SFXVolumeSlider.onValueChanged.AddListener(SetSFXVolume);
     }
 
     public void OpenOptions()

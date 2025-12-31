@@ -1,6 +1,7 @@
 using UnityEngine;
 
 public class EveSkill : MonoBehaviour
+    
 {
     [Header("Shield Condition")]
     public float noDamageTime = 5f;      // 피해 안 받는 시간
@@ -59,10 +60,10 @@ public class EveSkill : MonoBehaviour
         var weapon = GetComponentInChildren<WeaponAutoAttack>();
         if (weapon == null) return;
 
-        if (apply)
+        /*if (apply)
             weapon.attackMultiplier += attackBonusRate;
         else
-            weapon.attackMultiplier -= attackBonusRate;
+            weapon.attackMultiplier -= attackBonusRate;*/
     }
 
     public bool IsShieldActive() => shieldActive;
