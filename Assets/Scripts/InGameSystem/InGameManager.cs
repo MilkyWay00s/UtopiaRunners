@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
@@ -24,16 +24,16 @@ public class InGameManager : MonoBehaviour
         timeLeft = timeLimit;
         UpdateTimerUI();
 
-        // CharacterManager Ã£°í ÀÌº¥Æ® ±¸µ¶
+        // CharacterManager ì°¾ê³  ì´ë²¤íŠ¸ êµ¬ë…
         cm = FindObjectOfType<CharacterManager>();
         /*
         if (cm != null)
         {
-            cm.OnActiveCharacterDeath += GameOver; // È°¼º Ä³¸¯ÅÍ »ç¸Á ½Ã °ÔÀÓ¿À¹ö
+            cm.OnActiveCharacterDeath += GameOver; // í™œì„± ìºë¦­í„° ì‚¬ë§ ì‹œ ê²Œì„ì˜¤ë²„
         }
         else
         {
-            Debug.LogError("[GameManager] CharacterManager¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù.");
+            Debug.LogError("[GameManager] CharacterManagerë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
         }
         */
     }
@@ -50,7 +50,7 @@ public class InGameManager : MonoBehaviour
     private void UpdateTimerUI()
     {
         if (timerText)
-            timerText.text = $"Time: {Mathf.CeilToInt(Mathf.Max(0f, timeLeft))}";
+            timerText.text = $"{Mathf.CeilToInt(Mathf.Max(0f, timeLeft))}";
     }
 
     public void CommonStageClear()
@@ -67,14 +67,19 @@ public class InGameManager : MonoBehaviour
     }
 
 
-    // (¼±ÅÃ) ´Ù½Ã ½ÃÀÛ/¸Ş´º·Î °¡±â ¹öÆ°¿¡¼­ È£ÃâÇÒ ¼ö ÀÖ´Â ÇïÆÛ
+    // (ì„ íƒ) ë‹¤ì‹œ ì‹œì‘/ë©”ë‰´ë¡œ ê°€ê¸° ë²„íŠ¼ì—ì„œ í˜¸ì¶œí•  ìˆ˜ ìˆëŠ” í—¬í¼
     public void RestartCurrentScene()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void onBackButtonClicked()
+    public void onStageSelectButtonClicked()
+    {
+        SceneManager.LoadScene("2_Eden");
+    }
+
+    public void onRetryButtonClicked()
     {
         SceneManager.LoadScene("3_CharacterSelect");
     }

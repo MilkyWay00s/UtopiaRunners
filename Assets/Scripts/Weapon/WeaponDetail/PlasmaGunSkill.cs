@@ -16,20 +16,23 @@ public class PlasmaGunSkill : MonoBehaviour, IWeaponBehaviour
         {
             if (!hit.CompareTag("Boss")) continue;
 
-            Enemy target = hit.GetComponent<Enemy>();
-            if (target == null) continue;
+            EnemyCondition enemy = hit.GetComponent<EnemyCondition>();
+            if (enemy == null) continue;
+
+            MobHealth mob = hit.GetComponent<MobHealth>();
+            if (mob == null) continue;
 
             float dist =
                 Vector3.Distance(hit.transform.position, hitPoint);
 
             if (dist < 0.1f)
             {
-                target.TakeDamage(directDamage);
-                target.ApplyStun(stunDuration);
+                mob.TakeDamage(directDamage);
+                enemy.ApplyStun(stunDuration);
             }
             else
             {
-                target.TakeDamage(explosionDamage);
+                mob.TakeDamage(explosionDamage);
             }
         }
     }

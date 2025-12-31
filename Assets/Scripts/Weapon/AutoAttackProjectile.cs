@@ -6,14 +6,23 @@ public class AutoAttackProjectile : MonoBehaviour
 {
     public float moveSpeed = 10f;
     public string targetTag = "Boss";
+    public int finalDamage;
 
     private Transform target;
-    //public float attackMultiplier = 1f;
-    //finalDamage = baseDamage * attackMultiplier;  를 밑에 추가해야함
+    
 
     private void Start()
     {
         AcquireTarget();
+        WeaponAutoAttack weapon =
+        GetComponentInParent<WeaponAutoAttack>();
+
+        if (weapon != null)
+        {
+            finalDamage = Mathf.RoundToInt(
+                weapon.baseDamage * weapon.attackMultiplier
+            );
+        }
     }
 
     private void Update()
