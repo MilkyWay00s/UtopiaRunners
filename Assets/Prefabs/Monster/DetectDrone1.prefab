@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5451994258001377084}
   - component: {fileID: -3019688178687816928}
   - component: {fileID: -7665302789251148693}
+  - component: {fileID: 7911334577341044554}
   m_Layer: 0
   m_Name: DetectDrone1
   m_TagString: Boss
@@ -30,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7, y: 3.3, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -112,7 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 376c7d9835a05734998b2857ea17284c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 5
+  data: {fileID: 11400000, guid: ccb7c58bf0c2b5a4fb6be5f2ea02187d, type: 2}
 --- !u!70 &-7665302789251148693
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -148,3 +149,30 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 6.77, y: 6.77}
   m_Direction: 0
+--- !u!50 &7911334577341044554
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4181751369538448354}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

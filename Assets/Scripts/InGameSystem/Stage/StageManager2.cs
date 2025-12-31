@@ -4,14 +4,30 @@ using UnityEngine;
 
 public class StageManager2 : MonoBehaviour
 {
-    public StageData2 stageData;
-    private float timer = 0f;
+    [Header("Database")]
+    public StageDatabase2 stageDatabase;
 
+    private StageData2 stageData;
+
+    private float timer = 0f;
     private int enemyWaveIndex = 0;
     private int obstacleWaveIndex = 0;
 
+    void Start()
+    {
+        timer = 0f;
+        enemyWaveIndex = 0;
+        obstacleWaveIndex = 0;
+
+        StageName stageId = GameManager.Instance.SelectedStageId;
+
+        stageData = stageDatabase.Get(stageId);
+    }
+
     void Update()
     {
+        if (stageData == null) return;
+
         timer += Time.deltaTime;
 
         if (timer >= stageData.stageTimeLimit)
@@ -21,7 +37,7 @@ public class StageManager2 : MonoBehaviour
             return;
         }
 
-        // Enemy Wave 실행
+        // Enemy Wave
         if (enemyWaveIndex < stageData.enemyWaves.Count)
         {
             var wave = stageData.enemyWaves[enemyWaveIndex];
@@ -32,7 +48,7 @@ public class StageManager2 : MonoBehaviour
             }
         }
 
-        // Obstacle Wave 실행
+        // Obstacle Wave
         if (obstacleWaveIndex < stageData.obstacleWaves.Count)
         {
             var wave = stageData.obstacleWaves[obstacleWaveIndex];
@@ -49,7 +65,11 @@ public class StageManager2 : MonoBehaviour
         foreach (var spawn in wave.spawnList)
         {
             yield return new WaitForSeconds(spawn.spawnTimeOffset);
-            Instantiate(spawn.enemyPrefab, spawn.spawnPosition, Quaternion.identity);
+            Instantiate(
+                spawn.enemyPrefab,
+                spawn.spawnPosition,
+                Quaternion.identity
+            );
         }
     }
 
@@ -58,7 +78,11 @@ public class StageManager2 : MonoBehaviour
         foreach (var spawn in wave.spawnList)
         {
             yield return new WaitForSeconds(spawn.spawnTimeOffset);
-            Instantiate(spawn.obstaclePrefab, spawn.spawnPosition, Quaternion.identity);
+            Instantiate(
+                spawn.obstaclePrefab,
+                spawn.spawnPosition,
+                Quaternion.identity
+            );
         }
     }
 }

@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4181e831e4659e44bacd3c5d372feb7a, type: 3}
   m_Name: EnemyWave1_3
   m_EditorClassIdentifier: 
-  startTime: 0
+  startTime: 10
   spawnList:
   - enemyPrefab: {fileID: 728205970907969643, guid: d384b42587aeb8f4ebdae7de3d12363e,
       type: 3}
     spawnTimeOffset: 0
-    spawnPosition: {x: 10, y: -3.5}
+    spawnPosition: {x: 10, y: -2.8}
     speedModifier: 0
   - enemyPrefab: {fileID: 728205970907969643, guid: d384b42587aeb8f4ebdae7de3d12363e,
       type: 3}
     spawnTimeOffset: 2
-    spawnPosition: {x: 10, y: -3.5}
+    spawnPosition: {x: 10, y: -2.8}
     speedModifier: 0

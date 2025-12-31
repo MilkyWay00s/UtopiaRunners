@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb72f209a6a49094d882d1426baf72c5, type: 3}
   m_Name: DetectDrone2Data
   m_EditorClassIdentifier: 
-  monsterName: 
-  maxHp: 3
+  monsterName: DetectDrone2
+  maxHp: 8
   defense: 0
   attackType: 1
   rangedType: 1
