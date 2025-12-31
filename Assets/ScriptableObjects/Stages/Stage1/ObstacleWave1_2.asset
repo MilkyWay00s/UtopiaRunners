@@ -14,23 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startTime: 7
   spawnList:
-  - obstaclePrefab: {fileID: 6925315057518650935, guid: 78029d8b3e44ed44cacf492ad0d5f352,
+  - obstaclePrefab: {fileID: 7178641908762747988, guid: 78029d8b3e44ed44cacf492ad0d5f352,
       type: 3}
     spawnTimeOffset: 0
-    spawnPosition: {x: 10, y: -3.25}
+    spawnPosition: {x: 10, y: -3.41}
     moveSpeed: 0
-  - obstaclePrefab: {fileID: 6925315057518650935, guid: 78029d8b3e44ed44cacf492ad0d5f352,
+  - obstaclePrefab: {fileID: 4851638627358135023, guid: f2eb78a011aec8f498ff6d8cbac896bb,
       type: 3}
-    spawnTimeOffset: 1
-    spawnPosition: {x: 10, y: -3.25}
+    spawnTimeOffset: 0.7
+    spawnPosition: {x: 10, y: -2.14}
     moveSpeed: 0
-  - obstaclePrefab: {fileID: 6925315057518650935, guid: 78029d8b3e44ed44cacf492ad0d5f352,
+  - obstaclePrefab: {fileID: 2487858346475530645, guid: 0d465f3ea5143bb468ddd7a8b984e8d4,
       type: 3}
-    spawnTimeOffset: 2
-    spawnPosition: {x: 10, y: -3.25}
+    spawnTimeOffset: 0.7
+    spawnPosition: {x: 10, y: 3.28}
     moveSpeed: 0
-  - obstaclePrefab: {fileID: 6925315057518650935, guid: 78029d8b3e44ed44cacf492ad0d5f352,
+  - obstaclePrefab: {fileID: 4851638627358135023, guid: f2eb78a011aec8f498ff6d8cbac896bb,
       type: 3}
-    spawnTimeOffset: 3
-    spawnPosition: {x: 10, y: -3.25}
+    spawnTimeOffset: 0.7
+    spawnPosition: {x: 10, y: -2.14}
     moveSpeed: 0

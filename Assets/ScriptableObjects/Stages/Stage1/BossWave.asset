@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4181e831e4659e44bacd3c5d372feb7a, type: 3}
   m_Name: BossWave
   m_EditorClassIdentifier: 
-  startTime: 15
+  startTime: 30
   spawnList:
   - enemyPrefab: {fileID: 8513055816008065806, guid: b059dea61440d6848be59e7e3e8f5a19,
       type: 3}
     spawnTimeOffset: 0
-    spawnPosition: {x: 7.5, y: -1.75}
+    spawnPosition: {x: 6, y: -0.5}
     speedModifier: 0
