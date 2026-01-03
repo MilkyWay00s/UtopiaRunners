@@ -178,7 +178,11 @@ MonoBehaviour:
   maxJumpCount: 2
   slideDuration: 0.5
   currentWeapon: {fileID: 0}
-  slideScaleY: 0.3
+  normalVisual: {fileID: 0}
+  slideVisual: {fileID: 0}
+  slideColliderSize: {x: 1, y: 0.5}
+  slideColliderOffset: {x: 0, y: -0.25}
+  animator: {fileID: -7130420851932567681}
 --- !u!114 &488325427016581731
 MonoBehaviour:
   m_ObjectHideFlags: 0
