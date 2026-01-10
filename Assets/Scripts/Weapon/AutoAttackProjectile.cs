@@ -67,7 +67,7 @@ public class AutoAttackProjectile : MonoBehaviour
     {
         if (other.CompareTag("Boss"))
         {
-            Enemy enemy = other.GetComponent<Enemy>();
+            EnemyCondition enemy = other.GetComponent<EnemyCondition>();
             GetComponentInParent<HaniSkill>()?.OnBasicAttackHit(enemy);//하니 스킬 호출
 
             IWeaponBehaviour weaponBehaviour =

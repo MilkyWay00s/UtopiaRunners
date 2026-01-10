@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     Vector2 originalColliderSize;
     Vector2 originalColliderOffset;
 
+    [SerializeField] private Animator animator;//추상화 필요
     public bool IsGrounded() => isGrounded;
 
     void Awake()
@@ -97,6 +98,7 @@ public class PlayerController : MonoBehaviour
     {
         isSliding = true;
 
+        animator.SetBool("IsSlide", true);
         GetComponent<IcarusSkill>()?.OnJumpOrSlide();
 
         if (normalVisual) normalVisual.SetActive(false);
@@ -109,7 +111,7 @@ public class PlayerController : MonoBehaviour
     void EndSlide()
     {
         isSliding = false;
-
+        animator.SetBool("IsSlide", false);
         if (normalVisual) normalVisual.SetActive(true);
         if (slideVisual) slideVisual.SetActive(false);
 

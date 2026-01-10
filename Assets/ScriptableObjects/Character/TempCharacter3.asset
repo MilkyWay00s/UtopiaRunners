@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TempCharacter3
   m_EditorClassIdentifier: 
   displayName: "\uC784\uC2DC3\uBC88"
-  displayImage: {fileID: 21300000, guid: 4b8ac79055b2af4408f7a8ffd3b7610d, type: 3}
+  displayImage: {fileID: 21300000, guid: 77ab6370d323e164fafb73bf6d24fe68, type: 3}
   characterLevel: 1
   abilities: {fileID: 0}
   selectedState: 0
