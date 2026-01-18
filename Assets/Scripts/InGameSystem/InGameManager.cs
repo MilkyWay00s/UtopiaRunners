@@ -40,6 +40,8 @@ public class InGameManager : MonoBehaviour
 
     void Update()
     {
+        if (ChatScriptController.Instance != null && ChatScriptController.Instance.IsChatPlaying)
+            return;
         if (isGameOver) return;
 
         timeLeft -= Time.deltaTime;

@@ -53,6 +53,16 @@ public class ChatScriptController : SingletonObject<ChatScriptController>
         string key = GetStageChatSeenKey();
         return PlayerPrefs.GetInt(key, 0) == 0; // 0이면 아직 안 봄
     }
+    public void ResetCurrentStageChatSeen()
+    {
+        string key = GetStageChatSeenKey();
+
+        if (PlayerPrefs.HasKey(key))
+        {
+            PlayerPrefs.DeleteKey(key);
+            PlayerPrefs.Save();
+        }
+    }
     private IEnumerator ShowChat(MultiChatMessageData chatData)
     {
         PauseScene(true);
