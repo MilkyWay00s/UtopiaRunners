@@ -1,4 +1,4 @@
-ï»¿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -67,18 +67,18 @@ public class AutoAttackProjectile : MonoBehaviour
     {
         if (other.CompareTag("Boss"))
         {
-            //Enemy enemy = other.GetComponent<Enemy>();
-            //GetComponentInParent<HaniSkill>()?.OnBasicAttackHit(enemy);//í•˜ë‹ˆ ìŠ¤í‚¬ í˜¸ì¶œ
+            EnemyCondition enemy = other.GetComponent<EnemyCondition>();
+            GetComponentInParent<HaniSkill>()?.OnBasicAttackHit(enemy);//ÇÏ´Ï ½ºÅ³ È£Ãâ
 
-            //IWeaponBehaviour weaponBehaviour =
-            //GetComponentInParent<IWeaponBehaviour>();
+            IWeaponBehaviour weaponBehaviour =
+            GetComponentInParent<IWeaponBehaviour>();
 
-            //if (weaponBehaviour != null)
-            //{
-            //    weaponBehaviour.OnHit(other.transform.position);
-            //}
+            if (weaponBehaviour != null)
+            {
+                weaponBehaviour.OnHit(other.transform.position);
+            }
 
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 }

@@ -13,7 +13,12 @@ public class EveSkill : MonoBehaviour
     float timer = 0f;
 
     bool shieldActive = false;
+    [SerializeField] private Animator animator;//추상화 필요
 
+    private void OnEnable()
+    {
+        animator.SetInteger("RunnerIdx", 1);
+    }
     void Update()
     {
         // 보호막이 없을 때만 타이머 증가

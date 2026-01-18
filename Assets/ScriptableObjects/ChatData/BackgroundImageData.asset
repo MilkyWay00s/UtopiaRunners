@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundImages:
   - backgroundImage: 0
-    image: {fileID: 21300000, guid: fd00b29c3d9553d4c8e0ab3b572af409, type: 3}
+    image: {fileID: 21300000, guid: 59a0f13dff6ca5649a25278972ba19d9, type: 3}
   - backgroundImage: 1
-    image: {fileID: 21300000, guid: 9d1a3e0bc36dfc9468a738d92b6e92d4, type: 3}
+    image: {fileID: 0}
   - backgroundImage: 2
-    image: {fileID: 21300000, guid: 367fef7c7a0cf8b4e8fc2020259965e9, type: 3}
+    image: {fileID: 0}
+  - backgroundImage: 3
+    image: {fileID: 0}

@@ -1,4 +1,4 @@
-Ôªøusing System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ public class ElectricOrbBehaviour : MonoBehaviour, IWeaponBehaviour
 
     bool chainReady = false;
 
-    // Ï†êÌîÑ Ïãú PlayerControllerÏóêÏÑú Ìò∏Ï∂ú
+    // ¡°«¡ Ω√ PlayerControllerø°º≠ »£√‚
     public void EnableChainOnce()
     {
         chainReady = true;
@@ -18,23 +18,23 @@ public class ElectricOrbBehaviour : MonoBehaviour, IWeaponBehaviour
 
     public void OnHit(Vector3 hitPoint)
     {
-        //if (!chainReady) return;
-        //chainReady = false;
+        if (!chainReady) return;
+        chainReady = false;
 
-        //Collider2D[] hits =
-        //    Physics2D.OverlapCircleAll(hitPoint, chainRange);
+        Collider2D[] hits =
+            Physics2D.OverlapCircleAll(hitPoint, chainRange);
 
-        //int count = 0;
-        //foreach (Collider2D hit in hits)
-        //{
-        //    if (!hit.CompareTag("Boss")) continue;
+        int count = 0;
+        foreach (Collider2D hit in hits)
+        {
+            if (!hit.CompareTag("Boss")) continue;
 
-        //    Enemy e = hit.GetComponent<Enemy>();
-        //    if (e == null) continue;
+            MobHealth e = hit.GetComponent<MobHealth>();
+            if (e == null) continue;
 
-        //    e.TakeDamage(damage);
-        //    count++;
-        //    if (count >= chainCount) break;
-        //}
+            e.TakeDamage(damage);
+            count++;
+            if (count >= chainCount) break;
+        }
     }
 }
