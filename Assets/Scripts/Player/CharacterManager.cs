@@ -60,6 +60,8 @@ public class CharacterManager : MonoBehaviour
 
     void Update()
     {
+        if (ChatScriptController.Instance != null && ChatScriptController.Instance.IsChatPlaying)
+            return;
         if (switchRemain > 0f) switchRemain -= Time.deltaTime;
         if (InputManager.Instance.GetKey(ActionCode.Tag) && switchRemain <= 0f)
             SwitchCharacters();

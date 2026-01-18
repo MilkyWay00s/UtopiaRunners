@@ -18,6 +18,7 @@ public class ChatScriptController : SingletonObject<ChatScriptController>
     private TMP_Text nameText;
     private TMP_Text messageText;
     private bool isWorking = false;
+    public bool IsChatPlaying => isWorking;
 
     [Header("Chat Databases (Inspector Reference)")]
     [SerializeField] private ChatSpeakerData chatSpeakerData;
@@ -38,7 +39,19 @@ public class ChatScriptController : SingletonObject<ChatScriptController>
     }
     private void Start()
     {
-        StartCoroutine(ShowChat(chatData));
+        if (ShouldPlayChatOncePerStage())
+        {
+            StartCoroutine(ShowChat(chatData));
+        }
+        else
+        {
+            Close();
+        }
+    }
+    private bool ShouldPlayChatOncePerStage()
+    {
+        string key = GetStageChatSeenKey();
+        return PlayerPrefs.GetInt(key, 0) == 0; // 0이면 아직 안 봄
     }
     private IEnumerator ShowChat(MultiChatMessageData chatData)
     {
@@ -64,7 +77,15 @@ public class ChatScriptController : SingletonObject<ChatScriptController>
         SetCharacterImage(null, false);
         Close();
 
+        MarkChatSeen();
+
         PauseScene(false);
+    }
+    private void MarkChatSeen()
+    {
+        string key = GetStageChatSeenKey();
+        PlayerPrefs.SetInt(key, 1);
+        PlayerPrefs.Save();
     }
     public IEnumerator Open()
     {
@@ -227,6 +248,7 @@ public class ChatScriptController : SingletonObject<ChatScriptController>
 
     public Sprite GetBackgroundImageSprite(BackgroundImage backgroundImage)
     {
+        if (backgroundImageData == null) return null;
         foreach (var imageInfo in backgroundImageData.backgroundImages)
         {
             if (imageInfo.backgroundImage == backgroundImage)
@@ -295,6 +317,16 @@ public class ChatScriptController : SingletonObject<ChatScriptController>
         {
             Time.timeScale = prevTimeScale;
         }
+    }
+    private string GetStageChatSeenKey()
+    {
+        string stageKey = "UnknownStage";
+        if (GameManager.Instance != null)
+            stageKey = GameManager.Instance.SelectedStageId.ToString();
+        else
+            stageKey = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+
+        return $"ChatSeen_{stageKey}";
     }
     private IEnumerator WaitRealtime(float seconds)
     {

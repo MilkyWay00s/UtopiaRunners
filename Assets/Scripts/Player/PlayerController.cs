@@ -43,6 +43,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (ChatScriptController.Instance != null && ChatScriptController.Instance.IsChatPlaying)
+            return;
         bool jumpInput =
             Input.GetKeyDown(KeyCode.Space) ||
             Input.GetKeyDown(KeyCode.UpArrow);

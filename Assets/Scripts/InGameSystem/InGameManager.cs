@@ -81,6 +81,7 @@ public class InGameManager : MonoBehaviour
 
     public void onRetryButtonClicked()
     {
-        SceneManager.LoadScene("3_CharacterSelect");
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
