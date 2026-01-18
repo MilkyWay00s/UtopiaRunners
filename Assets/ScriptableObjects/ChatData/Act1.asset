@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 041ba23189479014b8c359673dc0bdcc, type: 3}
+  m_Name: Act1
+  m_EditorClassIdentifier: 
+  bgmName: 
+  chatMessages:
+  - speakerName: 0
+    faceType: 0
+    isLeft: 0
+    messages:
+    - "\uC11C\uAE30 2048\uB144, \uC5D0\uB374 \uB0A8\uBD80 \uC911\uC2EC\uAC00, \uC624\uD6C4
+      6\uC2DC."
+    - "\uD558\uB298 \uB192\uC774 \uC19F\uC740 \uB9C8\uCC9C\uB8E8\uB4E4 \uC0AC\uC774\uB85C
+      \uC5B4\uB514\uC120\uAC00 \uC18C\uB780\uC2A4\uB7EC\uC6B4 \uC18C\uB9AC\uAC00
+      \uB4E4\uB824\uC628\uB2E4."
+    - "\uD2B9\uC774\uD55C \uC7A5\uD654\uB97C \uC2E0\uC740 \uB0A8\uC790\uAC00 \uB85C\uBD07\uB4E4\uC5D0\uAC8C
+      \uCAD3\uAE30\uBA70 \uB3C4\uC2DC \uC0AC\uC774\uB97C \uB2EC\uB9AC\uACE0 \uC788\uB2E4."
+    backgroundImage: 0
+    chatImage: 0
+  - speakerName: 201
+    faceType: 0
+    isLeft: 0
+    messages:
+    - " \uC989\uC2DC \uC815\uC9C0\uD558\uC2ED\uC2DC\uC624. \uB2F9\uC2E0\uC740 \uC5D0\uB374\uBCF4\uC548\uBC95\uC744
+      \uC704\uBC18\uD558\uACE0 \uC788\uC2B5\uB2C8\uB2E4."
+    - "    \uC800\uD56D\uD560 \uACBD\uC6B0 \uAD00\uB828 \uBC95\uB839\uC5D0 \uB530\uB77C
+      \uD604\uD589\uBC94\uC73C\uB85C \uCCB4\uD3EC\uD558\uACA0\uC2B5\uB2C8\uB2E4."
+    backgroundImage: 0
+    chatImage: 0
+  - speakerName: 1
+    faceType: 0
+    isLeft: 0
+    messages:
+    - "\uC774\uBBF8 \uD604\uD589\uBC94\uC778\uB370, \uBA48\uCD9C \uC218 \uC788\uACA0\uB0D0!"
+    backgroundImage: 0
+    chatImage: 0

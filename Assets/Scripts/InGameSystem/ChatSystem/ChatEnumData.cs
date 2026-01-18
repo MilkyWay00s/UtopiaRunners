@@ -3,21 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //이후 추가 및 변경
-public enum ChatSpeakerType//화자 이미지
+public enum ChatSpeakerType //0~99 : 주역, 100~199 : 조역, 200~ : 엑스트라, 999=???
 {
     None = 0,
-    Person1 = 1,
-    Person2 = 2,
-    Person3 = 3,
-    Person4 = 4,
-    Person5 = 5
+    Icarus = 1,
+    Karok = 2,
+    Eve = 3,
+    Hani = 4,
+    Person5 = 5,
+
+    IcarusDad = 101,
+    Kar = 102,
+
+    ExtraRodot1 =201,
+    ExtraRodot2 = 202,
+    ExtraPolice = 203,
+    QuestionablePerson1 = 204,
+    QuestionablePerson2 = 205,
+    Bartender = 206,
+    SercurityRobot = 207,
+
+    Extra = 999,
 }
 
 public enum BackgroundImage//대화 배경 이미지
 {
-    Black = 0,
-    Nothing = 1,
+    None = 0,
+    Black = 1,
     Eden = 2,
+    Etc = 3,
 }
 
 public enum ChatImage //시네마틱용 이미지
