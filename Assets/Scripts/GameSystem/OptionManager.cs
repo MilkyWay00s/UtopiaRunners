@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections; 
 
-public class MenuManager : MonoBehaviour
+public class MenuManager : SingletonObject<MenuManager>
 {
     [Header("UI Panels")]
     public GameObject DarkOverlay;
