@@ -11,7 +11,6 @@ public enum BGM
 {
     //규칙 : BGM0_MainLobby
     BGM0_MainLobby,
-    BGM0_MainLobby1,
 
     Count //Count체크용 enum, 삭제 금지
 }
@@ -21,7 +20,6 @@ public enum SFX
 {
     //규칙 : SFX0_BallStart
     SFX0_BallStart,
-    SFX0_BallStart1,
 
     Count //Count체크용 enum, 삭제 금지
 }
@@ -90,6 +88,11 @@ public class SoundManager : SingletonObject<SoundManager>
         {
             Mixer.SetFloat("SFXSound", Mathf.Log10(value) * 20);
         }
+    }
+    protected override void Awake()
+    {
+        base.Awake();
+        Init();
     }
     // 초기화 BGM은 메인과 버퍼 2개가 있으며 SFX는 채널수를 지정해서 그 갯수만큼 만듦
     public void Init()

@@ -1,57 +1,21 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class OptionsManager : MonoBehaviour
 {
-    public GameObject OptionsPanel;
-    public GameObject DarkOverlay;
-    public AudioMixer audioMixer;
-    //public Slider MasterVolumeSlider;
-    //public Slider SFXVolumeSlider;
-    //public Slider BGMVolumeSlider;
-
-    void Start()
-    {
-        float masterVol, bgmVol, sfxVol;
-
-        audioMixer.GetFloat("MasterVolume", out masterVol);
-        audioMixer.GetFloat("BGMVolume", out bgmVol);
-        audioMixer.GetFloat("SFXVolume", out sfxVol);
-
-        //MasterVolumeSlider.value = Mathf.Pow(10, masterVol / 20f);
-        //BGMVolumeSlider.value = Mathf.Pow(10, bgmVol / 20f);
-        //SFXVolumeSlider.value = Mathf.Pow(10, sfxVol / 20f);
-
-        //MasterVolumeSlider.onValueChanged.AddListener(SetMasterVolume);
-        //BGMVolumeSlider.onValueChanged.AddListener(SetBGMVolume);
-        //SFXVolumeSlider.onValueChanged.AddListener(SetSFXVolume);
-    }
-
     public void OpenOptions()
     {
-        DarkOverlay.SetActive(true);
-        OptionsPanel.SetActive(true);
-    }
+        GameObject optionWindow = Instantiate(Resources.Load<GameObject>("UI/UI_Option"));
 
-    public void CloseOptions()
-    {
-        DarkOverlay.SetActive(false);
-        OptionsPanel.SetActive(false);
-    }
+        if (this.gameObject != null)
+        {
+            this.gameObject.transform.DOPunchScale(new Vector3(0.35f, 0.7f, 1f) * -0.2f, 0.2f).SetEase(Ease.InBack);
+            this.gameObject.GetComponent<Button>().interactable = false;
+            optionWindow.GetComponent<OptionWin>().OptionButton = this.gameObject.GetComponent<Button>();
+        }
 
-    public void SetMasterVolume(float value)
-    {
-        audioMixer.SetFloat("MasterVolume", Mathf.Log10(value) * 20f);
-    }
-
-    public void SetBGMVolume(float value)
-    {
-        audioMixer.SetFloat("BGMVolume", Mathf.Log10(value) * 20f);
-    }
-
-    public void SetSFXVolume(float value)
-    {
-        audioMixer.SetFloat("SFXVolume", Mathf.Log10(value) * 20f);
+        optionWindow.GetComponent<OptionWin>().Init();
     }
 }
