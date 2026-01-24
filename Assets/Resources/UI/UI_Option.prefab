@@ -976,18 +976,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4226947294856350212, guid: 2e1ba1a207a422a45ac115d863b6c30f,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1878553729472949694}
+    - target: {fileID: 4226947294856350212, guid: 2e1ba1a207a422a45ac115d863b6c30f,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4226947294856350212, guid: 2e1ba1a207a422a45ac115d863b6c30f,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CloseOptions
+      value: OnBackButton
       objectReference: {fileID: 0}
     - target: {fileID: 4226947294856350212, guid: 2e1ba1a207a422a45ac115d863b6c30f,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: OptionsManager, Assembly-CSharp
+      value: OptionWin, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4226947294856350212, guid: 2e1ba1a207a422a45ac115d863b6c30f,
         type: 3}
