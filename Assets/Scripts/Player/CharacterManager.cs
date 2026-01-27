@@ -1,6 +1,5 @@
 using InputSystem;
 using System;
-using System.Reflection;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,6 +23,8 @@ public class CharacterManager : MonoBehaviour
 
     // 외부(GameManager)가 구독할 이벤트
     public event Action OnActiveCharacterDeath;
+    
+    public event System.Action<GameObject, GameObject> OnTagSwitched;
 
     private GameObject mainObj, subObj;
     private GameObject activeObj, reserveObj;
@@ -126,11 +127,13 @@ public class CharacterManager : MonoBehaviour
         var rbTo = reserveObj.GetComponent<Rigidbody2D>();
         if (rbFrom && rbTo) rbTo.velocity = velFrom;
 
-        reserveObj.GetComponent<IcarusSkill>()?.OnTagEnter();
+        //reserveObj.GetComponent<IcarusSkill>()?.OnTagEnter();
 
         // 참조 스왑 및 UI/이벤트 재바인딩
         var tmp = activeObj; activeObj = reserveObj; reserveObj = tmp;
         BindHPRefs();
+
+        OnTagSwitched?.Invoke(activeObj, reserveObj);
 
         switchRemain = switchCooldown;
     }

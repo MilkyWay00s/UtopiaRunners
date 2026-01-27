@@ -11,19 +11,63 @@ public class IcarusSkill : MonoBehaviour
     public float dashStopDistance = 0.3f;
 
     WeaponSkill weaponSkill;
+    PlayerController pc;
+    CharacterManager cm;
+
     bool isDashing = false;
-    [SerializeField] private Animator animator;
+
     void Awake()
     {
-        // Player에 붙은 WeaponSkill 찾기
-        weaponSkill = FindObjectOfType<WeaponSkill>();
+        weaponSkill = GetComponentInChildren<WeaponSkill>();
+        pc = GetComponent<PlayerController>();
     }
 
-    public void OnJumpOrSlide()
+    void OnEnable()
+    {
+        if (pc != null)
+        {
+            pc.OnJumped += HandleJumped;
+            pc.OnSlideStarted += HandleSlideStarted;
+        }
+
+        cm = FindObjectOfType<CharacterManager>();
+        if (cm != null)
+            cm.OnTagSwitched += HandleTagSwitched;
+    }
+
+    void OnDisable()
+    {
+        if (pc != null)
+        {
+            pc.OnJumped -= HandleJumped;
+            pc.OnSlideStarted -= HandleSlideStarted;
+        }
+
+        if (cm != null)
+            cm.OnTagSwitched -= HandleTagSwitched;
+    }
+
+    void HandleJumped(int jumpCount)
+    {
+        ReduceCooldown();
+    }
+
+    void HandleSlideStarted()
+    {
+        ReduceCooldown();
+    }
+
+    void ReduceCooldown()
     {
         if (weaponSkill == null) return;
-
         weaponSkill.ReduceCooldown(cooldownReduceAmount);
+    }
+
+    void HandleTagSwitched(GameObject newActive, GameObject newReserve)
+    {
+       
+        if (newActive == this.gameObject)
+            OnTagEnter();
     }
 
     public void OnTagEnter()
@@ -45,8 +89,7 @@ public class IcarusSkill : MonoBehaviour
 
         Vector3 originPos = transform.position;
 
-        // 태그 후 돌진
-        while (Vector3.Distance(transform.position, target.position) > dashStopDistance)
+        while (target != null && Vector3.Distance(transform.position, target.position) > dashStopDistance)
         {
             transform.position = Vector3.MoveTowards(
                 transform.position,
@@ -55,8 +98,6 @@ public class IcarusSkill : MonoBehaviour
             );
             yield return null;
         }
-
-        // 데미지/히트 판정 추가 가능
 
         yield return new WaitForSeconds(0.05f);
 

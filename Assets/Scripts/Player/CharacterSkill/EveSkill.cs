@@ -13,11 +13,11 @@ public class EveSkill : MonoBehaviour
     float timer = 0f;
 
     bool shieldActive = false;
-    [SerializeField] private Animator animator;//추상화 필요
+    [SerializeField] private Animator animator;
 
     private void OnEnable()
     {
-        animator.SetInteger("RunnerIdx", 1);
+        if (animator) animator.SetInteger("RunnerIdx", 1);
     }
     void Update()
     {
@@ -41,14 +41,19 @@ public class EveSkill : MonoBehaviour
         ApplyAttackBuff(true);
     }
 
-    // 피해를 받았을 때 (1회 피격)
-    public void OnDamaged()
+    public void ModifyDamage(ref int damage)
     {
+        if (damage <= 0) return;
+
+        // if 피격시도,  타이머 리셋 
         timer = 0f;
 
-        if (!shieldActive) return;
-
-        BreakShield();
+        // if 쉴드,  데미지 0 && 쉴드 파괴
+        if (shieldActive)
+        {
+            BreakShield();
+            damage = 0;  
+        }
     }
 
     void BreakShield()
