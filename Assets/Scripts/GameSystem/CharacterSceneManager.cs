@@ -22,7 +22,17 @@ public class CharacterSceneManager : MonoBehaviour
 
     public void onGoButtonClicked()
     {
-        SceneManager.LoadScene("7_InGameScene");
+        if (WeaponSelectManager.Instance == null ||
+    WeaponSelectManager.Instance.GetSelectedWeaponInfo() == null)
+        {
+            Debug.Log("무기를 선택해야 게임을 시작할 수 있습니다!");
+            return;
+        }
+
+        else
+        {
+            SceneManager.LoadScene("7_InGameScene");
+        }
     }
 
     public void onStageButtonClicked()
