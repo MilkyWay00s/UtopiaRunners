@@ -1,229 +1,366 @@
-using System;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Audio;
+using UnityEngine.Diagnostics;
+using System.Collections.Generic;
+using System;
+using Unity.VisualScripting;
+// 각 배경음악
+public enum BGM
+{
+    //규칙 : BGM0_MainLobby
+    BGM0_MainLobby,
+
+    Count //Count체크용 enum, 삭제 금지
+}
+
+// 각 효과음
+public enum SFX
+{
+    //규칙 : SFX0_BallStart
+    SFX0_BallStart,
+
+    Count //Count체크용 enum, 삭제 금지
+}
+
+//사운드 추가 시 위 Enum에 추가 할 것
 
 public class SoundManager : SingletonObject<SoundManager>
 {
-    //일단 gpt로 대충 생성. 이후 필요 기능에 따라 개선 필요
-    [Header("Database")]
-    [SerializeField] private SoundSourceList sourceList;
+    public AudioMixer Mixer { get; private set; }
 
-    [Header("Audio Sources")]
-    [SerializeField] private AudioSource bgmSource;
-    [SerializeField] private AudioSource sfxSourcePrefab;
-    [SerializeField] private int sfxPoolSize = 10;
+    [Header("BGM")]
+    List<AudioClip> bgmClips = new List<AudioClip>();
+    float bgmVolume = 0.5f;
+    AudioSource bgmPlayer;
+    AudioSource bgmBuffer;
+    bool isBGMLooping = false;
 
-    [Header("Volume")]
-    [Range(0f, 1f)] public float masterVolume = 1f;
-    [Range(0f, 1f)] public float bgmVolume = 1f;
-    [Range(0f, 1f)] public float sfxVolume = 1f;
+    [Header("SFX")]
+    List<AudioClip> sfxClips = new List<AudioClip>();
+    float sfxVolume = 0.5f;
+    int channels = 20;
+    AudioSource[] sfxPlayers;
+    int channelIndex;
 
-    // 내부 캐시
-    private readonly Dictionary<string, SoundSourceList.SoundEntry> _byName = new();
-    private readonly List<AudioSource> _sfxPool = new();
-    private int _sfxPoolCursor = 0;
+    // AudioMixer - Master 볼륨
+    public float MasterSoundVolume
+    {
+        get
+        {
+            float temp;
+            Mixer.GetFloat("MasterSound", out temp);
+            return Mathf.Pow(10, temp * 0.05f);
+        }
 
+        set
+        {
+            Mixer.SetFloat("MasterSound", Mathf.Log10(value) * 20);
+        }
+    }
+    // AudioMixer - BGM 볼륨
+    public float BGMSoundVolume
+    {
+        get
+        {
+            float temp;
+            Mixer.GetFloat("BGMSound", out temp);
+            return Mathf.Pow(10, temp * 0.05f);
+        }
+
+        set
+        {
+            Mixer.SetFloat("BGMSound", Mathf.Log10(value) * 20);
+        }
+    }
+    // AudioMixer - SFX 볼륨
+    public float SFXSoundVolume
+    {
+        get
+        {
+            float temp;
+            Mixer.GetFloat("SFXSound", out temp);
+            return Mathf.Pow(10, temp * 0.05f);
+        }
+
+        set
+        {
+            Mixer.SetFloat("SFXSound", Mathf.Log10(value) * 20);
+        }
+    }
     protected override void Awake()
     {
         base.Awake();
-        BuildCache();
-        SetupSources();
-        BuildSfxPool();
-        ApplyVolumes();
+        Init();
+    }
+    // 초기화 BGM은 메인과 버퍼 2개가 있으며 SFX는 채널수를 지정해서 그 갯수만큼 만듦
+    public void Init()
+    {
+        Mixer = Resources.Load<AudioMixer>($"Sound/Mixer");
+
+        GameObject bgmObject = new GameObject("BgmPlayer");
+
+        bgmObject.transform.parent = transform;
+        bgmPlayer = bgmObject.AddComponent<AudioSource>();
+        bgmPlayer.outputAudioMixerGroup = Mixer.FindMatchingGroups("BGM")[0];
+        bgmPlayer.playOnAwake = false;
+        bgmPlayer.loop = true;
+        bgmPlayer.volume = bgmVolume;
+        bgmPlayer.dopplerLevel = 0.0f;
+        bgmPlayer.reverbZoneMix = 0.0f;
+
+        GameObject bufferObject = new GameObject("BgmPlayer");
+        bufferObject.transform.parent = transform;
+        bgmBuffer = bufferObject.AddComponent<AudioSource>();
+        bgmBuffer.outputAudioMixerGroup = Mixer.FindMatchingGroups("BGM")[0];
+        bgmBuffer.playOnAwake = false;
+        bgmBuffer.loop = true;
+        bgmBuffer.volume = bgmVolume;
+        bgmBuffer.dopplerLevel = 0.0f;
+        bgmBuffer.reverbZoneMix = 0.0f;
+
+        GameObject sfxObject = new GameObject("SfxPlayer");
+        sfxObject.transform.parent = transform;
+
+        sfxPlayers = new AudioSource[channels];
+
+        for (int index = 0; index < sfxPlayers.Length; index++)
+        {
+            sfxPlayers[index] = sfxObject.AddComponent<AudioSource>();
+            sfxPlayers[index].outputAudioMixerGroup = Mixer.FindMatchingGroups("SFX")[0];
+            sfxPlayers[index].playOnAwake = false;
+            sfxPlayers[index].volume = sfxVolume;
+            sfxPlayers[index].dopplerLevel = 0.0f;
+            sfxPlayers[index].reverbZoneMix = 0.0f;
+        }
+
+        isBGMLooping = false;
+
+        AddBGMClips();
+        AddSFXClips();
     }
 
-    private void BuildCache()
+    void AddBGMClips()
     {
-        _byName.Clear();
-
-        if (sourceList == null)
+        for (int i = 0; i < (int)BGM.Count; i++)
         {
-            Debug.LogError("SoundManager: sourceList가 할당되지 않았습니다.");
-            return;
-        }
-
-        foreach (var s in sourceList.sounds)
-        {
-            if (s == null) continue;
-            if (string.IsNullOrEmpty(s.soundName)) continue;
-
-            // 중복 키 방지 (뒤가 덮어쓰게)
-            _byName[s.soundName] = s;
+            bgmClips.Add(Resources.Load<AudioClip>($"Sound/BGM/{(BGM)i}"));
         }
     }
-
-    private void SetupSources()
+    void AddSFXClips()
     {
-        if (bgmSource == null)
+        for (int i = 0; i < (int)SFX.Count; i++)
         {
-            bgmSource = gameObject.AddComponent<AudioSource>();
-            bgmSource.playOnAwake = false;
-        }
-
-        if (sfxSourcePrefab == null)
-        {
-            // 프리팹을 안 쓰면, 기본 AudioSource를 풀로 생성합니다.
-            // (일단은 이 방식이 가장 간단합니다.)
-        }
-    }
-
-    private void BuildSfxPool()
-    {
-        _sfxPool.Clear();
-
-        int count = Mathf.Max(1, sfxPoolSize);
-        for (int i = 0; i < count; i++)
-        {
-            AudioSource src;
-
-            if (sfxSourcePrefab != null)
-            {
-                src = Instantiate(sfxSourcePrefab, transform);
-            }
-            else
-            {
-                var go = new GameObject($"SFX_Source_{i}");
-                go.transform.SetParent(transform);
-                src = go.AddComponent<AudioSource>();
-                src.playOnAwake = false;
-            }
-
-            // SFX 기본 세팅
-            src.loop = false;
-            _sfxPool.Add(src);
+            sfxClips.Add(Resources.Load<AudioClip>($"Sound/SFX/{(SFX)i}"));
         }
     }
 
-    public bool Play(string soundName)
+    // BGM을 실행
+    public void PlayBgm(BGM bgm, bool isLoop)
     {
-        if (!_byName.TryGetValue(soundName, out var entry) || entry.clip == null)
+        if (bgmPlayer.isPlaying)
         {
-            Debug.LogWarning($"SoundManager: sound not found or clip null: {soundName}");
-            return false;
-        }
+            bgmBuffer.clip = bgmClips[(int)bgm];
+            bgmBuffer.Play();
+            bgmBuffer.volume = bgmVolume;
+            StartCoroutine(SoundSmooth(bgmPlayer, true));
+            StartCoroutine(SoundSmooth(bgmBuffer, false));
 
-        if (entry.type == SoundType.Bgm)
-        {
-            PlayBgmInternal(entry);
+            var temp = bgmBuffer;
+            bgmBuffer = bgmPlayer;
+            bgmPlayer = temp;
+
+            bgmPlayer.loop = isLoop;
+            bgmBuffer.loop = isLoop;
         }
         else
         {
-            PlaySfxInternal(entry);
+            bgmPlayer.clip = bgmClips[(int)bgm];
+            bgmPlayer.volume = bgmVolume;
+            bgmPlayer.Play();
+            StartCoroutine(SoundSmooth(bgmPlayer, false));
+            bgmPlayer.loop = isLoop;
         }
-
-        return true;
     }
-
-    public void PlayBgm(string soundName)
+    // Rnd으로 플레이
+    public void PlayRndBgm(BGM[] bgmList, bool isLoop)
     {
-        if (!_byName.TryGetValue(soundName, out var entry) || entry.clip == null)
+        if (bgmList == null || bgmList.Length == 0)
         {
-            Debug.LogWarning($"SoundManager: BGM not found: {soundName}");
+            Debug.LogWarning("RndPlayBgm: BGM 리스트가 비어 있습니다.");
             return;
         }
 
-        PlayBgmInternal(entry);
-    }
+        // 랜덤으로 하나 선택
+        BGM randomBgm = bgmList[UnityEngine.Random.Range(0, bgmList.Length)];
 
+        // 기존 PlayBgm 호출
+        PlayBgm(randomBgm, isLoop);
+    }
+    // BGM을 멈춤
     public void StopBgm()
     {
-        if (bgmSource == null) return;
-        bgmSource.Stop();
-        bgmSource.clip = null;
+        StartCoroutine(SoundSmooth(bgmPlayer, true));
+        StopCoroutine("BGMRandomLoop");
+        isBGMLooping = false;
     }
-
-    public void StopAllSfx()
+    public void SetBGMPicth(float val)
     {
-        foreach (var s in _sfxPool)
+        bgmPlayer.pitch = val;
+    }
+    // SFX를 실행
+    public void PlaySFX(SFX sfx, float Pitch = 1, bool isLoop = false)
+    {
+        if (Pitch < 0)
+            Pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+
+        for (int index = 0; index < sfxPlayers.Length; index++)
         {
-            if (s != null) s.Stop();
+            int loopIndex = (index + channelIndex) % sfxPlayers.Length;
+
+            if (sfxPlayers[loopIndex].isPlaying)
+                continue;
+
+            channelIndex = loopIndex;
+            sfxPlayers[loopIndex].clip = sfxClips[(int)sfx];
+            sfxPlayers[loopIndex].loop = isLoop;
+            sfxPlayers[loopIndex].pitch = Pitch;
+            sfxPlayers[loopIndex].volume = sfxVolume;
+            sfxPlayers[loopIndex].Play();
+            break;
+        }
+    }
+    // SFX를 서서히 실행
+    public void SmoothPlaySfx(SFX sfx, float Pitch = 1, bool isLoop = false)
+    {
+        for (int index = 0; index < sfxPlayers.Length; index++)
+        {
+            int loopIndex = (index + channelIndex) % sfxPlayers.Length;
+
+            if (sfxPlayers[loopIndex].isPlaying)
+                continue;
+
+            channelIndex = loopIndex;
+            sfxPlayers[loopIndex].clip = sfxClips[(int)sfx];
+            sfxPlayers[loopIndex].loop = isLoop;
+            sfxPlayers[loopIndex].pitch = Pitch;
+            sfxPlayers[loopIndex].Play();
+            StartCoroutine(SoundSmooth(sfxPlayers[loopIndex], false));
+            break;
+        }
+    }
+    // SFX를 멈춤
+    public void StopSfx(SFX sfx)
+    {
+        for (int index = 0; index < sfxPlayers.Length; index++)
+        {
+            if (sfxPlayers[index].clip == sfxClips[(int)sfx])
+            {
+                StartCoroutine(SoundSmooth(sfxPlayers[index], true));
+            }
         }
     }
 
-    public void StopAll()
+    // 특정 값까지 BGM을 서서히 줄임
+    public void SetBGMSoundVolume(float val)
     {
-        StopBgm();
-        StopAllSfx();
+        StartCoroutine(BGMSmoothVolum(val, 1));
     }
 
-    public void SetMasterVolume(float v)
+    // BGM을 실행하고 끝났을시 랜덤으로 다시 돌림
+    public void StartBGMRandomLoop(int num)
     {
-        masterVolume = Mathf.Clamp01(v);
-        ApplyVolumes();
+        if (isBGMLooping) return;
+        StopCoroutine("BGMRandomLoop");
+        StartCoroutine("BGMRandomLoop", num);
+        isBGMLooping = true;
     }
 
-    public void SetBgmVolume(float v)
+    // 사운드 크기가 특정값까지 자연스럽게 바뀜
+    IEnumerator BGMSmoothVolum(float endVolum, float time)
     {
-        bgmVolume = Mathf.Clamp01(v);
-        ApplyVolumes();
-    }
+        float DeltaVolum = (endVolum - bgmPlayer.volume) * 0.1f;
+        float second = time * 0.1f;
 
-    public void SetSfxVolume(float v)
-    {
-        sfxVolume = Mathf.Clamp01(v);
-        ApplyVolumes();
-    }
-
-    private void ApplyVolumes()
-    {
-        if (bgmSource != null)
-            bgmSource.volume = masterVolume * bgmVolume;
-
-        foreach (var s in _sfxPool)
+        for (int i = 0; i < 10; i++)
         {
-            if (s != null)
-                s.volume = masterVolume * sfxVolume;
+            bgmPlayer.volume += DeltaVolum;
+            yield return new WaitForSeconds(second);
         }
     }
 
-    private void PlayBgmInternal(SoundSourceList.SoundEntry entry)
+    // 사운드의 크기를 서서히 줄이거나 늘릴때 사용 
+    IEnumerator SoundSmooth(AudioSource audio, bool isDown)
     {
-        if (bgmSource == null) return;
-
-        // 같은 BGM이면 재시작 안 하게 하고 싶으면 아래 조건을 사용하세요.
-        // if (bgmSource.clip == entry.clip && bgmSource.isPlaying) return;
-
-        bgmSource.clip = entry.clip;
-        bgmSource.loop = entry.loop;
-        bgmSource.volume = masterVolume * bgmVolume * entry.volume;
-        bgmSource.Play();
-    }
-
-    private void PlaySfxInternal(SoundSourceList.SoundEntry entry)
-    {
-        var src = GetNextSfxSource();
-        if (src == null) return;
-
-        src.clip = entry.clip;
-        src.loop = entry.loop;
-        src.volume = masterVolume * sfxVolume * entry.volume;
-
-        // loop가 true면 그냥 Play, loop가 false면 OneShot도 가능
-        if (entry.loop)
+        float startvolume = audio.volume;
+        float start = 0;
+        float num = 0;
+        if (isDown)
         {
-            src.Play();
+            start = audio.volume;
+            num = -audio.volume / 10;
         }
         else
         {
-            // src.PlayOneShot(entry.clip, src.volume);  // 이 방식도 가능
-            src.Play();
+            start = 0;
+            num = audio.volume / 10;
         }
-    }
 
-    private AudioSource GetNextSfxSource()
-    {
-        if (_sfxPool.Count == 0) return null;
+        audio.volume = start;
 
-        // 다음 소스를 순환 사용 (가장 단순한 풀)
-        var src = _sfxPool[_sfxPoolCursor];
-        _sfxPoolCursor = (_sfxPoolCursor + 1) % _sfxPool.Count;
-
-        // 이미 재생 중이면 끊고 새로 재생 (UI 클릭음 같은 용도엔 이게 편합니다)
-        if (src.isPlaying && !src.loop)
+        for (int i = 0; i < 10; i++)
         {
-            src.Stop();
+            audio.volume += num;
+            yield return new WaitForSeconds(0.095f);
         }
 
-        return src;
+        if (isDown)
+        {
+            audio.Stop();
+            audio.volume = startvolume;
+        }
     }
+
+    // 2초마다 한번씩 BGM이 끝났는지 검사 후 끝났으면 다음 BGM을 틀음
+    IEnumerator BGMRandomLoop(int num)
+    {
+        int[] temp = new int[num];
+        for (int i = 0; i < num; i++)
+            temp[i] = i;
+
+        for (int i = 0; i < temp.Length; i++)
+        {
+            int randNum1 = UnityEngine.Random.Range(0, temp.Length);
+            int tempint1 = temp[i];
+            temp[i] = temp[randNum1];
+            temp[randNum1] = tempint1;
+        }
+
+        int index = 0;
+
+        while (true)
+        {
+            if (!bgmPlayer.isPlaying)
+            {
+                PlayBgm((BGM)temp[index], false);
+                index++;
+
+                if (index >= temp.Length)
+                {
+                    index = 0;
+
+                    for (int i = 0; i < temp.Length; i++)
+                    {
+                        int randNum2 = UnityEngine.Random.Range(0, temp.Length);
+                        int tempint2 = temp[i];
+                        temp[i] = temp[randNum2];
+                        temp[randNum2] = tempint2;
+                    }
+                }
+            }
+            yield return new WaitForSeconds(1);
+        }
+    }
+
 }

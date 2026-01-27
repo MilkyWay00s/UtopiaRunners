@@ -26,6 +26,8 @@ public class StageManager2 : MonoBehaviour
 
     void Update()
     {
+        if (ChatScriptController.Instance != null && ChatScriptController.Instance.IsChatPlaying)
+            return;
         if (stageData == null) return;
 
         timer += Time.deltaTime;

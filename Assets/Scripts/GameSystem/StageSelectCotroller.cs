@@ -9,6 +9,7 @@ public class StageSelectCotroller : MonoBehaviour
     //----------------------------------------------------------------------------
     [Header("Stage Nodes (Index Order)")]
     public StageNode[] stages;
+    [SerializeField] private Sprite[] stageNodeSprites;
 
     [Header("Pointer")]
     public Transform pointer;

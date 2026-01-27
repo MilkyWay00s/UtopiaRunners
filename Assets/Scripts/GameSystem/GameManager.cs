@@ -53,6 +53,10 @@ public class GameManager : SingletonObject<GameManager>
 
         selectedStageId = ParseStageNameFromString(currentStage);
     }
+    private void Start()
+    {
+        SoundManager.Instance.PlayBgm(BGM.BGM0_MainLobby, true);
+    }
 
     private void UpdatePlayTime()
     {

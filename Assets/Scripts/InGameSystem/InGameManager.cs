@@ -40,6 +40,8 @@ public class InGameManager : MonoBehaviour
 
     void Update()
     {
+        if (ChatScriptController.Instance != null && ChatScriptController.Instance.IsChatPlaying)
+            return;
         if (isGameOver) return;
 
         timeLeft -= Time.deltaTime;
@@ -81,6 +83,7 @@ public class InGameManager : MonoBehaviour
 
     public void onRetryButtonClicked()
     {
-        SceneManager.LoadScene("3_CharacterSelect");
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
