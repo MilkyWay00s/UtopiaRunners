@@ -55,6 +55,13 @@ public class GameManager : SingletonObject<GameManager>
     }
     private void Start()
     {
+        float masterVolume = PlayerPrefs.GetFloat("MasterVolume", 0.5f);
+        SoundManager.Instance.MasterSoundVolume = masterVolume;
+        float bgmVolume = PlayerPrefs.GetFloat("BGMVolume", 0.5f);
+        SoundManager.Instance.BGMSoundVolume = bgmVolume;
+        float sfxVolume = PlayerPrefs.GetFloat("SFXVolume", 0.5f);
+        SoundManager.Instance.SFXSoundVolume = sfxVolume;
+
         SoundManager.Instance.PlayBgm(BGM.BGM1_GameDefault, true);
     }
 

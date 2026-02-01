@@ -15,15 +15,15 @@ public class OptionWin : MonoBehaviour
     {
         MasterSlider.minValue = 0.0001f;
         MasterSlider.value = SoundManager.Instance.MasterSoundVolume;
-        MasterSlider.onValueChanged.AddListener((float value) => { SoundManager.Instance.MasterSoundVolume = value; });
+        MasterSlider.onValueChanged.AddListener((float value) => { SoundManager.Instance.MasterSoundVolume = value; PlayerPrefs.SetFloat("MasterVolume", value); PlayerPrefs.Save(); });
 
         BGMSlider.minValue = 0.0001f;
         BGMSlider.value = SoundManager.Instance.BGMSoundVolume;
-        BGMSlider.onValueChanged.AddListener((float value) => { SoundManager.Instance.BGMSoundVolume = value; });
+        BGMSlider.onValueChanged.AddListener((float value) => { SoundManager.Instance.BGMSoundVolume = value; PlayerPrefs.SetFloat("BGMVolume", value); PlayerPrefs.Save(); });
 
         SFXSlider.minValue = 0.0001f;
         SFXSlider.value = SoundManager.Instance.SFXSoundVolume;
-        SFXSlider.onValueChanged.AddListener((float value) => { SoundManager.Instance.SFXSoundVolume = value; });
+        SFXSlider.onValueChanged.AddListener((float value) => { SoundManager.Instance.SFXSoundVolume = value; PlayerPrefs.SetFloat("SFXVolume", value); PlayerPrefs.Save(); });
     }
 
     public void OnEndButton()//메인화면으로
