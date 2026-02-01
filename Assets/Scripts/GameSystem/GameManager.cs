@@ -288,4 +288,11 @@ public class GameManager : SingletonObject<GameManager>
 
         return 1;
     }
+
+    public bool TrySpendCoin(int amount)
+    {
+        if (coin < amount) return false;
+        coin -= amount;
+        return true;
+    }
 }
