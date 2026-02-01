@@ -6,12 +6,17 @@ using UnityEngine.UI;
 
 public class OptionWin : MonoBehaviour
 {
+    public Slider MasterSlider;
     public Slider BGMSlider;
     public Slider SFXSlider;
     public Button OptionButton;
 
     public void Init()
     {
+        MasterSlider.minValue = 0.0001f;
+        MasterSlider.value = SoundManager.Instance.MasterSoundVolume;
+        MasterSlider.onValueChanged.AddListener((float value) => { SoundManager.Instance.MasterSoundVolume = value; });
+
         BGMSlider.minValue = 0.0001f;
         BGMSlider.value = SoundManager.Instance.BGMSoundVolume;
         BGMSlider.onValueChanged.AddListener((float value) => { SoundManager.Instance.BGMSoundVolume = value; });
