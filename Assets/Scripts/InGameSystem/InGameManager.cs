@@ -26,6 +26,7 @@ public class InGameManager : MonoBehaviour
 
         // CharacterManager 찾고 이벤트 구독
         cm = FindObjectOfType<CharacterManager>();
+        SoundManager.Instance.PlayBgm(BGM.BGM3_Dangerous,true);
         /*
         if (cm != null)
         {
@@ -79,6 +80,7 @@ public class InGameManager : MonoBehaviour
     public void onStageSelectButtonClicked()
     {
         SoundManager.Instance.PlaySFX(SFX.SFX1_Click);
+        SoundManager.Instance.PlayBgm(BGM.BGM2_Select, true);
         SceneManager.LoadScene("2_Eden");
     }
 
