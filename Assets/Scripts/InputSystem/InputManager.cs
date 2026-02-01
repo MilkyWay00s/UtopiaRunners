@@ -65,7 +65,7 @@ namespace InputSystem
                 { ActionCode.Tag, KeyCode.Q },
                 { ActionCode.Skill, KeyCode.Space },
                 { ActionCode.Slide, KeyCode.LeftControl },
-                { ActionCode.Option, KeyCode.Space },
+                { ActionCode.Option, KeyCode.Escape },
              
 
 
