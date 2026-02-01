@@ -28,6 +28,7 @@ public class OptionWin : MonoBehaviour
 
     public void OnEndButton()//메인화면으로
     {
+        SoundManager.Instance.PlaySFX(SFX.SFX1_Click);
         OptionButton.interactable = true;
         SceneManager.LoadScene(0);
     }
@@ -42,6 +43,7 @@ public class OptionWin : MonoBehaviour
 
     public void OnBackButton()
     {
+        SoundManager.Instance.PlaySFX(SFX.SFX1_Click);
         OptionButton.interactable = true;
         Destroy(this.gameObject);
     }

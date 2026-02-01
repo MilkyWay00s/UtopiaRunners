@@ -78,11 +78,13 @@ public class InGameManager : MonoBehaviour
 
     public void onStageSelectButtonClicked()
     {
+        SoundManager.Instance.PlaySFX(SFX.SFX1_Click);
         SceneManager.LoadScene("2_Eden");
     }
 
     public void onRetryButtonClicked()
     {
+        SoundManager.Instance.PlaySFX(SFX.SFX1_Click);
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

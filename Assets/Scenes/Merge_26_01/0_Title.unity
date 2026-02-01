@@ -3235,6 +3235,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CoinText0
       objectReference: {fileID: 0}
+    - target: {fileID: 2492859552372386764, guid: 38682ef1ed57af44baa8e98339a9bef5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5035943473084173988, guid: 38682ef1ed57af44baa8e98339a9bef5,
         type: 3}
       propertyPath: m_AnchorMax.y

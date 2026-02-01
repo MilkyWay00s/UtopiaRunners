@@ -126,7 +126,10 @@ public class StageSelectCotroller : MonoBehaviour
         }
 
         if (goCharacterSelectBeforeRunning)
+        {
+            SoundManager.Instance.PlaySFX(SFX.SFX2_Enter);
             SceneManager.LoadScene(characterSelectSceneName);
+        }
         else
             SceneManager.LoadScene("RunningScene");
     }

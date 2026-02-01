@@ -55,7 +55,7 @@ public class GameManager : SingletonObject<GameManager>
     }
     private void Start()
     {
-        SoundManager.Instance.PlayBgm(BGM.BGM0_Default, true);
+        SoundManager.Instance.PlayBgm(BGM.BGM1_GameDefault, true);
     }
 
     private void UpdatePlayTime()

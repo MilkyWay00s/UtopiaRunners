@@ -17,6 +17,7 @@ public class OptionsManager : MonoBehaviour
     public void OpenOptions()
     {
         if (optionWindow != null) return;
+        SoundManager.Instance.PlaySFX(SFX.SFX1_Click);
         optionWindow = Instantiate(Resources.Load<GameObject>("UI/UI_Option"));
 
         if (this.gameObject != null)
