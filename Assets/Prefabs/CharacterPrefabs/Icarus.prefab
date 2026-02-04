@@ -116,7 +116,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &7650886727929318120
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -211,7 +211,6 @@ MonoBehaviour:
   cooldownReduceAmount: 1
   dashSpeed: 20
   dashStopDistance: 0.3
-  animator: {fileID: -7130420851932567681}
 --- !u!95 &-7130420851932567681
 Animator:
   serializedVersion: 5
