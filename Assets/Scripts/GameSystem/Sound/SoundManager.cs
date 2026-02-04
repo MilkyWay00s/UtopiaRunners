@@ -49,7 +49,6 @@ public class SoundManager : SingletonObject<SoundManager>
     {
         get
         {
-
             float temp;
             Mixer.GetFloat("MasterSound", out temp);
             return Mathf.Pow(10, temp * 0.05f);

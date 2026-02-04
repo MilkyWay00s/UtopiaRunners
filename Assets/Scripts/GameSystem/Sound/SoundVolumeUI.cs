@@ -22,15 +22,12 @@ public class SoundOptionUI : MonoBehaviour
 
     IEnumerator InitSliders()
     {
-        yield return new WaitForSecondsRealtime(0.1f);
+        yield return null;
 
         masterSlider.value = SoundManager.Instance.MasterSoundVolume;
         bgmSlider.value = SoundManager.Instance.BGMSoundVolume;
         sfxSlider.value = SoundManager.Instance.SFXSoundVolume;
 
-        if (masterText != null) UpdateText(masterText, masterSlider.value);
-        if (bgmText != null) UpdateText(bgmText, bgmSlider.value);
-        if (sfxText != null) UpdateText(sfxText, sfxSlider.value);
 
         masterSlider.onValueChanged.RemoveAllListeners();
         masterSlider.onValueChanged.AddListener(OnMasterSliderChanged);
@@ -40,15 +37,17 @@ public class SoundOptionUI : MonoBehaviour
 
         sfxSlider.onValueChanged.RemoveAllListeners();
         sfxSlider.onValueChanged.AddListener(OnSFXSliderChanged);
+
+        UpdateText(masterText, masterSlider.value);
+        UpdateText(bgmText, bgmSlider.value);
+        UpdateText(sfxText, sfxSlider.value);
     }
 
     private void UpdateText(TextMeshProUGUI textElement, float value)
     {
-        if (textElement != null)
-        {
-            int volumeInt = Mathf.RoundToInt(value * 100f);
+        if (textElement == masterText) Debug.Log($"마스터 텍스트 업데이트됨: {value}");
+        int volumeInt = Mathf.RoundToInt(value * 100f);
             textElement.text = volumeInt.ToString();
-        }
     }
 
     private void OnMasterSliderChanged(float value)
