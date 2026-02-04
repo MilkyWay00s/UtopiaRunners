@@ -784,7 +784,7 @@ MonoBehaviour:
   characterDatabase: {fileID: 11400000, guid: ad06aaccdfdb7a14386ddb1c543c1958, type: 2}
   spawnPoint: {fileID: 87194267}
   switchKey: 113
-  switchCooldown: 15
+  switchCooldown: 3
   activeHpLabel: {fileID: 0}
   activeHpBar: {fileID: 0}
   reserveHpLabel: {fileID: 0}

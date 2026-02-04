@@ -9,6 +9,7 @@ public class CharacterSpec : ScriptableObject
     public Sprite displayImage;
     public int characterLevel;
     public AbilitySpec abilities;
-    public SelectedState selectedState;
+    //public SelectedState selectedState;
     public GameObject runnerObj;
+    public int characterIndex;
 }
