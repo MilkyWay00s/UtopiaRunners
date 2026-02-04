@@ -45,7 +45,6 @@ public class SoundOptionUI : MonoBehaviour
 
     private void UpdateText(TextMeshProUGUI textElement, float value)
     {
-        if (textElement == masterText) Debug.Log($"마스터 텍스트 업데이트됨: {value}");
         int volumeInt = Mathf.RoundToInt(value * 100f);
             textElement.text = volumeInt.ToString();
     }
