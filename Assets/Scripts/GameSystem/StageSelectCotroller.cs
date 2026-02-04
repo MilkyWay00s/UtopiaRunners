@@ -134,4 +134,11 @@ public class StageSelectCotroller : MonoBehaviour
         else
             SceneManager.LoadScene("RunningScene");
     }
+
+    public void onWorldmapButtonClicked()
+    {
+        SceneManager.LoadScene("1_WorldMap");
+    }
 }
+
+    
