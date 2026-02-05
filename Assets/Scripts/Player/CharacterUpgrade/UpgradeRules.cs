@@ -7,8 +7,7 @@ public static class UpgradeRules
         int baseCost = type switch
         {
             UpgradeType.MaxHealth => 50,
-            UpgradeType.WeaponDamage => 60,
-            UpgradeType.WeaponAttackSpeed => 70,
+            UpgradeType.SkillLevel => 60,
             _ => 50
         };
 
@@ -17,6 +16,6 @@ public static class UpgradeRules
     }
 
     public static int GetMaxHealthBonus(int level) => level * 20;
-    public static float GetWeaponDamageBonus(int level) => level * 0.15f;
-    public static float GetAttackSpeedBonus(int level) => level * 0.10f;
+    public static float GetSkillLevelBonus(int level) => level;
 }
+

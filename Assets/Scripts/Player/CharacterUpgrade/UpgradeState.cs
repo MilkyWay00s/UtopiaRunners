@@ -3,8 +3,7 @@ using UnityEngine;
 public enum UpgradeType
 {
     MaxHealth,
-    WeaponDamage,
-    WeaponAttackSpeed
+    SkillLevel
 }
 
 public static class UpgradeState
