@@ -15,21 +15,16 @@ public class UpgradeShopUI : MonoBehaviour
     public TMP_Text hpCostText;
     public Button hpUpgradeButton;
 
-    [Header("Weapon Damage UI")]
-    public TMP_Text dmgLevelText;
-    public TMP_Text dmgCostText;
-    public Button dmgUpgradeButton;
+    [Header("Skill Level UI")]
+    public TMP_Text sklvLevelText;
+    public TMP_Text sklvCostText;
+    public Button sklvUpgradeButton;
 
-    [Header("Attack Speed UI")]
-    public TMP_Text aspdLevelText;
-    public TMP_Text aspdCostText;
-    public Button aspdUpgradeButton;
 
     void OnEnable()
     {
         if (hpUpgradeButton) hpUpgradeButton.onClick.AddListener(OnClickHp);
-        if (dmgUpgradeButton) dmgUpgradeButton.onClick.AddListener(OnClickDmg);
-        if (aspdUpgradeButton) aspdUpgradeButton.onClick.AddListener(OnClickAspd);
+        if (sklvUpgradeButton) sklvUpgradeButton.onClick.AddListener(OnClickSklv);
 
         RefreshAll();
     }
@@ -37,8 +32,8 @@ public class UpgradeShopUI : MonoBehaviour
     void OnDisable()
     {
         if (hpUpgradeButton) hpUpgradeButton.onClick.RemoveListener(OnClickHp);
-        if (dmgUpgradeButton) dmgUpgradeButton.onClick.RemoveListener(OnClickDmg);
-        if (aspdUpgradeButton) aspdUpgradeButton.onClick.RemoveListener(OnClickAspd);
+        if (sklvUpgradeButton) sklvUpgradeButton.onClick.RemoveListener(OnClickSklv);
+        
     }
 
     //  캐릭터 선택 버튼이 호출할 API
@@ -55,8 +50,8 @@ public class UpgradeShopUI : MonoBehaviour
     }
 
     void OnClickHp() => TryUpgrade(UpgradeType.MaxHealth);
-    void OnClickDmg() => TryUpgrade(UpgradeType.WeaponDamage);
-    void OnClickAspd() => TryUpgrade(UpgradeType.WeaponAttackSpeed);
+    void OnClickSklv() => TryUpgrade(UpgradeType.SkillLevel);
+    
 
     void TryUpgrade(UpgradeType type)
     {
@@ -86,8 +81,7 @@ public class UpgradeShopUI : MonoBehaviour
         if (coinText) coinText.text = $"Coins: {coins}";
 
         RefreshSlot(UpgradeType.MaxHealth, hpLevelText, hpCostText, hpUpgradeButton);
-        RefreshSlot(UpgradeType.WeaponDamage, dmgLevelText, dmgCostText, dmgUpgradeButton);
-        RefreshSlot(UpgradeType.WeaponAttackSpeed, aspdLevelText, aspdCostText, aspdUpgradeButton);
+        RefreshSlot(UpgradeType.SkillLevel, sklvLevelText, sklvCostText, sklvUpgradeButton);
     }
 
     void RefreshSlot(UpgradeType type, TMP_Text levelText, TMP_Text costText, Button btn)
