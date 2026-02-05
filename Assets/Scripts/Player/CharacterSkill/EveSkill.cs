@@ -9,20 +9,43 @@ public class EveSkill : MonoBehaviour
     [Header("Attack Buff")]
     public float attackBonusRate = 0.2f; // 공격력 +20%
 
+    [Header("SkillLevel Scaling")]
+    public int characterIndex = 0;          // Eve 인덱스(필요하면 Inspector에서 설정)
+    public float baseShieldDuration = 3f;   // 보호막 기본 지속시간
+    public float shieldDurationPerLevel = 0.5f; // 레벨당 지속시간 증가
+    public float baseAttackBonusRate = 0.2f;    // 보호막 공격버프 기본값
+    public float attackBonusPerLevel = 0.05f;   // 레벨당 공격버프 증가
+
     [Header("Time Without Buff")]
     float timer = 0f;
 
     bool shieldActive = false;
+
+    float shieldTimer = 0f;
+    float shieldDuration = 0f;
+
     [SerializeField] private Animator animator;
 
     private void OnEnable()
     {
         if (animator) animator.SetInteger("RunnerIdx", 1);
+
+        ApplySkillLevel();
     }
     void Update()
     {
         // 보호막이 없을 때만 타이머 증가
-        if (shieldActive) return;
+        if (shieldActive)
+        {
+            shieldTimer += Time.deltaTime;
+            if (shieldTimer >= shieldDuration)
+            {
+                // 지속시간 끝나면 보호막 해제
+                shieldActive = false;
+                ApplyAttackBuff(false);
+            }
+            return;
+        }
 
         timer += Time.deltaTime;
 
@@ -33,10 +56,29 @@ public class EveSkill : MonoBehaviour
     }
 
     // 보호막 생성
+
+    void ApplySkillLevel()
+    {
+        int lv = UpgradeState.GetLevel($"C{characterIndex}", UpgradeType.SkillLevel);
+        float bonus = UpgradeRules.GetSkillLevelBonus(lv);
+
+        // 보호막 지속시간 강화
+        shieldDuration = baseShieldDuration + shieldDurationPerLevel * bonus;
+
+        // 공격버프 비율 강화
+        attackBonusRate = baseAttackBonusRate + attackBonusPerLevel * bonus;
+
+        // 안전장치
+        if (shieldDuration < 0f) shieldDuration = 0f;
+        if (attackBonusRate < 0f) attackBonusRate = 0f;
+    }
+
     void ActivateShield()
     {
         shieldActive = true;
         timer = 0f;
+        shieldTimer = 0f;
+
 
         ApplyAttackBuff(true);
     }
@@ -59,6 +101,7 @@ public class EveSkill : MonoBehaviour
     void BreakShield()
     {
         shieldActive = false;
+        shieldTimer = 0f;
         ApplyAttackBuff(false);
 
         Debug.Log("Eve Shield Broken");
