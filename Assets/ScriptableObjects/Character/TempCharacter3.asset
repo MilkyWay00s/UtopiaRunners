@@ -19,3 +19,4 @@ MonoBehaviour:
   selectedState: 0
   runnerObj: {fileID: 7853347430173106205, guid: a69a876554421cb4ca125b253960a227,
     type: 3}
+  characterIndex: 2

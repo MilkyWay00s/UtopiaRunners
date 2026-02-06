@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
     {
         if (ChatScriptController.Instance != null && ChatScriptController.Instance.IsChatPlaying)
             return;
+
         bool jumpInput =
             Input.GetKeyDown(KeyCode.Space) ||
             Input.GetKeyDown(KeyCode.UpArrow);
@@ -67,21 +68,21 @@ public class PlayerController : MonoBehaviour
             Input.GetKeyDown(KeyCode.LeftControl) ||
             Input.GetKeyDown(KeyCode.DownArrow);
 
-        // 슬라이드 시작
         if (slideDown && !isSliding && isGrounded)
         {
             StartSlide();
         }
 
-        // 슬라이드 종료(홀드 해제)
         if (isSliding && !slideHold)
         {
             EndSlide();
         }
 
-        // 점프 (슬라이드 중이든 아니든 동일하게 처리)
         if (jumpInput && jumpCount < maxJumpCount)
         {
+            if (isSliding)
+                EndSlide();
+
             DoJump();
         }
     }

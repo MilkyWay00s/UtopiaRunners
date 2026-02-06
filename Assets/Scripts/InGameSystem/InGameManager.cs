@@ -15,6 +15,7 @@ public class InGameManager : MonoBehaviour
     private bool isGameOver = false;
     public StageData2 stageData;
 
+
     void Start()
     {
         Time.timeScale = 1f;

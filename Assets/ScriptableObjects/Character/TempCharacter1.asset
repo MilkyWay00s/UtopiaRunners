@@ -16,6 +16,6 @@ MonoBehaviour:
   displayImage: {fileID: 21300000, guid: f500f783385552549b0a7c9941507de2, type: 3}
   characterLevel: 1
   abilities: {fileID: 0}
-  selectedState: 0
-  runnerObj: {fileID: 7781550883857344802, guid: 62b1c01228c0f8c41800e6d9c0237c42,
+  runnerObj: {fileID: 7975672807681981967, guid: 0c471edd15848d341a7a1bbca18faa6c,
     type: 3}
+  characterIndex: 0

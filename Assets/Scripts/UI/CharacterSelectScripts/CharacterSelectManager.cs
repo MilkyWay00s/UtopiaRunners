@@ -16,17 +16,24 @@ public class CharacterSelectManager : SingletonObject<CharacterSelectManager>
     [SerializeField] private GameObject mainPanel;
     [SerializeField] private GameObject subPanel;
 
+    private bool selectingMain = true;
+
     private void Start()
     {
-        //패널 초기화
-        selectedCharacterDesplay = mainPanel.transform.Find("CharacterImage").GetComponent<Image>();
+        int mainIndex = PlayerPrefs.GetInt("MainCharacter", -1);
+        int subIndex = PlayerPrefs.GetInt("SubCharacter", -1);
 
-        //슬롯 초기화
-        selectedCharacter = null;
-        mainCharacter = null;
-        subCharacter = null;
+        if (mainIndex >= 0)
+            mainCharacter = characterDatabase.allCharacters[mainIndex];
+
+        if (subIndex >= 0)
+            subCharacter = characterDatabase.allCharacters[subIndex];
+
+        selectingMain = true;
     }
-    
+
+
+
     public void SwapPanelSibling()
     {
         int m_idx = mainPanel.transform.GetSiblingIndex();
@@ -42,20 +49,33 @@ public class CharacterSelectManager : SingletonObject<CharacterSelectManager>
     }
     public void CharacterSelect(CharacterSpec ch)
     {
-        selectedCharacter = ch;
-        selectedCharacterDesplay.sprite = selectedCharacter.displayImage;
-    }
-    public void TagSelect()
-    {
-        SwapPanelSibling();
-        if (mainPanel.transform.GetSiblingIndex() < subPanel.transform.GetSiblingIndex())
+        if (selectingMain)
         {
-            selectedCharacterDesplay = subPanel.transform.Find("CharacterImage").GetComponent<Image>();
+            mainCharacter = ch;
+            PlayerPrefs.SetInt("MainCharacter", ch.characterIndex);
+
+            mainPanel.transform.Find("CharacterImage")
+                .GetComponent<Image>().sprite = ch.displayImage;
         }
         else
         {
-            selectedCharacterDesplay = mainPanel.transform.Find("CharacterImage").GetComponent<Image>();
+            subCharacter = ch;
+            PlayerPrefs.SetInt("SubCharacter", ch.characterIndex);
+
+            subPanel.transform.Find("CharacterImage")
+                .GetComponent<Image>().sprite = ch.displayImage;
         }
+
+        PlayerPrefs.Save();
     }
+
+    public void TagSelect()
+    {
+        selectingMain = !selectingMain;
+        SwapPanelSibling();
+    }
+
+
+
     #endregion
 }
