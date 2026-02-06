@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7391831515726743990}
   - component: {fileID: 8402625377600564124}
   - component: {fileID: 4771357443377780249}
-  - component: {fileID: -3088024336804975176}
+  - component: {fileID: 799382725037724938}
   m_Layer: 5
   m_Name: OptionButton
   m_TagString: Untagged
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -3088024336804975176}
+      - m_Target: {fileID: 799382725037724938}
         m_TargetAssemblyTypeName: OptionsManager, Assembly-CSharp
         m_MethodName: OpenOptions
         m_Mode: 1
@@ -133,7 +133,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &-3088024336804975176
+--- !u!114 &799382725037724938
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,6 +142,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1735809376817574252}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28b04d51075595e448eb2610c07b780f, type: 3}
+  m_Script: {fileID: 11500000, guid: 0c23bc0db0d26884399307315f38b808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

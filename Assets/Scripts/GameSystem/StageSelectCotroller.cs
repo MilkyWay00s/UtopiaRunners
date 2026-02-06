@@ -126,8 +126,19 @@ public class StageSelectCotroller : MonoBehaviour
         }
 
         if (goCharacterSelectBeforeRunning)
+        {
+            SoundManager.Instance.PlaySFX(SFX.SFX2_Enter);
+            SoundManager.Instance.PlayBgm(BGM.BGM2_Select, true);
             SceneManager.LoadScene(characterSelectSceneName);
+        }
         else
             SceneManager.LoadScene("RunningScene");
     }
+
+    public void onWorldmapButtonClicked()
+    {
+        SceneManager.LoadScene("1_WorldMap");
+    }
 }
+
+    

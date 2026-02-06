@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,27 +6,66 @@ using UnityEngine.UI;
 
 public class OptionWin : MonoBehaviour
 {
+    [Header("Panels")]
+    [SerializeField] private GameObject menuPanel;     
+    [SerializeField] private GameObject settingsPanel; 
+
+    [Header("Sliders")]
+    public Slider MasterSlider;
     public Slider BGMSlider;
     public Slider SFXSlider;
-    public Button OptionButton;
+
+    public bool IsSettingsPanelActive => settingsPanel.activeSelf;
 
     public void Init()
     {
+        ShowMenu();
+
+        MasterSlider.minValue = 0.0001f;
+        MasterSlider.value = SoundManager.Instance.MasterSoundVolume;
+        MasterSlider.onValueChanged.AddListener((float value) => { SoundManager.Instance.MasterSoundVolume = value; PlayerPrefs.SetFloat("MasterVolume", value); PlayerPrefs.Save(); });
+
         BGMSlider.minValue = 0.0001f;
         BGMSlider.value = SoundManager.Instance.BGMSoundVolume;
-        BGMSlider.onValueChanged.AddListener((float value) => { SoundManager.Instance.BGMSoundVolume = value; });
+        BGMSlider.onValueChanged.AddListener((float value) => { SoundManager.Instance.BGMSoundVolume = value; PlayerPrefs.SetFloat("BGMVolume", value); PlayerPrefs.Save(); });
 
         SFXSlider.minValue = 0.0001f;
         SFXSlider.value = SoundManager.Instance.SFXSoundVolume;
-        SFXSlider.onValueChanged.AddListener((float value) => { SoundManager.Instance.SFXSoundVolume = value; });
+        SFXSlider.onValueChanged.AddListener((float value) => { SoundManager.Instance.SFXSoundVolume = value; PlayerPrefs.SetFloat("SFXVolume", value); PlayerPrefs.Save(); });
     }
 
-    public void OnEndButton()//∏ﬁ¿Œ»≠∏È¿∏∑Œ
+    public void ShowMenu()
     {
-        OptionButton.interactable = true;
+        menuPanel.SetActive(true);
+        settingsPanel.SetActive(false);
+    }
+
+    public void ShowSettings() 
+    {
+        menuPanel.SetActive(false);
+        settingsPanel.SetActive(true);
+    }
+
+    public void GoBack()
+    {
+        if (IsSettingsPanelActive)
+        {
+            ShowMenu();
+        }
+        else
+        {
+            OnBackButton(); 
+        }
+    }
+
+    public void OnEndButton()//Î©îÏù∏ÌôîÎ©¥ÏúºÎ°ú
+    {
+        SoundManager.Instance.PlaySFX(SFX.SFX1_Click);
+        //OptionButton.interactable = true;
         SceneManager.LoadScene(0);
     }
-    public void ExitGame()//∞‘¿”¡æ∑·
+
+    public void ExitGame()//Í≤åÏûÑÏ¢ÖÎ£å
     {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
@@ -37,7 +76,8 @@ public class OptionWin : MonoBehaviour
 
     public void OnBackButton()
     {
-        OptionButton.interactable = true;
+        SoundManager.Instance.PlaySFX(SFX.SFX1_Click);
+        //OptionButton.interactable = true;
         Destroy(this.gameObject);
     }
 }

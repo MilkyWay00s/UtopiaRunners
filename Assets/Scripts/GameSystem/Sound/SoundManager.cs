@@ -9,8 +9,15 @@ using Unity.VisualScripting;
 // 각 배경음악
 public enum BGM
 {
-    //규칙 : BGM0_MainLobby
-    BGM0_MainLobby,
+    //규칙 : BGM0_Default
+    BGM0_Default,
+    BGM1_GameDefault,
+    BGM2_Select,
+    BGM3_Dangerous,
+    BGM4_CinematicDefault,
+    BGM5_Nostelsia,
+    BGM6_SomethingHappen,
+    BGM7_Urban,
 
     Count //Count체크용 enum, 삭제 금지
 }
@@ -18,8 +25,12 @@ public enum BGM
 // 각 효과음
 public enum SFX
 {
-    //규칙 : SFX0_BallStart
-    SFX0_BallStart,
+    //규칙 : SFX0_Default
+    SFX0_Default,
+    SFX1_Click,
+    SFX2_Enter,
+    SFX3_Exit,
+    SFX4_FireWeapon,
 
     Count //Count체크용 enum, 삭제 금지
 }

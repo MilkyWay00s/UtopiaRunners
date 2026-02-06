@@ -46,6 +46,7 @@ public class SaveSlotManager : MonoBehaviour
 
     public void OnSelectSlot(int slotNumber)
     {
+        SoundManager.Instance.PlaySFX(SFX.SFX1_Click);
         GameManager.Instance.currentSlot = slotNumber; 
         GameManager.Instance.LoadGame(slotNumber);
         SceneManager.LoadScene("1_WorldMap");
@@ -54,17 +55,20 @@ public class SaveSlotManager : MonoBehaviour
 
     public void OnStartButtonClicked()
     {
+        SoundManager.Instance.PlaySFX(SFX.SFX1_Click);
         SaveSlotPanel.SetActive(true);
         PopulateSlots(slotCount); 
     }
 
     public void OnBackButtonClicked()
     {
+        SoundManager.Instance.PlaySFX(SFX.SFX1_Click);
         SaveSlotPanel.SetActive(false);
     }
 
     public void OnClickLoadMostRecent()
     {
+        SoundManager.Instance.PlaySFX(SFX.SFX1_Click);
         GameManager.Instance.LoadMostRecent();
         SceneManager.LoadScene("1_WorldMap");
     }
