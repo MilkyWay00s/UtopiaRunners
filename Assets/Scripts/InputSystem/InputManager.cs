@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +20,6 @@ namespace InputSystem
         Menu,
         MenuLeft,
         MenuRight,
-
     }
     public class InputManager : SingletonObject<InputManager>
     {
@@ -35,14 +34,14 @@ namespace InputSystem
         private Dictionary<ActionCode, KeyCode> _altKeyMappings = new Dictionary<ActionCode, KeyCode>();
 
 
-        //¾ÀÀÌ ·ÎµåµÉ ¶§¸¶´Ù OnSceneUnloading ÇÔ¼ö ½ÇÇàµÇµµ·Ï µî·Ï.
+        //ì”¬ì´ ë¡œë“œë  ë•Œë§ˆë‹¤ OnSceneUnloading í•¨ìˆ˜ ì‹¤í–‰ë˜ë„ë¡ ë“±ë¡.
         protected override void Awake()
         {
             base.Awake();
             SceneManager.sceneLoaded += OnSceneUnloading;
         }
 
-        //¾À ·Îµå ½Ã ÃÊ±âÈ­
+        //ì”¬ ë¡œë“œ ì‹œ ì´ˆê¸°í™”
         private void OnSceneUnloading(Scene arg0, LoadSceneMode arg1)
         {
             foreach (ActionCode action in Enum.GetValues(typeof(ActionCode)))
@@ -56,7 +55,7 @@ namespace InputSystem
             SceneManager.sceneLoaded -= OnSceneUnloading;
         }
 
-        //°ÔÀÓÀÇ ±âº» Å° ¼³Á¤À» Á¤ÀÇ
+        //ê²Œì„ì˜ ê¸°ë³¸ í‚¤ ì„¤ì •ì„ ì •ì˜
         public void SetDefaultKey()
         {
             _keyMappings = new Dictionary<ActionCode, KeyCode>()
@@ -69,7 +68,7 @@ namespace InputSystem
              
 
 
-                //ÆíÁı ÇÊ¿ä
+                //í¸ì§‘ í•„ìš”
             };
 
             _altKeyMappings = new Dictionary<ActionCode, KeyCode>()
@@ -82,13 +81,13 @@ namespace InputSystem
 
         public static event Action<ActionCode, InputType> OnKeyEvent;
 
-        //Æ¯Á¤ ¾×¼ÇÀ» ÀÓ½Ã·Î ¸·À» ¼ö ÀÖÀ½
+        //íŠ¹ì • ì•¡ì…˜ì„ ì„ì‹œë¡œ ë§‰ì„ ìˆ˜ ìˆìŒ
         public void SetKeyActive(ActionCode action, bool active)
         {
             _keyActiveFlags[action] = active;
         }
 
-        //»óÈ£ÀÛ¿ë Å° Á¦¿ÜÇÏ°í ÀüÃ¼ Å° È°¼ºÈ­/ºñÈ°¼ºÈ­ ¼³Á¤.
+        //ìƒí˜¸ì‘ìš© í‚¤ ì œì™¸í•˜ê³  ì „ì²´ í‚¤ í™œì„±í™”/ë¹„í™œì„±í™” ì„¤ì •.
         /*public void SetActionState(bool active)
         {
             foreach (ActionCode actionCode in _keyMappings.Keys)
@@ -97,13 +96,13 @@ namespace InputSystem
                     SetKeyActive(actionCode, active);
             }
         }       
-        ºÒÇÊ¿äÇØº¸¿© ÁÖ¼®Ã³¸®*/
+        ë¶ˆí•„ìš”í•´ë³´ì—¬ ì£¼ì„ì²˜ë¦¬*/
 
-        //Å° È°¼º ¿©ºÎ, ÀüÃ¼ ¸ÅÇÎ Á¶È¸¿ë getter.
+        //í‚¤ í™œì„± ì—¬ë¶€, ì „ì²´ ë§¤í•‘ ì¡°íšŒìš© getter.
         public bool GetKeyActive(ActionCode action) => _keyActiveFlags[action];
         public Dictionary<ActionCode, KeyCode> GetKeyActions() => _keyMappings;
 
-        //Å° º¯°æ
+        //í‚¤ ë³€ê²½
         public void SetKey(ActionCode actionCode, KeyCode newKey)
         {
             if (_keyMappings.ContainsKey(actionCode))
@@ -118,7 +117,7 @@ namespace InputSystem
                 _altKeyMappings.Add(actionCode, newAltKey);
         }
 
-        //Å°´­¸²°¨Áö(ÇÑ¹ø¸¸)
+        //í‚¤ëˆŒë¦¼ê°ì§€(í•œë²ˆë§Œ)
         public bool GetKeyDown(ActionCode action)
         {
             try
@@ -138,7 +137,7 @@ namespace InputSystem
         }
 
 
-        //Å°È¦µå °¨Áö
+        //í‚¤í™€ë“œ ê°ì§€
         public bool GetKey(ActionCode action)
         {
             try
@@ -156,7 +155,7 @@ namespace InputSystem
         }
 
 
-        //Å°°¡ ´­·ÈÀ» ¶§ ÀÏÁ¤ ½Ã°£ ÈÄ ÀÚµ¿ ÃÊ±âÈ­
+        //í‚¤ê°€ ëˆŒë ¸ì„ ë•Œ ì¼ì • ì‹œê°„ í›„ ìë™ ì´ˆê¸°í™”
         private IEnumerator KeyDownCounter(ActionCode action)
         {
             yield return new WaitForSeconds(KeyDownDelay);
@@ -196,7 +195,7 @@ namespace InputSystem
             }
         }
 
-        //Ã³À½ ½ÃÀÛÇÒ ¶§ ¸ğµç ¾×¼Ç »óÅÂ ÃÊ±âÈ­
+        //ì²˜ìŒ ì‹œì‘í•  ë•Œ ëª¨ë“  ì•¡ì…˜ ìƒíƒœ ì´ˆê¸°í™”
         private void InitKeyDownDictionary()
         {
             foreach (ActionCode action in Enum.GetValues(typeof(ActionCode)))
@@ -209,7 +208,7 @@ namespace InputSystem
         }
 
 
-        //ÀÔ·Â ÀÌº¥Æ® °¨Áö ÄÚ·çÆ¾(¿ÜºÎ ¸®½º³Ê¿¡ ÀÌº¥Æ® Àü´Ş)
+        //ì…ë ¥ ì´ë²¤íŠ¸ ê°ì§€ ì½”ë£¨í‹´(ì™¸ë¶€ ë¦¬ìŠ¤ë„ˆì— ì´ë²¤íŠ¸ ì „ë‹¬)
         private IEnumerator CallListenersCoroutine()
         {
             while (true)
