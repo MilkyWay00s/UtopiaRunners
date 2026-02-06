@@ -10,12 +10,14 @@ public class CharacterSceneManager : MonoBehaviour
 
     public void OnWeaponButtonClicked()
     {
+        SoundManager.Instance.PlaySFX(SFX.SFX1_Click);
         weaponSelectUI.SetActive(true);
         characterSelectUI.SetActive(false);
     }
 
     public void OnSelectButtonClicked()
     {
+        SoundManager.Instance.PlaySFX(SFX.SFX1_Click);
         weaponSelectUI.SetActive(false);
         characterSelectUI.SetActive(true);
     }
@@ -31,12 +33,14 @@ public class CharacterSceneManager : MonoBehaviour
 
         else
         {
+            SoundManager.Instance.PlaySFX(SFX.SFX1_Click);
             SceneManager.LoadScene("7_InGameScene");
         }
     }
 
     public void onStageButtonClicked()
     {
+        SoundManager.Instance.PlaySFX(SFX.SFX1_Click);
         SceneManager.LoadScene("2_Eden");
     }
 }

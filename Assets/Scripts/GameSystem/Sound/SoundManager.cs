@@ -1,4 +1,4 @@
-ï»¿using System.Collections;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
@@ -6,25 +6,36 @@ using UnityEngine.Diagnostics;
 using System.Collections.Generic;
 using System;
 using Unity.VisualScripting;
-// ê° ë°°ê²½ìŒì•…
+// °¢ ¹è°æÀ½¾Ç
 public enum BGM
 {
-    //ê·œì¹™ : BGM0_MainLobby
-    BGM0_MainLobby,
+    //±ÔÄ¢ : BGM0_Default
+    BGM0_Default,
+    BGM1_GameDefault,
+    BGM2_Select,
+    BGM3_Dangerous,
+    BGM4_CinematicDefault,
+    BGM5_Nostelsia,
+    BGM6_SomethingHappen,
+    BGM7_Urban,
 
-    Count //Countì²´í¬ìš© enum, ì‚­ì œ ê¸ˆì§€
+    Count //CountÃ¼Å©¿ë enum, »èÁ¦ ±İÁö
 }
 
-// ê° íš¨ê³¼ìŒ
+// °¢ È¿°úÀ½
 public enum SFX
 {
-    //ê·œì¹™ : SFX0_BallStart
-    SFX0_BallStart,
+    //±ÔÄ¢ : SFX0_Default
+    SFX0_Default,
+    SFX1_Click,
+    SFX2_Enter,
+    SFX3_Exit,
+    SFX4_FireWeapon,
 
-    Count //Countì²´í¬ìš© enum, ì‚­ì œ ê¸ˆì§€
+    Count //CountÃ¼Å©¿ë enum, »èÁ¦ ±İÁö
 }
 
-//ì‚¬ìš´ë“œ ì¶”ê°€ ì‹œ ìœ„ Enumì— ì¶”ê°€ í•  ê²ƒ
+//»ç¿îµå Ãß°¡ ½Ã À§ Enum¿¡ Ãß°¡ ÇÒ °Í
 
 public class SoundManager : SingletonObject<SoundManager>
 {
@@ -44,7 +55,7 @@ public class SoundManager : SingletonObject<SoundManager>
     AudioSource[] sfxPlayers;
     int channelIndex;
 
-    // AudioMixer - Master ë³¼ë¥¨
+    // AudioMixer - Master º¼·ı
     public float MasterSoundVolume
     {
         get
@@ -59,7 +70,7 @@ public class SoundManager : SingletonObject<SoundManager>
             Mixer.SetFloat("MasterSound", Mathf.Log10(value) * 20);
         }
     }
-    // AudioMixer - BGM ë³¼ë¥¨
+    // AudioMixer - BGM º¼·ı
     public float BGMSoundVolume
     {
         get
@@ -74,7 +85,7 @@ public class SoundManager : SingletonObject<SoundManager>
             Mixer.SetFloat("BGMSound", Mathf.Log10(value) * 20);
         }
     }
-    // AudioMixer - SFX ë³¼ë¥¨
+    // AudioMixer - SFX º¼·ı
     public float SFXSoundVolume
     {
         get
@@ -94,7 +105,7 @@ public class SoundManager : SingletonObject<SoundManager>
         base.Awake();
         Init();
     }
-    // ì´ˆê¸°í™” BGMì€ ë©”ì¸ê³¼ ë²„í¼ 2ê°œê°€ ìˆìœ¼ë©° SFXëŠ” ì±„ë„ìˆ˜ë¥¼ ì§€ì •í•´ì„œ ê·¸ ê°¯ìˆ˜ë§Œí¼ ë§Œë“¦
+    // ÃÊ±âÈ­ BGMÀº ¸ŞÀÎ°ú ¹öÆÛ 2°³°¡ ÀÖÀ¸¸ç SFX´Â Ã¤³Î¼ö¸¦ ÁöÁ¤ÇØ¼­ ±× °¹¼ö¸¸Å­ ¸¸µê
     public void Init()
     {
         Mixer = Resources.Load<AudioMixer>($"Sound/Mixer");
@@ -156,7 +167,7 @@ public class SoundManager : SingletonObject<SoundManager>
         }
     }
 
-    // BGMì„ ì‹¤í–‰
+    // BGMÀ» ½ÇÇà
     public void PlayBgm(BGM bgm, bool isLoop)
     {
         if (bgmPlayer.isPlaying)
@@ -183,22 +194,22 @@ public class SoundManager : SingletonObject<SoundManager>
             bgmPlayer.loop = isLoop;
         }
     }
-    // Rndìœ¼ë¡œ í”Œë ˆì´
+    // RndÀ¸·Î ÇÃ·¹ÀÌ
     public void PlayRndBgm(BGM[] bgmList, bool isLoop)
     {
         if (bgmList == null || bgmList.Length == 0)
         {
-            Debug.LogWarning("RndPlayBgm: BGM ë¦¬ìŠ¤íŠ¸ê°€ ë¹„ì–´ ìˆìŠµë‹ˆë‹¤.");
+            Debug.LogWarning("RndPlayBgm: BGM ¸®½ºÆ®°¡ ºñ¾î ÀÖ½À´Ï´Ù.");
             return;
         }
 
-        // ëœë¤ìœ¼ë¡œ í•˜ë‚˜ ì„ íƒ
+        // ·£´ıÀ¸·Î ÇÏ³ª ¼±ÅÃ
         BGM randomBgm = bgmList[UnityEngine.Random.Range(0, bgmList.Length)];
 
-        // ê¸°ì¡´ PlayBgm í˜¸ì¶œ
+        // ±âÁ¸ PlayBgm È£Ãâ
         PlayBgm(randomBgm, isLoop);
     }
-    // BGMì„ ë©ˆì¶¤
+    // BGMÀ» ¸ØÃã
     public void StopBgm()
     {
         StartCoroutine(SoundSmooth(bgmPlayer, true));
@@ -209,7 +220,7 @@ public class SoundManager : SingletonObject<SoundManager>
     {
         bgmPlayer.pitch = val;
     }
-    // SFXë¥¼ ì‹¤í–‰
+    // SFX¸¦ ½ÇÇà
     public void PlaySFX(SFX sfx, float Pitch = 1, bool isLoop = false)
     {
         if (Pitch < 0)
@@ -231,7 +242,7 @@ public class SoundManager : SingletonObject<SoundManager>
             break;
         }
     }
-    // SFXë¥¼ ì„œì„œíˆ ì‹¤í–‰
+    // SFX¸¦ ¼­¼­È÷ ½ÇÇà
     public void SmoothPlaySfx(SFX sfx, float Pitch = 1, bool isLoop = false)
     {
         for (int index = 0; index < sfxPlayers.Length; index++)
@@ -250,7 +261,7 @@ public class SoundManager : SingletonObject<SoundManager>
             break;
         }
     }
-    // SFXë¥¼ ë©ˆì¶¤
+    // SFX¸¦ ¸ØÃã
     public void StopSfx(SFX sfx)
     {
         for (int index = 0; index < sfxPlayers.Length; index++)
@@ -262,13 +273,13 @@ public class SoundManager : SingletonObject<SoundManager>
         }
     }
 
-    // íŠ¹ì • ê°’ê¹Œì§€ BGMì„ ì„œì„œíˆ ì¤„ì„
+    // Æ¯Á¤ °ª±îÁö BGMÀ» ¼­¼­È÷ ÁÙÀÓ
     public void SetBGMSoundVolume(float val)
     {
         StartCoroutine(BGMSmoothVolum(val, 1));
     }
 
-    // BGMì„ ì‹¤í–‰í•˜ê³  ëë‚¬ì„ì‹œ ëœë¤ìœ¼ë¡œ ë‹¤ì‹œ ëŒë¦¼
+    // BGMÀ» ½ÇÇàÇÏ°í ³¡³µÀ»½Ã ·£´ıÀ¸·Î ´Ù½Ã µ¹¸²
     public void StartBGMRandomLoop(int num)
     {
         if (isBGMLooping) return;
@@ -277,7 +288,7 @@ public class SoundManager : SingletonObject<SoundManager>
         isBGMLooping = true;
     }
 
-    // ì‚¬ìš´ë“œ í¬ê¸°ê°€ íŠ¹ì •ê°’ê¹Œì§€ ìì—°ìŠ¤ëŸ½ê²Œ ë°”ë€œ
+    // »ç¿îµå Å©±â°¡ Æ¯Á¤°ª±îÁö ÀÚ¿¬½º·´°Ô ¹Ù²ñ
     IEnumerator BGMSmoothVolum(float endVolum, float time)
     {
         float DeltaVolum = (endVolum - bgmPlayer.volume) * 0.1f;
@@ -290,7 +301,7 @@ public class SoundManager : SingletonObject<SoundManager>
         }
     }
 
-    // ì‚¬ìš´ë“œì˜ í¬ê¸°ë¥¼ ì„œì„œíˆ ì¤„ì´ê±°ë‚˜ ëŠ˜ë¦´ë•Œ ì‚¬ìš© 
+    // »ç¿îµåÀÇ Å©±â¸¦ ¼­¼­È÷ ÁÙÀÌ°Å³ª ´Ã¸±¶§ »ç¿ë 
     IEnumerator SoundSmooth(AudioSource audio, bool isDown)
     {
         float startvolume = audio.volume;
@@ -322,7 +333,7 @@ public class SoundManager : SingletonObject<SoundManager>
         }
     }
 
-    // 2ì´ˆë§ˆë‹¤ í•œë²ˆì”© BGMì´ ëë‚¬ëŠ”ì§€ ê²€ì‚¬ í›„ ëë‚¬ìœ¼ë©´ ë‹¤ìŒ BGMì„ í‹€ìŒ
+    // 2ÃÊ¸¶´Ù ÇÑ¹ø¾¿ BGMÀÌ ³¡³µ´ÂÁö °Ë»ç ÈÄ ³¡³µÀ¸¸é ´ÙÀ½ BGMÀ» Æ²À½
     IEnumerator BGMRandomLoop(int num)
     {
         int[] temp = new int[num];

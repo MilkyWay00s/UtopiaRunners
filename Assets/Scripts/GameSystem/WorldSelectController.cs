@@ -123,6 +123,7 @@ public class WorldSelectController : MonoBehaviour
 
         if (!string.IsNullOrEmpty(selectedWorldSceneName))
         {
+            SoundManager.Instance.PlaySFX(SFX.SFX1_Click);
             SceneManager.LoadScene(selectedWorldSceneName);
         }
     }
