@@ -43,6 +43,17 @@ public class PlayerHealth : MonoBehaviour
             OnDeath?.Invoke();
         }
     }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Boss"))
+        {
+            TakeDamage(10);
+        }
+        else if (other.CompareTag("Enemy"))
+        {
+            TakeDamage(10);
+        }
+    }
 
     public void Heal(int amount)
     {
@@ -52,4 +63,12 @@ public class PlayerHealth : MonoBehaviour
         CurrentHealth = Mathf.Clamp(CurrentHealth + amount, 0, maxHealth);
         OnHealthChanged?.Invoke(CurrentHealth, maxHealth);
     }
+
+    public void ApplyMaxHealthBonusAndRefill(int bonus)
+    {
+        maxHealth += bonus;
+        CurrentHealth = maxHealth;
+        OnHealthChanged?.Invoke(CurrentHealth, maxHealth);
+    }
 }
+

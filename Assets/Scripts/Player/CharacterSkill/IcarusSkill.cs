@@ -6,6 +6,11 @@ public class IcarusSkill : MonoBehaviour
     [Header("Cooldown Reduce")]
     public float cooldownReduceAmount = 1.0f;
 
+
+    public int characterIndex = 1;                 // 이카루스 인덱스로 설정(Inspector)
+    public float baseCooldownReduceAmount = 1.0f;   // 레벨 0일 때 쿨감량
+    public float cooldownReducePerLevel = 0.25f;    // 레벨당 쿨감량 증가
+
     [Header("Tag Dash")]
     public float dashSpeed = 20f;
     public float dashStopDistance = 0.3f;
@@ -24,6 +29,8 @@ public class IcarusSkill : MonoBehaviour
 
     void OnEnable()
     {
+        ApplySkillLevel();
+
         if (pc != null)
         {
             pc.OnJumped += HandleJumped;
@@ -46,6 +53,17 @@ public class IcarusSkill : MonoBehaviour
         if (cm != null)
             cm.OnTagSwitched -= HandleTagSwitched;
     }
+
+    void ApplySkillLevel()
+    {
+        int lv = UpgradeState.GetLevel($"C{characterIndex}", UpgradeType.SkillLevel);
+        float bonus = UpgradeRules.GetSkillLevelBonus(lv); 
+
+        cooldownReduceAmount = baseCooldownReduceAmount + cooldownReducePerLevel * bonus;
+
+        if (cooldownReduceAmount < 0f) cooldownReduceAmount = 0f;
+    }
+
 
     void HandleJumped(int jumpCount)
     {

@@ -49,6 +49,14 @@ public class CharacterManager : MonoBehaviour
         mainObj = Instantiate(characterDatabase.allCharacters[mainIndex].runnerObj, pos, Quaternion.identity);
         subObj = Instantiate(characterDatabase.allCharacters[subIndex].runnerObj, pos, Quaternion.identity);
 
+        string mainKey = $"C{mainIndex}";
+        string subKey = $"C{subIndex}";
+
+        ApplyUpgradesToCharacter(mainObj, mainKey);
+        ApplyUpgradesToCharacter(subObj, subKey);
+
+
+
         // 처음엔 메인만 보이게
         mainObj.SetActive(true);
         subObj.SetActive(true);
@@ -139,4 +147,18 @@ public class CharacterManager : MonoBehaviour
 
         switchRemain = switchCooldown;
     }
+
+    void ApplyUpgradesToCharacter(GameObject obj, string characterKey)
+    {
+        int hpLv = UpgradeState.GetLevel(characterKey, UpgradeType.MaxHealth);
+        int hpBonus = UpgradeRules.GetMaxHealthBonus(hpLv);
+
+        var hp = obj.GetComponent<PlayerHealth>();
+        if (hp != null)
+        {
+            hp.ApplyMaxHealthBonusAndRefill(hpBonus);
+        }
+    }
+
+
 }
