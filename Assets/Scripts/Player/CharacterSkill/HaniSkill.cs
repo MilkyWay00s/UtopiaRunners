@@ -21,7 +21,7 @@ public class HaniSkill : MonoBehaviour
 
     
     float gaugeGainPerAirJump = 1f;   // 기본: 1칸
-    float shockTargetCount = 1f;      // 기본: 1명(맞은 적)
+    int shockTargetCount = 1;      // 기본: 1명(맞은 적)
 
         public float multiShockRange = 6f;
 
@@ -57,13 +57,13 @@ public class HaniSkill : MonoBehaviour
         int lv = UpgradeState.GetLevel($"C{characterIndex}", UpgradeType.SkillLevel);
         float bonus = UpgradeRules.GetSkillLevelBonus(lv); // 너 규칙: level 그대로 반환
 
-        float b = Mathf.FloorToInt(bonus);
+        int b = Mathf.FloorToInt(bonus);
 
         // 강화 요소 1) 2단 점프 시 차는 게이지 양
         gaugeGainPerAirJump = 1f + b*0.2f;   // Lv0=1, Lv1=2, Lv2=3 ...
 
         // 강화 요소 2) 풀차지 시 감전되는 적 수
-        shockTargetCount = 1f + b;      // Lv0=1명, Lv1=2명, Lv2=3명 ...
+        shockTargetCount = 1 + b;      // Lv0=1명, Lv1=2명, Lv2=3명 ...
 
         if (gaugeGainPerAirJump < 1) gaugeGainPerAirJump = 1;
         if (shockTargetCount < 1) shockTargetCount = 1;
@@ -89,7 +89,7 @@ public class HaniSkill : MonoBehaviour
 
         enemy.ApplyStun(shockDuration);
 
-        float needExtra = shockTargetCount - 1;
+        int needExtra = shockTargetCount - 1;
         if (needExtra > 0)
         {
             ApplyMultiShock(enemy, needExtra);
