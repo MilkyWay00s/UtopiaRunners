@@ -3,10 +3,17 @@ using InputSystem;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using System;
 
 public class OptionsManager : MonoBehaviour
 {
     private GameObject optionWindow;
+    private Button optionButton;
+
+    private void Awake()
+    {
+        optionButton = GetComponent<Button>();
+    }
     private void Update()
     {
         if (InputManager.Instance.GetKeyDown(ActionCode.Option))
@@ -42,15 +49,27 @@ public class OptionsManager : MonoBehaviour
                 rect.anchoredPosition = Vector2.zero;
                 rect.localScale = Vector3.one;
             }
+
+            OptionWin script = optionWindow.GetComponent<OptionWin>();
+            script.Init();
+            script.OnClose = CloseOptions;
         }
 
-        if (this.gameObject != null)
+        if (optionButton != null)
         {
-            this.gameObject.transform.DOPunchScale(new Vector3(0.35f, 0.7f, 1f) * -0.2f, 0.2f).SetEase(Ease.InBack);
-            this.gameObject.GetComponent<Button>().interactable = false;
-            //optionWindow.GetComponent<OptionWin>().OptionButton = this.gameObject.GetComponent<Button>();
+            optionButton.transform.DOPunchScale(new Vector3(0.35f, 0.7f, 1f) * -0.2f, 0.2f).SetEase(Ease.InBack);
+            optionButton.interactable = false;
         }
 
         optionWindow.GetComponent<OptionWin>().Init();
+    }
+
+    public void CloseOptions()
+    {
+        if (optionButton != null) optionButton.interactable = true;
+
+        optionButton.transform.DOScale(1f, 0.1f);
+
+        optionWindow = null;
     }
 }

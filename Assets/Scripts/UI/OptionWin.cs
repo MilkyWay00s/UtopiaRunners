@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,6 +16,7 @@ public class OptionWin : MonoBehaviour
     public Slider BGMSlider;
     public Slider SFXSlider;
 
+    public Action OnClose;
     public bool IsSettingsPanelActive => settingsPanel.activeSelf;
 
     public void Init()
@@ -58,10 +60,9 @@ public class OptionWin : MonoBehaviour
         }
     }
 
-    public void OnEndButton()//메인화면으로
+    public void OnEndButton()
     {
         SoundManager.Instance.PlaySFX(SFX.SFX1_Click);
-        //OptionButton.interactable = true;
         SceneManager.LoadScene(0);
     }
 
@@ -77,7 +78,7 @@ public class OptionWin : MonoBehaviour
     public void OnBackButton()
     {
         SoundManager.Instance.PlaySFX(SFX.SFX1_Click);
-        //OptionButton.interactable = true;
+        OnClose?.Invoke();
         Destroy(this.gameObject);
     }
 }
