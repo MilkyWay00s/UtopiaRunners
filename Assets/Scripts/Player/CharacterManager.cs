@@ -173,6 +173,9 @@ public class CharacterManager : MonoBehaviour
         PlayerController pc = activeObj.GetComponent<PlayerController>();
         if (pc != null)
             pc.currentWeapon = currentWeapon;
+
+        var autoAttack = currentWeapon.GetComponent<WeaponAutoAttack>();
+        autoAttack.StartAutoAttack();
     }
 
     public void RegisterWeapon(GameObject weapon)
