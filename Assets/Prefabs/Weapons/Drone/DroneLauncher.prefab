@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7720783602778787445}
   m_Layer: 0
   m_Name: DroneLauncher
-  m_TagString: Untagged
+  m_TagString: WeaponPrefab
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,6 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: f9e62b28f00c8b549aceafd1c0c1db20, type: 2}
+  baseDamage: 1
+  attackMultiplier: 1
 --- !u!114 &-2645503423207435760
 MonoBehaviour:
   m_ObjectHideFlags: 0

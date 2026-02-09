@@ -33,6 +33,8 @@ public class CharacterManager : MonoBehaviour
     public PlayerHealth ActiveHP => activeHP;
     public PlayerHealth ReserveHP => reserveHP;
 
+    private GameObject currentWeapon;
+
     void Start()
     {
         int mainIndex = PlayerPrefs.GetInt("MainCharacter", 0);
@@ -143,6 +145,8 @@ public class CharacterManager : MonoBehaviour
         var tmp = activeObj; activeObj = reserveObj; reserveObj = tmp;
         BindHPRefs();
 
+        ReattachWeapon();
+
         OnTagSwitched?.Invoke(activeObj, reserveObj);
 
         switchRemain = switchCooldown;
@@ -160,5 +164,19 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
+    void ReattachWeapon()
+    {
+        currentWeapon.transform.SetParent(activeObj.transform);
+        currentWeapon.transform.localPosition = Vector3.zero;
+        currentWeapon.transform.localRotation = Quaternion.identity;
 
+        PlayerController pc = activeObj.GetComponent<PlayerController>();
+        if (pc != null)
+            pc.currentWeapon = currentWeapon;
+    }
+
+    public void RegisterWeapon(GameObject weapon)
+    {
+        currentWeapon = weapon;
+    }
 }

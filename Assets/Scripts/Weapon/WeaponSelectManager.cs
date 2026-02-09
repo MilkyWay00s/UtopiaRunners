@@ -62,6 +62,8 @@ public class WeaponSelectManager : MonoBehaviour
             if (pc != null)
             {
                 pc.currentWeapon = weapon;
+                CharacterManager cm = FindObjectOfType<CharacterManager>();
+                cm.RegisterWeapon(weapon);
             }
         }
     }

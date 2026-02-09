@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -1572448051933289290}
   m_Layer: 0
   m_Name: PlazmaGun
-  m_TagString: Untagged
+  m_TagString: WeaponPrefab
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,6 +101,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: 303efa79c2e6e614f8f34e766ddb1c7e, type: 2}
+  baseDamage: 1
+  attackMultiplier: 1
 --- !u!114 &7216313378958591962
 MonoBehaviour:
   m_ObjectHideFlags: 0

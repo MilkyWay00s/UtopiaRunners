@@ -13,6 +13,7 @@ TagManager:
   - Target
   - FirePoint
   - Enemy
+  - WeaponPrefab
   layers:
   - Default
   - TransparentFX
