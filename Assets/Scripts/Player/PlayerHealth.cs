@@ -11,6 +11,10 @@ public class PlayerHealth : MonoBehaviour
 
     bool isDead = false;
 
+    
+    [Header("Debug")]
+    public bool logDamage = true;
+
     void Awake()
     {
         CurrentHealth = maxHealth;
@@ -24,33 +28,64 @@ public class PlayerHealth : MonoBehaviour
 
         int finalDamage = amount;
 
+        
         var mods = GetComponents<IDamageModifier>();
+        if (logDamage)
+            Debug.Log($"[HP] Incoming={amount}, mods={mods.Length} ({gameObject.name})");
+
         for (int i = 0; i < mods.Length; i++)
         {
+            int before = finalDamage;
             mods[i].ModifyDamage(ref finalDamage);
-            if (finalDamage <= 0) break; // 0이면 더 깎을 필요 없음
+
+            if (logDamage && before != finalDamage)
+                Debug.Log($"[HP] Modifier {mods[i].GetType().Name}: {before} -> {finalDamage}");
+
+            if (finalDamage <= 0) break;
         }
 
-        // 데미지가 0이 되면HP 변화 없음
-        if (finalDamage <= 0) return;
+        if (finalDamage <= 0)
+        {
+            if (logDamage)
+                Debug.Log($"[HP] Damage blocked! (cur={CurrentHealth}/{maxHealth}) ({gameObject.name})");
+            return;
+        }
 
+        int beforeHp = CurrentHealth;
         CurrentHealth = Mathf.Clamp(CurrentHealth - finalDamage, 0, maxHealth);
         OnHealthChanged?.Invoke(CurrentHealth, maxHealth);
+
+        if (logDamage)
+            Debug.Log($"[HP] Took {finalDamage}. {beforeHp} -> {CurrentHealth} / {maxHealth} ({gameObject.name})");
 
         if (CurrentHealth <= 0)
         {
             isDead = true;
+            if (logDamage) Debug.Log($"[HP] DEAD ({gameObject.name})");
             OnDeath?.Invoke();
         }
     }
+
+    // Trigger
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Boss"))
+        if (!logDamage) return;
+
+        if (other.CompareTag("Boss") || other.CompareTag("Enemy"))
         {
+            Debug.Log($"[HP] Trigger hit by {other.name} tag={other.tag} (self={gameObject.name})");
             TakeDamage(10);
         }
-        else if (other.CompareTag("Enemy"))
+    }
+
+    // Collision
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (!logDamage) return;
+
+        if (other.gameObject.CompareTag("Boss") || other.gameObject.CompareTag("Enemy"))
         {
+            Debug.Log($"[HP] Collision hit by {other.gameObject.name} tag={other.gameObject.tag} (self={gameObject.name})");
             TakeDamage(10);
         }
     }
@@ -62,6 +97,9 @@ public class PlayerHealth : MonoBehaviour
 
         CurrentHealth = Mathf.Clamp(CurrentHealth + amount, 0, maxHealth);
         OnHealthChanged?.Invoke(CurrentHealth, maxHealth);
+
+        if (logDamage)
+            Debug.Log($"[HP] Heal {amount}. cur={CurrentHealth}/{maxHealth} ({gameObject.name})");
     }
 
     public void ApplyMaxHealthBonusAndRefill(int bonus)
@@ -69,6 +107,8 @@ public class PlayerHealth : MonoBehaviour
         maxHealth += bonus;
         CurrentHealth = maxHealth;
         OnHealthChanged?.Invoke(CurrentHealth, maxHealth);
+
+        if (logDamage)
+            Debug.Log($"[HP] ApplyMaxHealthBonus {bonus}. cur={CurrentHealth}/{maxHealth} ({gameObject.name})");
     }
 }
-
