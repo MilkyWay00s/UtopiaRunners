@@ -13,16 +13,16 @@ public class AutoAttackProjectile : MonoBehaviour
 
     private void Start()
     {
-        AcquireTarget();
-        WeaponAutoAttack weapon =
-        GetComponentInParent<WeaponAutoAttack>();
+        //AcquireTarget();
+        //WeaponAutoAttack weapon =
+        //GetComponentInParent<WeaponAutoAttack>();
 
-        if (weapon != null)
-        {
-            finalDamage = Mathf.RoundToInt(
-                weapon.baseDamage * weapon.attackMultiplier
-            );
-        }
+        //if (weapon != null)
+        //{
+        //    finalDamage = Mathf.RoundToInt(
+        //        weapon.baseDamage * weapon.attackMultiplier
+        //    );
+        //}
     }
 
     private void Update()

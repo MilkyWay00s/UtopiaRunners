@@ -99,7 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  targetBoss: {fileID: 0}
+  targetTag: Boss
+  finalDamage: 1
 --- !u!58 &6276714250092718151
 CircleCollider2D:
   m_ObjectHideFlags: 0

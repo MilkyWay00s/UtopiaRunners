@@ -99,7 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  targetBoss: {fileID: 0}
+  targetTag: Boss
+  finalDamage: 1
 --- !u!70 &9020448549939609948
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
