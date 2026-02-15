@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Merge_25_09_16/3_CharacterSelect.unity
     guid: bd951bf897839e347a0d813e90909c69
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Merge_25_09_16/4_CharacterSelectScene.unity
     guid: 2c595fe2561ecbd419ade2fafdbe9be9
   - enabled: 1
@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Merge_25_09_16/7_InGameScene.unity
     guid: a1dcbd44b9beb3141a30e13435945bd5
+  - enabled: 1
+    path: Assets/Scenes/Merge_26_01/7_InGameScene_Boss.unity
+    guid: e3d867dd35683ee49848c2ffb1771560
   m_configObjects: {}

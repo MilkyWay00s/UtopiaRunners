@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class BossController2 : MonoBehaviour
@@ -32,15 +32,13 @@ public class BossController2 : MonoBehaviour
         isUsingPattern = false;
     }
 
-    IEnumerator ExecutePattern(BossPatternData pattern)
+    protected virtual IEnumerator ExecutePattern(BossPatternData pattern)
     {
         foreach (var info in pattern.spawnInfos)
         {
             Vector3 spawnPos = transform.TransformPoint(info.offset);
 
-            Quaternion rotation = Quaternion.Euler(0f, 0f, info.rotationZ);
-
-            Instantiate(info.prefab, spawnPos, rotation);
+            GameObject go = Instantiate(info.prefab, spawnPos, info.prefab.transform.rotation);
 
             yield return new WaitForSeconds(info.delay);
         }

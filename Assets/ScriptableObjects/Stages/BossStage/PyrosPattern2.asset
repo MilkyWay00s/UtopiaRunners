@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74a9ae6937ed0814ab662d7ed82c8441, type: 3}
+  m_Name: PyrosPattern2
+  m_EditorClassIdentifier: 
+  patternName: Fireball_LLM
+  spawnInfos:
+  - prefab: {fileID: 3347261329179663300, guid: a6d8c79654202074a8a6fe11ac3fffb6,
+      type: 3}
+    offset: {x: 0, y: -2, z: 0}
+    delay: 0.5
+    rotationZ: 0
+  - prefab: {fileID: 3347261329179663300, guid: a6d8c79654202074a8a6fe11ac3fffb6,
+      type: 3}
+    offset: {x: 0, y: -2, z: 0}
+    delay: 1
+    rotationZ: 0
+  - prefab: {fileID: 3347261329179663300, guid: a6d8c79654202074a8a6fe11ac3fffb6,
+      type: 3}
+    offset: {x: 0, y: 0, z: 0}
+    delay: 0
+    rotationZ: 0
+  cooldown: 1.5

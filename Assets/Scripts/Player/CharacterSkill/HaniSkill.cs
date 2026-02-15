@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 
 public class HaniSkill : MonoBehaviour
@@ -20,8 +20,8 @@ public class HaniSkill : MonoBehaviour
     public int characterIndex = 2;
 
     
-    float gaugeGainPerAirJump = 1f;   // ±âº»: 1Ä­
-    float shockTargetCount = 1f;      // ±âº»: 1¸í(¸ÂÀº Àû)
+    float gaugeGainPerAirJump = 1f;   // ê¸°ë³¸: 1ì¹¸
+    int shockTargetCount = 1;      // ê¸°ë³¸: 1ëª…(ë§ì€ ì )
 
         public float multiShockRange = 6f;
 
@@ -47,7 +47,7 @@ public class HaniSkill : MonoBehaviour
             pc.maxJumpCount -= extraJumpCount;
         }
 
-        // Ä³¸¯ÅÍ ±³Ã¼ ½Ã °ÔÀÌÁö ÃÊ±âÈ­
+        // ìºë¦­í„° êµì²´ ì‹œ ê²Œì´ì§€ ì´ˆê¸°í™”
         // currentGauge = 0;
         // empoweredAttackReady = false;
     }
@@ -55,15 +55,15 @@ public class HaniSkill : MonoBehaviour
     void ApplySkillLevel()
     {
         int lv = UpgradeState.GetLevel($"C{characterIndex}", UpgradeType.SkillLevel);
-        float bonus = UpgradeRules.GetSkillLevelBonus(lv); // ³Ê ±ÔÄ¢: level ±×´ë·Î ¹İÈ¯
+        float bonus = UpgradeRules.GetSkillLevelBonus(lv); // ë„ˆ ê·œì¹™: level ê·¸ëŒ€ë¡œ ë°˜í™˜
 
-        float b = Mathf.FloorToInt(bonus);
+        int b = Mathf.FloorToInt(bonus);
 
-        // °­È­ ¿ä¼Ò 1) 2´Ü Á¡ÇÁ ½Ã Â÷´Â °ÔÀÌÁö ¾ç
+        // ê°•í™” ìš”ì†Œ 1) 2ë‹¨ ì í”„ ì‹œ ì°¨ëŠ” ê²Œì´ì§€ ì–‘
         gaugeGainPerAirJump = 1f + b*0.2f;   // Lv0=1, Lv1=2, Lv2=3 ...
 
-        // °­È­ ¿ä¼Ò 2) Ç®Â÷Áö ½Ã °¨ÀüµÇ´Â Àû ¼ö
-        shockTargetCount = 1f + b;      // Lv0=1¸í, Lv1=2¸í, Lv2=3¸í ...
+        // ê°•í™” ìš”ì†Œ 2) í’€ì°¨ì§€ ì‹œ ê°ì „ë˜ëŠ” ì  ìˆ˜
+        shockTargetCount = 1 + b;      // Lv0=1ëª…, Lv1=2ëª…, Lv2=3ëª… ...
 
         if (gaugeGainPerAirJump < 1) gaugeGainPerAirJump = 1;
         if (shockTargetCount < 1) shockTargetCount = 1;
@@ -72,7 +72,7 @@ public class HaniSkill : MonoBehaviour
 
     void HandleJumped(int jumpCount)
     {
-        // 2´Ü, 3´Ü Á¡ÇÁÀÏ ¶§¸¸ ÃæÀü
+        // 2ë‹¨, 3ë‹¨ ì í”„ì¼ ë•Œë§Œ ì¶©ì „
         if (jumpCount < 2) return;
         if (currentGauge >= maxGauge) return;
 
@@ -89,7 +89,7 @@ public class HaniSkill : MonoBehaviour
 
         enemy.ApplyStun(shockDuration);
 
-        float needExtra = shockTargetCount - 1;
+       int  needExtra = shockTargetCount - 1;
         if (needExtra > 0)
         {
             ApplyMultiShock(enemy, needExtra);
@@ -101,12 +101,12 @@ public class HaniSkill : MonoBehaviour
 
     void ApplyMultiShock(EnemyCondition firstTarget, int extraCount)
     {
-        // EnemyConditionÀ» ¾À¿¡¼­ Ã£¾Æ °Å¸®¼øÀ¸·Î Ãß°¡ Àû¿ë
+        // EnemyConditionì„ ì”¬ì—ì„œ ì°¾ì•„ ê±°ë¦¬ìˆœìœ¼ë¡œ ì¶”ê°€ ì ìš©
         EnemyCondition[] all = GameObject.FindObjectsOfType<EnemyCondition>();
 
         Vector3 origin = firstTarget.transform.position;
 
-        // firstTarget Á¦¿Ü + ¹üÀ§ ³»¸¸ ¸ğÀ¸±â
+        // firstTarget ì œì™¸ + ë²”ìœ„ ë‚´ë§Œ ëª¨ìœ¼ê¸°
         List<EnemyCondition> candidates = new List<EnemyCondition>();
         for (int i = 0; i < all.Length; i++)
         {
@@ -119,13 +119,13 @@ public class HaniSkill : MonoBehaviour
                 candidates.Add(e);
         }
 
-        // °Å¸®¼ø Á¤·Ä
+        // ê±°ë¦¬ìˆœ ì •ë ¬
         candidates.Sort((a, b) =>
             Vector3.Distance(origin, a.transform.position)
             .CompareTo(Vector3.Distance(origin, b.transform.position))
         );
 
-        // extraCount¸í¿¡°Ô Ãß°¡ ½ºÅÏ
+        // extraCountëª…ì—ê²Œ ì¶”ê°€ ìŠ¤í„´
         for (int i = 0; i < candidates.Count && extraCount > 0; i++)
         {
             candidates[i].ApplyStun(shockDuration);

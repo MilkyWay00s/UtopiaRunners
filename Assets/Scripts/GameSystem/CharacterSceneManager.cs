@@ -35,6 +35,7 @@ public class CharacterSceneManager : MonoBehaviour
         {
             SoundManager.Instance.PlaySFX(SFX.SFX1_Click);
             SceneManager.LoadScene("7_InGameScene");
+            SceneManager.LoadScene("7_InGameScene_Boss");
         }
     }
 
