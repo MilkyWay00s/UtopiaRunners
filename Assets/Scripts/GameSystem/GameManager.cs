@@ -176,7 +176,7 @@ public class GameManager : SingletonObject<GameManager>
     public void SetCurrentStage(int stageIndex)
     {
         currentStage = $"Stage{stageIndex + 1}";
-
+        selectedStageId = ParseStageNameFromString(currentStage);
         SaveGame(currentSlot); 
     }
 
@@ -245,6 +245,7 @@ public class GameManager : SingletonObject<GameManager>
     private StageName ParseStageNameFromString(string stageStr)
     {
         if (string.IsNullOrEmpty(stageStr)) return default;
+        stageStr = stageStr.Replace(" ", "");
         if (Enum.TryParse(stageStr, out StageName parsed))
             return parsed;
 

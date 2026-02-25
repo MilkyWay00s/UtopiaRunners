@@ -1809,7 +1809,7 @@ MonoBehaviour:
   timeLimit: 60
   timerText: {fileID: 343393046}
   gameOverPanel: {fileID: 117189824}
-  stageData: {fileID: 11400000, guid: 985fdfd09885d274ea1f61a9a86ca650, type: 2}
+  stageData: {fileID: 0}
 --- !u!4 &1042214430
 Transform:
   m_ObjectHideFlags: 0

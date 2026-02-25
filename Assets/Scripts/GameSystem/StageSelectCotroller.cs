@@ -113,16 +113,15 @@ public class StageSelectCotroller : MonoBehaviour
     }
     public void ConfirmSelection()
     {
-        if (!isCurrentStageUnlocked)
-        {
-            Debug.Log("이전 스테이지를 클리어해야 선택할 수 있습니다.");
-            return;
-        }
+        //if (!isCurrentStageUnlocked)
+        //{
+        //    Debug.Log("이전 스테이지를 클리어해야 선택할 수 있습니다.");
+        //    return;
+        //}
 
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.currentStage = $"Stage{currentIndex + 1}";
-            GameManager.Instance.SaveGame(GameManager.Instance.currentSlot);
+            GameManager.Instance.SetCurrentStage(currentIndex);
         }
 
         if (goCharacterSelectBeforeRunning)
@@ -132,7 +131,9 @@ public class StageSelectCotroller : MonoBehaviour
             SceneManager.LoadScene(characterSelectSceneName);
         }
         else
+        {
             SceneManager.LoadScene("RunningScene");
+        }
     }
 
     public void onWorldmapButtonClicked()

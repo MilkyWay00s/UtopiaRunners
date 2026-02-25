@@ -807,12 +807,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63ec6c82200ec884891e6951b74ddce0, type: 3}
---- !u!224 &337341630 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1080917337966874165, guid: 63ec6c82200ec884891e6951b74ddce0,
-    type: 3}
-  m_PrefabInstance: {fileID: 337341629}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &405873426
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,7 +987,7 @@ MonoBehaviour:
   worldName: Lumina Forest
   worldDescription: "\uC0DD\uBA85\uB825\uC774 \uCDA9\uB9CC\uD55C \uB208\uBD80\uC2E0
     \uC232"
-  sceneName: 
+  sceneName: 2_LuminaForest
   lockIcon: {fileID: 1266010552}
 --- !u!1 &439850250
 GameObject:
@@ -1609,7 +1603,7 @@ PrefabInstance:
         type: 3}
       propertyPath: DarkOverlay
       value: 
-      objectReference: {fileID: 1863064046}
+      objectReference: {fileID: 0}
     - target: {fileID: 4820543161058797093, guid: 819d827a1f69ef44c961cecd4c49855e,
         type: 3}
       propertyPath: SettingsPanel
@@ -2167,7 +2161,7 @@ RectTransform:
   - {fileID: 550171243}
   - {fileID: 616422308}
   - {fileID: 1484275642}
-  - {fileID: 337341630}
+  - {fileID: 1857780583}
   - {fileID: 695685069}
   - {fileID: 259441606}
   - {fileID: 703747795}
@@ -3537,9 +3531,9 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1863064046 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8953852624252961006, guid: 63ec6c82200ec884891e6951b74ddce0,
+--- !u!224 &1857780583 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6253099241092667755, guid: 63ec6c82200ec884891e6951b74ddce0,
     type: 3}
   m_PrefabInstance: {fileID: 337341629}
   m_PrefabAsset: {fileID: 0}
