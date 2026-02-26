@@ -16,13 +16,13 @@ MonoBehaviour:
   spawnList:
   - obstaclePrefab: {fileID: 7178641908762747988, guid: 78029d8b3e44ed44cacf492ad0d5f352,
       type: 3}
-    spawnTimeOffset: 0
+    spawnTimeOffset: 0.5
     spawnPosition: {x: 10, y: -3.41}
     moveSpeed: 0
   - obstaclePrefab: {fileID: 4851638627358135023, guid: f2eb78a011aec8f498ff6d8cbac896bb,
       type: 3}
-    spawnTimeOffset: 0.7
-    spawnPosition: {x: 10, y: -2.14}
+    spawnTimeOffset: 1
+    spawnPosition: {x: 10, y: -3.41}
     moveSpeed: 0
   - obstaclePrefab: {fileID: 2487858346475530645, guid: 0d465f3ea5143bb468ddd7a8b984e8d4,
       type: 3}

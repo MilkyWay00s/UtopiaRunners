@@ -17,6 +17,6 @@ public class CharacterPortrait : MonoBehaviour, ICharacterPortrait
     }
     public void ClickedPortrait()
     {
-        CharacterSelectManager.Instance.CharacterSelect(character);
+        FindObjectOfType<CharacterSelectManager>().CharacterSelect(character);
     }
 }

@@ -2,7 +2,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class CharacterSelectManager : SingletonObject<CharacterSelectManager>
+public class CharacterSelectManager : MonoBehaviour
 {
     [SerializeField] private CharacterDatabase characterDatabase;
 

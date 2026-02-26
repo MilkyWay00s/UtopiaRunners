@@ -7,16 +7,44 @@ public class WeaponAutoAttack : MonoBehaviour
     public WeaponData weaponData;
     public int baseDamage = 1;
     public float attackMultiplier = 1f;
-    private void Start()
+
+    private Coroutine attackRoutine;
+
+    private void OnEnable()
     {
-        StartCoroutine(AutoAttack());
+        StartAutoAttack();
+    }
+
+    private void OnDisable()
+    {
+        StopAutoAttack();
+    }
+
+    public void StartAutoAttack()
+    {
+        if (attackRoutine != null) return;
+        attackRoutine = StartCoroutine(AutoAttack());
+    }
+
+    public void StopAutoAttack()
+    {
+        if (attackRoutine != null)
+        {
+            StopCoroutine(attackRoutine);
+            attackRoutine = null;
+        }
     }
 
     private IEnumerator AutoAttack()
     {
         while (true)
         {
-            Instantiate(weaponData.autoAttackPrefab, transform.position, transform.rotation);
+            Instantiate(
+                weaponData.autoAttackPrefab,
+                transform.position,
+                transform.rotation
+            );
+
             yield return new WaitForSeconds(weaponData.attackSpeed);
         }
     }

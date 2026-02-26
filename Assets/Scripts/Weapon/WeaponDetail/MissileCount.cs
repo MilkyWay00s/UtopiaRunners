@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,7 +24,10 @@ public class MissileCount : MonoBehaviour
                 Debug.Log("Missile = " + missile);
             }
         }
+    }
 
+    private void LateUpdate()
+    {
         if (player != null && Input.GetKeyDown(KeyCode.Q))
         {
             GameObject playerObj = GameObject.FindGameObjectWithTag("Player");

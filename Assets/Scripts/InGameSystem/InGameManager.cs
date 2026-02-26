@@ -28,7 +28,7 @@ public class InGameManager : MonoBehaviour
         // CharacterManager 찾고 이벤트 구독
         cm = FindObjectOfType<CharacterManager>();
         SoundManager.Instance.PlayBgm(BGM.BGM3_Dangerous,true);
-        /*
+        
         if (cm != null)
         {
             cm.OnActiveCharacterDeath += GameOver; // 활성 캐릭터 사망 시 게임오버
@@ -37,7 +37,22 @@ public class InGameManager : MonoBehaviour
         {
             Debug.LogError("[GameManager] CharacterManager를 찾을 수 없습니다.");
         }
-        */
+
+        if (cm != null && cm.ActiveHP != null)
+        {
+            cm.ActiveHP.OnDeath += GameOver; 
+        }
+
+    }
+
+    void OnDestroy()
+    {
+        // 씬 재시작/종료 시 이벤트 해제(중복 구독 방지)
+        if (cm != null)
+        {
+            cm.OnActiveCharacterDeath -= GameOver;
+            if (cm.ActiveHP != null) cm.ActiveHP.OnDeath -= GameOver; // 
+        }
     }
 
     void Update()
@@ -68,6 +83,17 @@ public class InGameManager : MonoBehaviour
 
         GameManager.Instance.coin += stageData.stageRewardCoin;
         GameManager.Instance.SaveGame(GameManager.Instance.currentSlot);
+    }
+
+    private void GameOver()
+    {
+        if (isGameOver) return;
+        isGameOver = true; 
+
+        Time.timeScale = 0f; 
+        if (gameOverPanel) gameOverPanel.SetActive(true); 
+
+        // Debug.Log("[InGameManager] Game Over!"); 
     }
 
 

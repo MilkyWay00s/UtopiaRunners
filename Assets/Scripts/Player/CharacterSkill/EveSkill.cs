@@ -1,7 +1,7 @@
 using UnityEngine;
 
-public class EveSkill : MonoBehaviour
-    
+public class EveSkill : MonoBehaviour, IDamageModifier
+
 {
     [Header("Shield Condition")]
     public float noDamageTime = 5f;      // 피해 안 받는 시간
@@ -26,11 +26,17 @@ public class EveSkill : MonoBehaviour
 
     [SerializeField] private Animator animator;
 
+    // 디버그용
+    public bool logShield = true;
+
     private void OnEnable()
     {
         if (animator) animator.SetInteger("RunnerIdx", 1);
 
         ApplySkillLevel();
+
+        if (logShield)
+            Debug.Log($"[EveSkill] Enabled. shieldDuration={shieldDuration:F2}, attackBonusRate={attackBonusRate:F2}, noDamageTime={noDamageTime:F2}");
     }
     void Update()
     {
@@ -43,6 +49,7 @@ public class EveSkill : MonoBehaviour
                 // 지속시간 끝나면 보호막 해제
                 shieldActive = false;
                 ApplyAttackBuff(false);
+                if (logShield) Debug.Log("[EveSkill] Shield expired");
             }
             return;
         }
@@ -81,6 +88,7 @@ public class EveSkill : MonoBehaviour
 
 
         ApplyAttackBuff(true);
+        if (logShield) Debug.Log("[EveSkill] Shield ACTIVATED");
     }
 
     public void ModifyDamage(ref int damage)
@@ -93,8 +101,13 @@ public class EveSkill : MonoBehaviour
         // if 쉴드,  데미지 0 && 쉴드 파괴
         if (shieldActive)
         {
+            if (logShield) Debug.Log($"[EveSkill] Blocked damage={damage} and BREAK shield");
             BreakShield();
             damage = 0;  
+        }
+        else
+        {
+            if (logShield) Debug.Log($"[EveSkill] No shield. damage={damage}"); 
         }
     }
 
